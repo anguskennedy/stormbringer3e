@@ -1,7 +1,4 @@
-/**
- * A simple and flexible system for world-building using an arbitrary collection of character and item attributes
- * Author: Atropos
- */
+
 
 // Import Modules
 import { SimpleActor } from "./actor.js";
