@@ -1,0 +1,31 @@
+{
+  "Actor": {
+    "templates": {
+      "base": {
+        "stats": {
+          "str": 0,
+          "con": 0,
+          "siz": 0,
+          "int": 0,
+          "pow": 0,
+          "dex": 0,
+          "cha": 0
+        },
+        "hp": { "value": 0, "max": 0 },
+        "damageBonus": 0,
+        "majorWoundLevel": 0,
+        "skills": {}
+      }
+    },
+    "character": {
+      "templates": ["base"],
+      "name": "",
+      "sex": "",
+      "class": "",
+      "nationality": "",
+      "cult": "",
+      "age": 0,
+      "elan": 0
+    }
+  }
+}

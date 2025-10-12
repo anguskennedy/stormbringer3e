@@ -1,0 +1,32 @@
+{
+  "id": "stormbringer3e",
+  "version": "0.0.1",
+  "title": "Stormbringer 3e",
+  "url": "https://github.com/anguskennedy/stormbringer3e/",
+  "description": "Simple Stormbringer",
+  "license": "LICENSE.txt",
+  "authors": [
+    {
+      "name": "Aerkane"
+    }
+  ],
+  "esmodules": ["module/stormbringer.js"],
+  "styles": ["css/stormbringer.css"],
+  "templates": ["templates"],
+  "packs": [],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "gridDistance": 5,
+  "gridUnits": "ft",
+  "manifest": "https://raw.githubusercontent.com/anguskennedy/stormbringer3e/refs/heads/main/system.json",
+  "download": "https://github.com/anguskennedy/stormbringer3e/archive/refs/tags/v0.0.1.zip"
+}
