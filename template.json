@@ -1,31 +1,28 @@
 {
   "Actor": {
+    "types": ["character", "npc"],
     "templates": {
       "base": {
-        "stats": {
-          "str": 0,
-          "con": 0,
-          "siz": 0,
-          "int": 0,
-          "pow": 0,
-          "dex": 0,
-          "cha": 0
+        "attributes": {
+          "str": 10, "con": 10, "siz": 10, "int": 10, "pow": 10, "dex": 10, "cha": 10
         },
-        "hp": { "value": 0, "max": 0 },
-        "damageBonus": 0,
-        "majorWoundLevel": 0,
+        "resources": {
+          "hp": {"value": 10, "max": 10},
+          "elan": {"value": 10, "max": 10}
+        },
         "skills": {}
-      }
-    },
-    "character": {
-      "templates": ["base"],
-      "name": "",
-      "sex": "",
-      "class": "",
-      "nationality": "",
-      "cult": "",
-      "age": 0,
-      "elan": 0
+      },
+      "character": {"$$inherit": ["base"]},
+      "npc": {"$$inherit": ["base"]}
+    }
+  },
+  "Item": {
+    "types": ["skill", "weapon", "armor"],
+    "templates": {
+      "base": {},
+      "skill": {"chance": 25},
+      "weapon": {"damage": "1d6", "skill": "weapon"},
+      "armor": {"ap": 1}
     }
   }
 }

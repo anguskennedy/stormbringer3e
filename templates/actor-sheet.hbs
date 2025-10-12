@@ -1,0 +1,28 @@
+<form class="storm sheet actor" autocomplete="off">
+  <header class="header flexrow">
+    <h1>{{actor.name}}</h1>
+  </header>
+  <section class="sheet-body">
+    <div class="grid">
+      <div>
+        <h3>{{localize "STORM.attributes"}}</h3>
+        {{#each system.attributes as |v k|}}
+          <label>{{k}}</label>
+          <input type="number" name="system.attributes.{{k}}" value="{{v}}"/>
+          <button type="button" data-action="roll-attr" data-attr="{{k}}">{{localize "STORM.roll"}}</button>
+        {{/each}}
+      </div>
+      <div>
+        <h3>{{localize "STORM.skills"}}</h3>
+        {{#each items as |it|}}
+          {{#if (eq it.type "skill")}}
+            <div class="flexrow">
+              <label>{{it.name}}</label>
+              <input type="number" name="items.{{it._id}}.system.chance" value="{{it.system.chance}}"/>
+            </div>
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
+  </section>
+</form>

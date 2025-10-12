@@ -1,0 +1,16 @@
+<form class="storm sheet item" autocomplete="off">
+  <header class="header flexrow">
+    <h1>{{item.name}}</h1>
+  </header>
+  <section class="sheet-body">
+    {{#if (eq item.type "skill")}}
+      <label>Chance</label>
+      <input type="number" name="system.chance" value="{{system.chance}}"/>
+    {{/if}}
+
+    {{#if (eq item.type "weapon")}}
+      <label>Damage</label>
+      <input type="text" name="system.damage" value="{{system.damage}}"/>
+    {{/if}}
+  </section>
+</form>

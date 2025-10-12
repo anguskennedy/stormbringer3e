@@ -1,0 +1,6 @@
+.storm.sheet .window-content { padding: 0; }
+.storm .sheet-body { padding: 0.75rem; }
+.storm .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+.storm .header { padding: 0.5rem 0.75rem; background: var(--color-shadow-dark); color: var(--color-text-light-0); }
+.storm label { font-weight: 600; }
+.storm input[type="number"] { text-align: center; }
