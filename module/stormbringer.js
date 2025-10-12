@@ -6,7 +6,7 @@ import { StormItemSheet } from "./sheets/item-sheet.js";
 import { StormDice } from "./dice.js";
 
 Hooks.once("init", function() {
-  console.log("Stormbringer Lite | Initializing");
+  console.log("Stormbringer 3e | Initializing");
 
   // Define custom document classes
   CONFIG.Actor.documentClass = StormActor;

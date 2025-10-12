@@ -2,17 +2,25 @@ export class StormActorSheet extends ActorSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["storm", "sheet", "actor"],
-      template: "systems/stormbringer-lite/templates/actor-sheet.hbs",
+      template: "systems/stormbringer3e/templates/actor-sheet.hbs",
       width: 600,
       height: 480
     });
   }
 
-  getData(options) {
-    const context = super.getData(options);
-    context.config = CONFIG.STORM ?? {};
-    return context;
-  }
+getData(options) {
+  const data = super.getData(options);
+  const actorData = this.actor.system;
+
+  // expose data for Handlebars
+  return {
+    ...data,
+    actor: this.actor,
+    system: actorData,
+    items: this.actor.items.contents,
+    config: CONFIG.STORM ?? {}
+  };
+}
 
   activateListeners(html) {
     super.activateListeners(html);
