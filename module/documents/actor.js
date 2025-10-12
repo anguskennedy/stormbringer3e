@@ -1,11 +1,22 @@
 export class StormActor extends Actor {
-  prepareData() {
-    super.prepareData();
-    const data = this.system; // v10+
+  prepareBaseData() {
+    super.prepareBaseData();
 
-    // Example derived data: total HP equals CON (demo only)
-    const con = Number(data.attributes?.con ?? 10);
-    data.resources ??= {};
-    data.resources.hp ??= { value: con, max: con };
+    const system = this.system;
+    system.attributes ??= {};
+    system.resources ??= {};
+
+    // Merge defaults from preloaded cache
+    if (game.stormbringer?._actorBase) {
+      foundry.utils.mergeObject(system, game.stormbringer._actorBase, { overwrite: false });
+    }
+  }
+
+  prepareDerivedData() {
+    const { attributes = {}, resources = {} } = this.system;
+    const con = Number(attributes.con ?? 10);
+    resources.hp ??= {};
+    resources.hp.max = con;
+    resources.hp.value = Math.min(resources.hp.value ?? con, con);
   }
 }

@@ -5,8 +5,13 @@ import { StormActorSheet } from "./sheets/actor-sheet.js";
 import { StormItemSheet } from "./sheets/item-sheet.js";
 import { StormDice } from "./dice.js";
 
-Hooks.once("init", function() {
+Hooks.once("init", async() => {
   console.log("Stormbringer 3e | Initializing");
+  game.stormbringer = {};
+
+  // Preload base actor data before anything initializes
+  const res = await fetch("systems/stormbringer3e/module/data/actor-base.json");
+  game.stormbringer._actorBase = await res.json();
 
   // Define custom document classes
   CONFIG.Actor.documentClass = StormActor;
