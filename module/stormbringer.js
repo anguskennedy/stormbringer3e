@@ -18,11 +18,15 @@ Hooks.once("init", async() => {
   CONFIG.Item.documentClass = StormItem;
 
   // Register sheets
-  Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("storm", StormActorSheet, { makeDefault: true, label: game.i18n.localize("STORM.sheet.actor") });
+  foundry.documents.collections.Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
+  foundry.documents.collections.Actors.registerSheet("storm", StormActorSheet, {
+  makeDefault: true
+  });
 
-  Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("storm", StormItemSheet, { makeDefault: true, label: game.i18n.localize("STORM.sheet.item") });
+  foundry.documents.collections.Items.unregisterSheet("core", foundry.appv1.sheets.ItemSheet);
+  foundry.documents.collections.Items.registerSheet("storm", StormItemSheet, {
+  makeDefault: true
+  });
 
   // Expose a tiny dice helper
   game.storm = { roll: StormDice.roll };

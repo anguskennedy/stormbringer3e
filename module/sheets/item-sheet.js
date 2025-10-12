@@ -1,4 +1,4 @@
-export class StormItemSheet extends ItemSheet {
+export class StormItemSheet extends foundry.appv1.sheets.ItemSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["storm", "sheet", "item"],

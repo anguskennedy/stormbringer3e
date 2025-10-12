@@ -31,7 +31,6 @@
   "grid": {
     "distance": 5,
     "units": "ft"
-  
   },
   "manifest": "https://raw.githubusercontent.com/anguskennedy/stormbringer3e/refs/heads/main/system.json",
   "download": "https://github.com/anguskennedy/stormbringer3e/archive/refs/tags/v0.0.1.zip"
