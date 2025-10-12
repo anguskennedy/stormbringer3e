@@ -12,7 +12,6 @@
   ],
   "esmodules": ["module/stormbringer.js"],
   "styles": ["css/stormbringer.css"],
-  "templates": ["templates"],
   "packs": [],
   "languages": [
     {
@@ -25,8 +24,8 @@
     "minimum": "13",
     "verified": "13"
   },
-  "gridDistance": 5,
-  "gridUnits": "ft",
+  "grid.distance": 5,
+  "grid.units": "ft",
   "manifest": "https://raw.githubusercontent.com/anguskennedy/stormbringer3e/refs/heads/main/system.json",
   "download": "https://github.com/anguskennedy/stormbringer3e/archive/refs/tags/v0.0.1.zip"
 }
