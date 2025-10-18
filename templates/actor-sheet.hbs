@@ -1,17 +1,21 @@
 <form class="storm sheet actor" autocomplete="off">
+  <link rel="stylesheet" href="systems/stormbringer3e/css/stormbringer.css">
+
   <header class="header flexrow">
     <h1>{{actor.name}}</h1>
   </header>
+  
   <section class="sheet-body">
     <div class="grid">
-      <div>
-        <h3>{{localize "STORM.attributes"}}</h3>
-        {{#each system.attributes as |v k|}}
-          <label>{{k}}</label>
-          <input type="number" name="system.attributes.{{k}}" value="{{v}}"/>
-          <button type="button" data-action="roll-attr" data-attr="{{k}}">{{localize "STORM.roll"}}</button>
-        {{/each}}
-      </div>
+    <div class="attributes">
+      <h3>{{localize "STORM.attributes"}}</h3>
+      {{#each system.attributes as |v k|}}
+        <div class="attribute-row flexrow">
+          <label class="attr-label" data-action="roll-attr" data-attr="{{k}}">{{k}}</label>
+          <input type="number" class="attr-value" name="system.attributes.{{k}}" value="{{v}}" />
+        </div>
+      {{/each}}
+    </div>
       <div>
         <h3>{{localize "STORM.skills"}}</h3>
         {{#each items as |it|}}

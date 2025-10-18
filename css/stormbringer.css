@@ -1,6 +1,45 @@
 .storm.sheet .window-content { padding: 0; }
 .storm .sheet-body { padding: 0.75rem; }
-.storm .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+.storm .grid {
+  display: grid;
+  grid-template-columns: 0.2fr 0.6fr; /* narrower Attributes column */
+  gap: 0.5rem;
+}
 .storm .header { padding: 0.5rem 0.75rem; background: var(--color-shadow-dark); color: var(--color-text-light-0); }
 .storm label { font-weight: 600; }
 .storm input[type="number"] { text-align: center; }
+
+.attribute-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  margin-bottom: 2px;
+  gap: 0.15em;
+}
+
+.attr-label {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: "Courier New", monospace;
+  font-size: 1rem;
+  width: 1em; /* tighter label width */
+  text-align: left; /* ensures alignment with header */
+  cursor: pointer;
+}
+
+.attr-value {
+  font-family: "Courier New", monospace;
+  font-size: 1rem;
+  border: none;
+  border-bottom: 1.5px solid black;
+  background: transparent;
+  box-shadow: none;
+  margin-left: 0;
+  line-height: 1.1;
+  padding-bottom: 1px;
+}
+
+.attr-value:focus {
+  outline: none;
+  border-bottom: 1.5px solid #b33;
+}

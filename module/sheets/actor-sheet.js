@@ -25,10 +25,16 @@ getData(options) {
   activateListeners(html) {
     super.activateListeners(html);
 
-    html.find("button[data-action='roll-attr']").on("click", ev => {
-      const attr = ev.currentTarget.dataset.attr;
-      const val = Number(this.actor.system.attributes[attr] ?? 10);
-      game.storm.roll(`${val}d1`); // demo roll showing chat output
+  html.find("[data-action='roll-attr']").on("click", async ev => {
+    const attr = ev.currentTarget.dataset.attr;
+    const val = Number(this.actor.system.attributes[attr] ?? 10);
+    const roll = new Roll("1d100");
+    await roll.evaluate();
+    const success = roll.total <= val;
+    await roll.toMessage({
+      speaker: ChatMessage.getSpeaker({actor: this.actor}),
+      flavor: `${attr.toUpperCase()} Check (vs ${val}) → ${success ? "Success" : "Failure"}`
     });
+  });
   }
 }
