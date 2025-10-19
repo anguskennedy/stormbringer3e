@@ -1,10 +1,5 @@
 .storm.sheet .window-content { padding: 0; }
 .storm .sheet-body { padding: 0.75rem; }
-.storm .grid {
-  display: grid;
-  grid-template-columns: 0.2fr 0.6fr; /* narrower Attributes column */
-  gap: 0.5rem;
-}
 .storm .header { padding: 0.5rem 0.75rem; background: var(--color-shadow-dark); color: var(--color-text-light-0); }
 .storm label { font-weight: 600; }
 .storm input[type="number"] { text-align: center; }
@@ -22,8 +17,8 @@
   text-transform: uppercase;
   font-family: "Courier New", monospace;
   font-size: 1rem;
-  width: 1em; /* tighter label width */
-  text-align: left; /* ensures alignment with header */
+  width: 1em; 
+  text-align: left;
   cursor: pointer;
 }
 
@@ -42,4 +37,193 @@
 .attr-value:focus {
   outline: none;
   border-bottom: 1.5px solid #b33;
+}
+
+
+/* === GENERAL SHEET LAYOUT === */
+.stormbringer-sheet {
+  font-family: 'Special Elite', 'Courier New', monospace;
+  font-size: 14px;
+  color: #111;
+  background-color: #fff;
+  border: 2px solid #000;
+  padding: 10px;
+  width: 900px;
+  margin: 0 auto;
+  line-height: 1.2;
+}
+
+.stormbringer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px solid #000;
+  padding-bottom: 6px;
+  margin-bottom: 6px;
+}
+
+.stormbringer-header .title {
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.stormbringer-section {
+  border: 2px solid #000;
+  padding: 6px;
+  margin-bottom: 8px;
+}
+
+/* === CHARACTER INFO === */
+.char-info {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 6px;
+  margin-bottom: 6px;
+}
+
+.char-info label {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.char-info span {
+  border-bottom: 1px solid #000;
+  padding: 0 4px;
+}
+
+/* === ATTRIBUTES TABLE === */
+.attributes {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.attributes th,
+.attributes td {
+  border: 1px solid #000;
+  padding: 4px 6px;
+}
+
+.attributes th {
+  background: #f5f5f5;
+  font-weight: bold;
+  text-align: center;
+}
+
+.attributes td.value {
+  text-align: center;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* === TEXT AREAS === */
+textarea, .desc-block {
+  width: 100%;
+  min-height: 60px;
+  border: 1px solid #000;
+  padding: 4px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+/* === POSSESSIONS, NOTES === */
+.possessions, .notes {
+  display: flex;
+  gap: 6px;
+}
+
+.possessions div,
+.notes div {
+  flex: 1;
+}
+
+/* === WEAPONS TABLE === */
+.weapons {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 4px;
+}
+
+.weapons th, .weapons td {
+  border: 1px solid #000;
+  padding: 4px;
+  text-align: center;
+}
+
+.weapons th {
+  background: #f5f5f5;
+}
+
+/* === SKILLS GRID === */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+  font-size: 13px;
+}
+
+.skill-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dotted #000;
+  padding: 0 4px;
+}
+
+.skill-item span.value {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* === SMALL UTILITIES === */
+.small { font-size: 12px; }
+.center { text-align: center; }
+.bold { font-weight: bold; }
+
+/* === FOOTER NOTES === */
+.footer {
+  border-top: 2px solid #000;
+  padding-top: 4px;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 8px;
+}
+
+
+.tabletop {
+  display: grid;
+  grid-template-columns: 1fr 2fr 3fr; /* three vertical sections */
+  grid-template-rows: 1fr 1fr;        /* two rows (bottom only used by last col) */
+  width: 860px;
+  height: 300px;
+  border: 2px solid black;
+}
+
+.cell {
+  border: 2px solid black;
+}
+
+/* Left column spans both rows */
+.attributeCell {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+/* Middle column spans both rows */
+.descriptionCell {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+/* Right column top */
+.afflictionsCell {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+/* Right column bottom */
+.armourCell {
+  grid-column: 3;
+  grid-row: 2;
 }

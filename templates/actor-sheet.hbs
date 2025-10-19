@@ -1,21 +1,131 @@
+<link rel="stylesheet" href="systems/stormbringer3e/css/stormbringer.css">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+
+<form class="stormbringer-sheet" autocomplete="off">
+
+  <!-- HEADER -->
+  <header class="stormbringer-header">
+    <div class="title">Stormbringer Character Description Form</div>
+    <div class="small center">
+      <div>Fantasy Roleplaying in the World of Elric</div>
+    </div>
+  </header>
+
+  <!-- CHARACTER INFO -->
+  <section class="stormbringer-section char-info">
+    <label>Name:</label> <span>Merak Gren</span>
+    <label>Sex:</label> <span>Male</span>
+    <label>Age:</label> <span>25</span>
+    <label>Player:</label> <span>Ken St. Andre</span>
+    <label>Nationality:</label> <span>Argimiliar</span>
+    <label>Class:</label> <span>Assassin</span>
+    <label>Cult:</label> <span>None</span>
+    <label>Elan:</label> <span>None</span>
+  </section>
+
+  <section class="stormbringer-section">
+    <div class="tabletop">
+      <div class="cell attributeCell">
+        {{#each system.attributes as |v k|}}
+          <div class="attribute-row flexrow">
+            <label class="attr-label" data-action="roll-attr" data-attr="{{k}}">{{k}}</label>
+            <input type="number" class="attr-value" name="system.attributes.{{k}}" value="{{v}}" />
+          </div>
+        {{/each}}
+      </div>
+      <div class="cell descriptionCell">
+        <p>Two meters tall, of medium build. 175kg weight. Blonde hair, brown eyes.
+          He wears a dark cloak over his tarnished plate armor and carries his bow
+          in his left hand.</p>
+      </div>
+      <div class="cell afflictionsCell">
+        <h3>Afflictions</h3>
+        <p>None</p>
+      </div>
+      <div class="cell armourCell">
+        <div style="flex: 3;">
+          <div class="bold">Armor</div>
+          <div>Plate (1D10+1D8), Major Wound Level: <u>10</u></div>
+          <div>Hit Points: <u>19</u></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- POSSESSIONS & MONEY -->
+  <section class="stormbringer-section possessions">
+    <div>
+      <div class="bold">Possessions</div>
+      <div>Various pouches for tools of the trade</div>
+    </div>
+    <div>
+      <div class="bold">Money</div>
+      <div>50 large bronze pieces</div>
+    </div>
+  </section>
+
+  <!-- WEAPONS -->
+  <section class="stormbringer-section">
+    <div class="bold">Weapons</div>
+    <table class="weapons">
+      <thead>
+        <tr><th>Weapon</th><th>Attack</th><th>Damage</th><th>Parry</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Desert Bow</td><td>57%</td><td>1D10+1D4</td><td>—</td></tr>
+        <tr><td>Sea Axe</td><td>37%</td><td>2D6+1D6</td><td>31%</td></tr>
+        <tr><td>Broadsword</td><td>47%</td><td>1D8+1D6</td><td>41%</td></tr>
+        <tr><td>Dagger</td><td>37%</td><td>1D4+1D6</td><td>31%</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- NOTES -->
+  <section class="stormbringer-section notes">
+    <div>
+      <div class="bold">Notes</div>
+      <div>Likes to sneak around</div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="stormbringer-section">
+    <div class="bold center">Skills</div>
+    <div class="skills-grid">
+      <div class="skill-item"><span>Climb</span><span class="value">36%</span></div>
+      <div class="skill-item"><span>Dodge</span><span class="value">51%</span></div>
+      <div class="skill-item"><span>Jump</span><span class="value">11%</span></div>
+      <div class="skill-item"><span>Ride</span><span class="value">51%</span></div>
+      <div class="skill-item"><span>Swim</span><span class="value">28%</span></div>
+      <div class="skill-item"><span>Hide</span><span class="value">40%</span></div>
+      <div class="skill-item"><span>Move Quietly</span><span class="value">50%</span></div>
+      <div class="skill-item"><span>Pick Lock</span><span class="value">47%</span></div>
+      <div class="skill-item"><span>Set Trap</span><span class="value">12%</span></div>
+      <div class="skill-item"><span>Persuade</span><span class="value">12%</span></div>
+      <div class="skill-item"><span>Listen</span><span class="value">51%</span></div>
+      <div class="skill-item"><span>Search</span><span class="value">26%</span></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div>Michael Moorcock’s Stormbringer © Chaosium</div>
+  </footer>
+
+</form>
+<!--
+
 <form class="storm sheet actor" autocomplete="off">
-  <link rel="stylesheet" href="systems/stormbringer3e/css/stormbringer.css">
 
   <header class="header flexrow">
     <h1>{{actor.name}}</h1>
   </header>
-  
+
   <section class="sheet-body">
     <div class="grid">
-    <div class="attributes">
-      <h3>{{localize "STORM.attributes"}}</h3>
-      {{#each system.attributes as |v k|}}
-        <div class="attribute-row flexrow">
-          <label class="attr-label" data-action="roll-attr" data-attr="{{k}}">{{k}}</label>
-          <input type="number" class="attr-value" name="system.attributes.{{k}}" value="{{v}}" />
-        </div>
-      {{/each}}
-    </div>
+
       <div>
         <h3>{{localize "STORM.skills"}}</h3>
         {{#each items as |it|}}
@@ -30,3 +140,4 @@
     </div>
   </section>
 </form>
+-->
