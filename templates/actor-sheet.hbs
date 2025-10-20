@@ -96,18 +96,11 @@
             {{#if (eq item.system.type "agility")}}
               <div class="skill-row flexrow">
                 <label>{{item.name}}</label>
-                <input type="number" value="{{item.system.effective}}" data-item-id="{{item._id}}" data-field="system.effective" class="item-field" />
+                <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
               </div>
             {{/if}}
           {{/if}}
         {{/each}}
-
-        <input
-  
-  
-  data-item-id="{{item._id}}"
-  data-field="system.effective"
-  class="item-field" />
       </div>
       <div class="cell perceptCell">
         <p>PERCEPT</p>
