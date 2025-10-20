@@ -104,10 +104,30 @@
       </div>
       <div class="cell perceptCell">
         <p>PERCEPT</p>
+        {{#each actor.items as |item|}}
+          {{#if (eq item.type "skill")}}
+            {{#if (eq item.system.type "perception")}}
+              <div class="skill-row flexrow">
+                <label>{{item.name}}</label>
+                <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
+              </div>
+            {{/if}}
+          {{/if}}
+        {{/each}}        
 
       </div>
       <div class="cell stealthCell">
         <p>STEALTH</p>
+        {{#each actor.items as |item|}}
+          {{#if (eq item.type "skill")}}
+            {{#if (eq item.system.type "stealth")}}
+              <div class="skill-row flexrow">
+                <label>{{item.name}}</label>
+                <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
+              </div>
+            {{/if}}
+          {{/if}}
+        {{/each}}        
 
       </div>
       <div class="cell knowCell">
