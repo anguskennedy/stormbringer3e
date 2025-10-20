@@ -24,6 +24,7 @@ getData(options) {
 
   activateListeners(html) {
     super.activateListeners(html);
+    console.log("StormActorSheet listeners activated for", this.actor.name);
 
   html.find("[data-action='roll-attr']").on("click", async ev => {
     const attr = ev.currentTarget.dataset.attr;
@@ -35,6 +36,16 @@ getData(options) {
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
       flavor: `${attr.toUpperCase()} Check (vs ${val}) → ${success ? "Success" : "Failure"}`
     });
+  });
+
+  // Handle inline item field edits (e.g., skills)
+  html.find(".item-field").change(ev => {
+    const input = ev.currentTarget;
+    const itemId = input.dataset.itemId;
+    const field = input.dataset.field;
+    const value = Number(input.value);
+    const item = this.actor.items.get(itemId);
+    if (item) item.update({ [field]: value });
   });
   }
 }

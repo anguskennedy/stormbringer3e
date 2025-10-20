@@ -1,0 +1,4 @@
+{"_id":"climb","name":"Climb","type":"skill","img":"icons/skills/movement/climb-rope-blue.webp","system":{"type":"agility","base":0,"description":"Climb walls, ropes, trees, or other surfaces."}}
+{"_id":"dodge","name":"Dodge","type":"skill","img":"icons/skills/movement/evade-backward.webp","system":{"type":"agility","base":0,"description":"Avoid physical attacks or moving hazards."}}
+{"_id":"listen","name":"Listen","type":"skill","img":"icons/skills/perception/ear-listen.webp","system":{"type":"perception","base":0,"description":"Detect sounds that indicate danger, conversation, or movement."}}
+{"_id":"see","name":"See","type":"skill","img":"icons/skills/perception/eye-blue.webp","system":{"type":"perception","base":0,"description":"Visually notice hidden, distant, or subtle details."}}

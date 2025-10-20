@@ -1,0 +1,13 @@
+{
+  "skill": {
+    "type": "",
+    "base": 0,
+    "effective": 0,
+    "description": ""
+  },
+  "type": {
+    "bonus": 0,
+    "skills": [],
+    "description": ""
+  }
+}

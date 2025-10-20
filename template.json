@@ -20,7 +20,12 @@
     "types": ["skill", "weapon", "armor"],
     "templates": {
       "base": {},
-      "skill": {"chance": 25},
+      "skill": {
+        "type": "",
+        "base": 0,
+        "effective": 0,
+        "description": ""
+      },
       "weapon": {"damage": "1d6", "skill": "weapon"},
       "armor": {"ap": 1}
     }

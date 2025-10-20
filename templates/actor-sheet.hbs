@@ -13,7 +13,7 @@
 
   <!-- CHARACTER INFO -->
   <section class="stormbringer-section char-info">
-    <label>Name:</label> <span>Merak Gren</span>
+    <label>Name:</label> <span>{{actor.name}}</span>
     <label>Sex:</label> <span>Male</span>
     <label>Age:</label> <span>25</span>
     <label>Player:</label> <span>Ken St. Andre</span>
@@ -39,8 +39,8 @@
           in his left hand.</p>
       </div>
       <div class="cell afflictionsCell">
-        <h3>Afflictions</h3>
-        <p>None</p>
+        <p>AFFLICTIONS</p>
+        <p>NONE</p>
       </div>
       <div class="cell armourCell">
         <div style="flex: 3;">
@@ -54,43 +54,94 @@
 
 
 
-  <!-- POSSESSIONS & MONEY -->
-  <section class="stormbringer-section possessions">
-    <div>
-      <div class="bold">Possessions</div>
-      <div>Various pouches for tools of the trade</div>
-    </div>
-    <div>
-      <div class="bold">Money</div>
-      <div>50 large bronze pieces</div>
-    </div>
-  </section>
-
-  <!-- WEAPONS -->
+  <!-- POSSESSIONS & WEAPONS -->
   <section class="stormbringer-section">
-    <div class="bold">Weapons</div>
-    <table class="weapons">
-      <thead>
-        <tr><th>Weapon</th><th>Attack</th><th>Damage</th><th>Parry</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Desert Bow</td><td>57%</td><td>1D10+1D4</td><td>—</td></tr>
-        <tr><td>Sea Axe</td><td>37%</td><td>2D6+1D6</td><td>31%</td></tr>
-        <tr><td>Broadsword</td><td>47%</td><td>1D8+1D6</td><td>41%</td></tr>
-        <tr><td>Dagger</td><td>37%</td><td>1D4+1D6</td><td>31%</td></tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- NOTES -->
-  <section class="stormbringer-section notes">
-    <div>
-      <div class="bold">Notes</div>
-      <div>Likes to sneak around</div>
+    <div class="tableMiddle">
+      <div class="cell possessionsCell">
+        <p>POSSESSIONS</p>
+        <div>Various pouches for tools of the trade</div>
+      </div>
+      <div class="cell weaponsCell">
+        <p>WEAPONS</p>
+        <table class="weapons">
+          <thead>
+            <tr><th>Weapon</th><th>Attack</th><th>Damage</th><th>Parry</th></tr>
+          </thead>     
+          <tbody>
+            <tr><td>Desert Bow</td><td>57%</td><td>1D10+1D4</td><td>—</td></tr>
+            <tr><td>Sea Axe</td><td>37%</td><td>2D6+1D6</td><td>31%</td></tr>
+            <tr><td>Broadsword</td><td>47%</td><td>1D8+1D6</td><td>41%</td></tr>
+            <tr><td>Dagger</td><td>37%</td><td>1D4+1D6</td><td>31%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cell moneyCell">
+        <p>MONEY</p>
+        <div>50 large bronze pieces</div>
+      </div>
+       <div class="cell notesCell">
+        <p>NOTES</p>
+        <div>Likes to sneak around</div>
+      </div>                 
     </div>
   </section>
 
   <!-- SKILLS -->
+  <section class="stormbringer-section">
+    <div class="tableSkills">
+      <div class="cell agilityCell">
+        <p>AGILITY</p>
+        {{#each actor.items as |item|}}
+          {{#if (eq item.type "skill")}}
+            {{#if (eq item.system.type "agility")}}
+              <div class="skill-row flexrow">
+                <label>{{item.name}}</label>
+                <input type="number" value="{{item.system.effective}}" data-item-id="{{item._id}}" data-field="system.effective" class="item-field" />
+              </div>
+            {{/if}}
+          {{/if}}
+        {{/each}}
+
+        <input
+  
+  
+  data-item-id="{{item._id}}"
+  data-field="system.effective"
+  class="item-field" />
+      </div>
+      <div class="cell perceptCell">
+        <p>PERCEPT</p>
+
+      </div>
+      <div class="cell stealthCell">
+        <p>STEALTH</p>
+
+      </div>
+      <div class="cell knowCell">
+        <p>KNOW</p>
+
+      </div>
+      <div class="cell summoningCell">
+        <p>SUMMONINGS</p>
+
+      </div>
+      <div class="cell manipCell">
+        <p>MANIP</p>
+
+      </div>
+      <div class="cell communCell">
+        <p>COMMUN</p>
+
+      </div>
+      <div class="cell skillNotesCell">
+        <p>NOTES</p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS 
+  
   <section class="stormbringer-section">
     <div class="bold center">Skills</div>
     <div class="skills-grid">
@@ -108,11 +159,8 @@
       <div class="skill-item"><span>Search</span><span class="value">26%</span></div>
     </div>
   </section>
+-->
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div>Michael Moorcock’s Stormbringer © Chaosium</div>
-  </footer>
 
 </form>
 <!--

@@ -12,7 +12,15 @@
   ],
   "esmodules": ["module/stormbringer.js"],
   "styles": ["css/stormbringer.css"],
-  "packs": [],
+  "packs": [
+    {
+      "name": "skills",
+      "label": "Skills",
+      "path": "packs/skills.db",
+      "type": "Item",
+      "system": "stormbringer3e"
+    }
+  ],
   "languages": [
     {
       "lang": "en",

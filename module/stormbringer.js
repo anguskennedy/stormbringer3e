@@ -1,4 +1,4 @@
-import STORM from "./config.js";
+import STORM, { STORM_TYPES } from "./config.js";
 import { StormActor } from "./documents/actor.js";
 import { StormItem } from "./documents/item.js";
 import { StormActorSheet } from "./sheets/actor-sheet.js";
@@ -8,6 +8,8 @@ import { StormDice } from "./dice.js";
 Hooks.once("init", async() => {
   console.log("Stormbringer 3e | Initializing");
   game.stormbringer = {};
+  game.system = game.system || {};
+  game.system.config = { STORM, STORM_TYPES };
 
   // Preload base actor data before anything initializes
   const res = await fetch("systems/stormbringer3e/module/data/actor-base.json");
