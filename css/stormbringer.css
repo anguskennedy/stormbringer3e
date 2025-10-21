@@ -5,8 +5,8 @@
 .storm label { font-weight: 600; }
 .storm input[type="number"] { text-align: center; }
 
-
 */
+
 /* === GENERAL SHEET LAYOUT === */
 .stormbringer-sheet {
   font-family: 'Special Elite', 'Courier New', monospace;
@@ -58,37 +58,51 @@
 
 .attribute-row {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   justify-content: flex-start;
   margin-bottom: 2px;
-  gap: 0.15em;
+  gap: 0.25rem;
 }
 .attr-label {
   font-weight: bold;
   text-transform: uppercase;
   font-family: "Courier New", monospace;
   font-size: 1rem;
-  width: 1em; 
+  letter-spacing: 0.05em;
+  width: 2.1em;
   text-align: left;
   cursor: pointer;
 }
 
 .attr-value {
+  flex: 0 0 auto;
+  width: 3ch;
   font-family: "Courier New", monospace;
   font-size: 1rem;
+  font-weight: 700;
   border: none;
   border-bottom: 1.5px solid black;
   background: transparent;
   box-shadow: none;
-  margin-left: 0;
   line-height: 1.1;
-  padding-bottom: 1px;
-  text-align: center;
+  padding: 0 6px 0 0;
+  text-align: right;
+  appearance: textfield;
 }
 
 .attr-value:focus {
   outline: none;
-  border-bottom: 1.5px solid #b33;
+  border-bottom-color: #b33;
+}
+
+.attr-value::-webkit-outer-spin-button,
+.attr-value::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.attr-value[type="number"] {
+  -moz-appearance: textfield;
 }
 
 
@@ -102,11 +116,6 @@ textarea, .desc-block {
   resize: vertical;
 }
 
-/* === POSSESSIONS, NOTES === */
-
-
-/* === WEAPONS TABLE === */
-
 
 /* === SKILLS GRID === */
 .tableSkills {
@@ -114,6 +123,60 @@ textarea, .desc-block {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr; /* five columns of skills */
     grid-template-rows: 1fr 1fr; /* 2 rows used by first three cols only */
     height: 300px;
+}
+
+.tableSkills .skill-row {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 2px 4px;
+  min-height: 22px;
+}
+
+.tableSkills .skill-row label {
+  flex: 1 1 auto;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.tableSkills .skill-row .item-field {
+  flex: 0 0 auto;
+  width: 3.25ch;
+  padding: 0 12px 0 0;
+  text-align: right;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px dashed #000;
+  box-shadow: none;
+  appearance: textfield;
+}
+
+.tableSkills .skill-row .item-field:focus {
+  outline: none;
+  border-bottom-color: #b33;
+}
+
+.tableSkills .skill-row::after {
+  content: "%";
+  position: absolute;
+  right: 4px;
+  bottom: 2px;
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+
+.tableSkills .skill-row .item-field::-webkit-outer-spin-button,
+.tableSkills .skill-row .item-field::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.tableSkills .skill-row .item-field[type="number"] {
+  -moz-appearance: textfield;
 }
 
 .skill-item {
@@ -134,8 +197,8 @@ textarea, .desc-block {
 
 .tabletop {
   display: grid;
-  grid-template-columns: 1fr 2fr 3fr; /* three vertical sections */
-  grid-template-rows: 1fr 1fr;        /* two rows (bottom only used by last col) */
+  grid-template-columns: 0.8fr 2.2fr 3fr; /* three vertical sections */
+  grid-template-rows: 1fr 1fr;            /* two rows (bottom only used by last col) */
   height: 300px;
 }
 
