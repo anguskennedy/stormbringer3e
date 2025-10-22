@@ -95,8 +95,11 @@
           {{#if (eq item.type "skill")}}
             {{#if (eq item.system.type "agility")}}
               <div class="skill-row flexrow">
-                <label>{{item.name}}</label>
-                <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
+                <label class="skill-roll" data-action="roll-skill" data-item-id="{{item._id}}">{{item.name}}</label>
+                <span class="item-field-wrapper">
+                  <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
+                  <span class="item-percent">%</span>
+                </span>
               </div>
             {{/if}}
           {{/if}}
@@ -108,8 +111,11 @@
           {{#if (eq item.type "skill")}}
             {{#if (eq item.system.type "perception")}}
               <div class="skill-row flexrow">
-                <label>{{item.name}}</label>
-                <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
+                <label class="skill-roll" data-action="roll-skill" data-item-id="{{item._id}}">{{item.name}}</label>
+                <span class="item-field-wrapper">
+                  <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
+                  <span class="item-percent">%</span>
+                </span>
               </div>
             {{/if}}
           {{/if}}
@@ -122,8 +128,11 @@
           {{#if (eq item.type "skill")}}
             {{#if (eq item.system.type "stealth")}}
               <div class="skill-row flexrow">
-                <label>{{item.name}}</label>
-                <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
+                <label class="skill-roll" data-action="roll-skill" data-item-id="{{item._id}}">{{item.name}}</label>
+                <span class="item-field-wrapper">
+                  <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
+                  <span class="item-percent">%</span>
+                </span>
               </div>
             {{/if}}
           {{/if}}
@@ -153,52 +162,7 @@
     </div>
   </section>
 
-  <!-- SKILLS 
-  
-  <section class="stormbringer-section">
-    <div class="bold center">Skills</div>
-    <div class="skills-grid">
-      <div class="skill-item"><span>Climb</span><span class="value">36%</span></div>
-      <div class="skill-item"><span>Dodge</span><span class="value">51%</span></div>
-      <div class="skill-item"><span>Jump</span><span class="value">11%</span></div>
-      <div class="skill-item"><span>Ride</span><span class="value">51%</span></div>
-      <div class="skill-item"><span>Swim</span><span class="value">28%</span></div>
-      <div class="skill-item"><span>Hide</span><span class="value">40%</span></div>
-      <div class="skill-item"><span>Move Quietly</span><span class="value">50%</span></div>
-      <div class="skill-item"><span>Pick Lock</span><span class="value">47%</span></div>
-      <div class="skill-item"><span>Set Trap</span><span class="value">12%</span></div>
-      <div class="skill-item"><span>Persuade</span><span class="value">12%</span></div>
-      <div class="skill-item"><span>Listen</span><span class="value">51%</span></div>
-      <div class="skill-item"><span>Search</span><span class="value">26%</span></div>
-    </div>
-  </section>
--->
+
 
 
 </form>
-<!--
-
-<form class="storm sheet actor" autocomplete="off">
-
-  <header class="header flexrow">
-    <h1>{{actor.name}}</h1>
-  </header>
-
-  <section class="sheet-body">
-    <div class="grid">
-
-      <div>
-        <h3>{{localize "STORM.skills"}}</h3>
-        {{#each items as |it|}}
-          {{#if (eq it.type "skill")}}
-            <div class="flexrow">
-              <label>{{it.name}}</label>
-              <input type="number" name="items.{{it._id}}.system.chance" value="{{it.system.chance}}"/>
-            </div>
-          {{/if}}
-        {{/each}}
-      </div>
-    </div>
-  </section>
-</form>
--->

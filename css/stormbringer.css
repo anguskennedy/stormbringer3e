@@ -107,6 +107,7 @@
 
 
 /* === TEXT AREAS === */
+/*
 textarea, .desc-block {
   width: 100%;
   min-height: 60px;
@@ -115,6 +116,7 @@ textarea, .desc-block {
   font-family: inherit;
   resize: vertical;
 }
+*/
 
 
 /* === SKILLS GRID === */
@@ -126,7 +128,6 @@ textarea, .desc-block {
 }
 
 .tableSkills .skill-row {
-  position: relative;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -141,10 +142,20 @@ textarea, .desc-block {
   letter-spacing: 0.02em;
 }
 
+.tableSkills .skill-row .skill-roll {
+  cursor: pointer;
+}
+
+.tableSkills .skill-row .item-field-wrapper {
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 4px;
+  min-width: 5ch;
+}
+
 .tableSkills .skill-row .item-field {
-  flex: 0 0 auto;
   width: 3.25ch;
-  padding: 0 12px 0 0;
   text-align: right;
   font-family: inherit;
   font-size: 0.95rem;
@@ -152,6 +163,7 @@ textarea, .desc-block {
   border: none;
   border-bottom: 1.5px dashed #000;
   box-shadow: none;
+  padding: 0;
   appearance: textfield;
 }
 
@@ -160,13 +172,8 @@ textarea, .desc-block {
   border-bottom-color: #b33;
 }
 
-.tableSkills .skill-row::after {
-  content: "%";
-  position: absolute;
-  right: 4px;
-  bottom: 2px;
+.tableSkills .skill-row .item-percent {
   font-size: 0.9rem;
-  pointer-events: none;
 }
 
 .tableSkills .skill-row .item-field::-webkit-outer-spin-button,
@@ -179,6 +186,7 @@ textarea, .desc-block {
   -moz-appearance: textfield;
 }
 
+/*
 .skill-item {
   display: flex;
   justify-content: space-between;
@@ -189,6 +197,7 @@ textarea, .desc-block {
   font-weight: bold;
   text-decoration: underline dotted;
 }
+*/
 
 /* === UTILITIES === */
 .small { font-size: 12px; }
