@@ -1,16 +1,40 @@
-<form class="storm sheet item" autocomplete="off">
-  <header class="header flexrow">
-    <h1>{{item.name}}</h1>
+<form class="storm sheet item storm-item-sheet" autocomplete="off">
+  <header class="header">
+    <div class="item-details">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="name" value="{{item.name}}" placeholder="Name"/>
+      </div>
+      {{#if (eq item.type "skill")}}
+        <div class="form-group">
+          <label>Category</label>
+          <select name="system.type">
+            {{#each config.skillTypes as |type|}}
+              <option value="{{type.id}}" {{#if (eq ../system.type type.id)}}selected{{/if}}>{{type.label}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Base Chance (%)</label>
+          <input type="number" name="system.base" value="{{system.base}}" />
+        </div>
+      {{/if}}
+    </div>
+    <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
   </header>
   <section class="sheet-body">
     {{#if (eq item.type "skill")}}
-      <label>Chance</label>
-      <input type="number" name="system.chance" value="{{system.chance}}"/>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea name="system.description">{{system.description}}</textarea>
+      </div>
     {{/if}}
 
     {{#if (eq item.type "weapon")}}
-      <label>Damage</label>
-      <input type="text" name="system.damage" value="{{system.damage}}"/>
+      <div class="form-group">
+        <label>Damage</label>
+        <input type="text" name="system.damage" value="{{system.damage}}"/>
+      </div>
     {{/if}}
   </section>
 </form>

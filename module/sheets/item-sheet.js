@@ -7,4 +7,25 @@ export class StormItemSheet extends foundry.appv1.sheets.ItemSheet {
       height: 400
     });
   }
+
+  getData(options) {
+    const data = super.getData(options);
+    const skillTypes = [
+      { id: "agility", label: "Agility" },
+      { id: "perception", label: "Perception" },
+      { id: "stealth", label: "Stealth" },
+      { id: "know", label: "Knowledge" },
+      { id: "summoning", label: "Summoning" },
+      { id: "manip", label: "Manipulation" },
+      { id: "commun", label: "Communication" }
+    ];
+
+    return {
+      ...data,
+      config: {
+        ...(data.config ?? {}),
+        skillTypes
+      }
+    };
+  }
 }

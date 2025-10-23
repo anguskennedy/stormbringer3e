@@ -199,6 +199,49 @@ textarea, .desc-block {
 }
 */
 
+.storm-item-sheet .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #333;
+}
+
+.storm-item-sheet .item-details {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.storm-item-sheet .item-img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border: 1px solid #333;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.storm-item-sheet .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.storm-item-sheet .sheet-body {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.storm-item-sheet textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
 /* === UTILITIES === */
 .small { font-size: 12px; }
 .center { text-align: center; }
