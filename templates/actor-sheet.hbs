@@ -13,14 +13,26 @@
 
   <!-- CHARACTER INFO -->
   <section class="stormbringer-section char-info">
-    <label>Name:</label> <span>{{actor.name}}</span>
-    <label>Sex:</label> <span>Male</span>
-    <label>Age:</label> <span>25</span>
-    <label>Player:</label> <span>Ken St. Andre</span>
-    <label>Nationality:</label> <span>Argimiliar</span>
-    <label>Class:</label> <span>Assassin</span>
-    <label>Cult:</label> <span>None</span>
-    <label>Elan:</label> <span>None</span>
+    <div class="char-info-row">
+      <label>Name:</label>
+      <input type="text" name="name" value="{{actor.name}}" />
+      <label>Sex:</label>
+      <input type="text" name="system.details.sex" value="{{system.details.sex}}" />
+      <label>Age:</label>
+      <input type="number" name="system.details.age" value="{{system.details.age}}" />
+      <label>Player:</label>
+      <input type="text" name="system.details.player" value="{{system.details.player}}" />
+    </div>
+    <div class="char-info-row">
+      <label>Nationality:</label>
+      <input type="text" name="system.details.nationality" value="{{system.details.nationality}}" />
+      <label>Class:</label>
+      <input type="text" name="system.details.class" value="{{system.details.class}}" />
+      <label>Cult:</label>
+      <input type="text" name="system.details.cult" value="{{system.details.cult}}" />
+      <label>Elan:</label>
+      <input type="number" name="system.details.elan" value="{{system.details.elan}}" />
+    </div>
   </section>
 
   <section class="stormbringer-section">
@@ -34,19 +46,26 @@
         {{/each}}
       </div>
       <div class="cell descriptionCell">
-        <p>Two meters tall, of medium build. 175kg weight. Blonde hair, brown eyes.
-          He wears a dark cloak over his tarnished plate armor and carries his bow
-          in his left hand.</p>
+        <p>DESCRIPTION</p>
+        <textarea class="cell-textarea description-text" name="system.narrative.description">{{system.narrative.description}}</textarea>
       </div>
       <div class="cell afflictionsCell">
         <p>AFFLICTIONS</p>
-        <p>NONE</p>
+        <textarea class="cell-textarea textarea-plain" name="system.narrative.afflictions">{{system.narrative.afflictions}}</textarea>
       </div>
       <div class="cell armourCell">
-        <div style="flex: 3;">
+        <div class="armor-block">
           <div class="bold">Armor</div>
-          <div>Plate (1D10+1D8), Major Wound Level: <u>10</u></div>
-          <div>Hit Points: <u>19</u></div>
+          <div>Plate (1D10+1D8)</div>
+          <div class="hp-row">
+            <span>Major Wound Level:</span>
+            <span class="hp-max">{{system.wounds.major}}</span>
+          </div>
+          <div class="hp-row">
+            <span>Hit Points:</span>
+            <input type="number" class="hp-input" name="system.resources.hp.value" value="{{system.resources.hp.value}}" />
+            <span class="hp-max">/ {{system.resources.hp.max}}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -59,29 +78,76 @@
     <div class="tableMiddle">
       <div class="cell possessionsCell">
         <p>POSSESSIONS</p>
-        <div>Various pouches for tools of the trade</div>
+        <textarea class="cell-textarea textarea-plain" name="system.narrative.possessions">{{system.narrative.possessions}}</textarea>
       </div>
-      <div class="cell weaponsCell">
+      <div class="cell weaponsCell" data-drop-target="true">
         <p>WEAPONS</p>
-        <table class="weapons">
-          <thead>
-            <tr><th>Weapon</th><th>Attack</th><th>Damage</th><th>Parry</th></tr>
-          </thead>     
-          <tbody>
-            <tr><td>Desert Bow</td><td>57%</td><td>1D10+1D4</td><td>—</td></tr>
-            <tr><td>Sea Axe</td><td>37%</td><td>2D6+1D6</td><td>31%</td></tr>
-            <tr><td>Broadsword</td><td>47%</td><td>1D8+1D6</td><td>41%</td></tr>
-            <tr><td>Dagger</td><td>37%</td><td>1D4+1D6</td><td>31%</td></tr>
-          </tbody>
-        </table>
+        <div class="weapons-table">
+          <div class="weapon-row weapon-header">
+            <div class="weapon-cell">Weapon</div>
+            <div class="weapon-cell">Attack</div>
+            <div class="weapon-cell">Damage</div>
+            <div class="weapon-cell">Parry</div>
+          </div>
+
+          <div class="weapon-row weapon-bonus-row">
+            <div class="weapon-cell weapon-name">Bonuses</div>
+            <div class="weapon-cell weapon-value attack">
+              <input type="number" name="system.combat.attackBonus" value="{{system.combat.attackBonus}}" aria-label="Attack bonus percentage" />
+              <span class="item-percent">%</span>
+            </div>
+            <div class="weapon-cell weapon-value damage">
+              <input type="text" name="system.combat.damageMods.hand" value="{{system.combat.damageMods.hand}}" placeholder="+d?" aria-label="Hand damage modifier" />
+              <span class="divider">/</span>
+              <input type="text" name="system.combat.damageMods.projectile" value="{{system.combat.damageMods.projectile}}" placeholder="+D?" aria-label="Projectile damage modifier" />
+            </div>
+            <div class="weapon-cell weapon-value parry">
+              <input type="number" name="system.combat.parryBonus" value="{{system.combat.parryBonus}}" aria-label="Parry bonus percentage" />
+              <span class="item-percent">%</span>
+            </div>
+          </div>
+
+          {{#if weaponRows.length}}
+            {{#each weaponRows as |weapon|}}
+              <div class="weapon-row" data-item-id="{{weapon.id}}">
+                <div class="weapon-cell weapon-name">{{weapon.name}}</div>
+                <div class="weapon-cell weapon-value attack">
+                  <button type="button" class="weapon-roll" data-action="roll-weapon" data-roll-type="attack" data-weapon-id="{{weapon.id}}" title="Roll Attack">🎲</button>
+                  <input type="number" class="weapon-stat-input" data-weapon-id="{{weapon.id}}" data-stat="attack" value="{{weapon.attackDisplay}}" />
+                  <span class="item-percent">%</span>
+                </div>
+                <div class="weapon-cell weapon-value damage">
+                  {{#if weapon.damageFormula}}
+                    <button type="button" class="weapon-damage-roll" data-weapon-id="{{weapon.id}}" data-damage-formula="{{weapon.damageFormula}}" title="Roll Damage">
+                      {{weapon.damageDisplay}}
+                    </button>
+                  {{else}}
+                    —
+                  {{/if}}
+                </div>
+                <div class="weapon-cell weapon-value parry">
+                  <button type="button" class="weapon-roll" data-action="roll-weapon" data-roll-type="parry" data-weapon-id="{{weapon.id}}" title="Roll Parry">🎲</button>
+                  <input type="number" class="weapon-stat-input" data-weapon-id="{{weapon.id}}" data-stat="parry" value="{{weapon.parryDisplay}}" />
+                  <span class="item-percent">%</span>
+                </div>
+              </div>
+            {{/each}}
+          {{else}}
+            <div class="weapon-row weapon-empty">
+              <div class="weapon-cell weapon-value">
+                <div class="center small">Drag weapon items here to equip them.</div>
+              </div>
+            </div>
+          {{/if}}
+        </div>
       </div>
       <div class="cell moneyCell">
         <p>MONEY</p>
-        <div>50 large bronze pieces</div>
+        <textarea class="cell-textarea textarea-plain" name="system.narrative.money">{{system.narrative.money}}</textarea>
       </div>
        <div class="cell notesCell">
         <p>NOTES</p>
-        <div>Likes to sneak around</div>
+        <textarea class="cell-textarea textarea-plain" name="system.narrative.notes">{{system.narrative.notes}}</textarea>
       </div>                 
     </div>
   </section>
@@ -91,69 +157,87 @@
     <div class="tableSkills">
       <div class="cell agilityCell">
         <p>AGILITY</p>
-        {{#each actor.items as |item|}}
-          {{#if (eq item.type "skill")}}
-            {{#if (eq item.system.type "agility")}}
-              <div class="skill-row flexrow">
-                <label class="skill-roll" data-action="roll-skill" data-item-id="{{item._id}}">{{item.name}}</label>
-                <span class="item-field-wrapper">
-                  <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
-                  <span class="item-percent">%</span>
-                </span>
-              </div>
-            {{/if}}
-          {{/if}}
+        {{#each skillsByType.agility as |item|}}
+          <div class="skill-row flexrow">
+            <label class="skill-roll" data-action="roll-skill" data-item-id="{{item._id}}">{{item.name}}</label>
+            <span class="item-field-wrapper">
+              <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
+              <span class="item-percent">%</span>
+            </span>
+          </div>
         {{/each}}
       </div>
       <div class="cell perceptCell">
         <p>PERCEPT</p>
-        {{#each actor.items as |item|}}
-          {{#if (eq item.type "skill")}}
-            {{#if (eq item.system.type "perception")}}
-              <div class="skill-row flexrow">
-                <label class="skill-roll" data-action="roll-skill" data-item-id="{{item._id}}">{{item.name}}</label>
-                <span class="item-field-wrapper">
-                  <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
-                  <span class="item-percent">%</span>
-                </span>
-              </div>
-            {{/if}}
-          {{/if}}
+        {{#each skillsByType.percept as |item|}}
+          <div class="skill-row flexrow">
+            <label class="skill-roll" data-action="roll-skill" data-item-id="{{item._id}}">{{item.name}}</label>
+            <span class="item-field-wrapper">
+              <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
+              <span class="item-percent">%</span>
+            </span>
+          </div>
         {{/each}}        
-
       </div>
       <div class="cell stealthCell">
         <p>STEALTH</p>
-        {{#each actor.items as |item|}}
-          {{#if (eq item.type "skill")}}
-            {{#if (eq item.system.type "stealth")}}
-              <div class="skill-row flexrow">
-                <label class="skill-roll" data-action="roll-skill" data-item-id="{{item._id}}">{{item.name}}</label>
-                <span class="item-field-wrapper">
-                  <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
-                  <span class="item-percent">%</span>
-                </span>
-              </div>
-            {{/if}}
-          {{/if}}
+        {{#each skillsByType.stealth as |item|}}
+          <div class="skill-row flexrow">
+            <label class="skill-roll" data-action="roll-skill" data-item-id="{{item._id}}">{{item.name}}</label>
+            <span class="item-field-wrapper">
+              <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
+              <span class="item-percent">%</span>
+            </span>
+          </div>
         {{/each}}        
-
       </div>
       <div class="cell knowCell">
         <p>KNOW</p>
-
+        {{#each skillsByType.know as |item|}}
+          <div class="skill-row flexrow">
+            <label class="skill-roll" data-action="roll-skill" data-item-id="{{item._id}}">{{item.name}}</label>
+            <span class="item-field-wrapper">
+              <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
+              <span class="item-percent">%</span>
+            </span>
+          </div>
+        {{/each}} 
       </div>
       <div class="cell summoningCell">
         <p>SUMMONINGS</p>
-
+        {{#each skillsByType.summoning as |item|}}
+          <div class="skill-row flexrow">
+            <label class="skill-roll" data-action="roll-skill" data-item-id="{{item._id}}">{{item.name}}</label>
+            <span class="item-field-wrapper">
+              <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
+              <span class="item-percent">%</span>
+            </span>
+          </div>
+        {{/each}} 
       </div>
       <div class="cell manipCell">
         <p>MANIP</p>
-
+        {{#each skillsByType.manip as |item|}}
+          <div class="skill-row flexrow">
+            <label class="skill-roll" data-action="roll-skill" data-item-id="{{item._id}}">{{item.name}}</label>
+            <span class="item-field-wrapper">
+              <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
+              <span class="item-percent">%</span>
+            </span>
+          </div>
+        {{/each}} 
       </div>
       <div class="cell communCell">
         <p>COMMUN</p>
-
+        {{#each skillsByType.commun as |item|}}
+          <div class="skill-row flexrow">
+            <label class="skill-roll" data-action="roll-skill" data-item-id="{{item._id}}">{{item.name}}</label>
+            <span class="item-field-wrapper">
+              <input type="number" value="{{item.system.base}}" data-item-id="{{item._id}}" data-field="system.base" class="item-field" />
+              <span class="item-percent">%</span>
+            </span>
+          </div>
+        {{/each}} 
       </div>
       <div class="cell skillNotesCell">
         <p>NOTES</p>

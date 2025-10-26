@@ -14,7 +14,7 @@
   color: #111;
   background-color: #fff;
   border: 2px solid #000;
-  width: 900px;
+  width: 960px;
   margin: 0 auto;
   line-height: 1.2;
 }
@@ -38,10 +38,35 @@
 
 /* === CHARACTER INFO === */
 .char-info {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-gap: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   padding: 6px;
+}
+
+.char-info-row {
+  display: grid;
+  grid-template-columns: auto 2fr auto 1fr auto 3fr;
+  align-items: center;
+  gap: 8px;
+}
+
+/* second row: nationality, class, cult, elan */
+.char-info-row:nth-of-type(2) {
+  grid-template-columns: auto 2.3fr auto 2fr auto 1.6fr auto 1fr;
+}
+
+.char-info-row:first-child {
+  grid-template-columns: auto 3fr auto 1fr auto 1fr auto 3fr;
+}
+
+.char-info-row input[name="system.details.age"],
+.char-info-row input[name="system.details.elan"] {
+  max-width: 4rem;
+}
+
+.char-info-row input[name="system.details.sex"] {
+  max-width: 6rem;
 }
 
 .char-info label {
@@ -49,9 +74,45 @@
   font-size: 13px;
 }
 
-.char-info span {
+.char-info span,
+.char-info input {
   border-bottom: 1px solid #000;
   padding: 0 4px;
+  font-family: inherit;
+  font-size: 14px;
+  background: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.char-info input:focus {
+  outline: none;
+  border-bottom-color: #b33;
+}
+
+.cell-textarea {
+  width: 100%;
+  min-height: 90px;
+  border: 1px solid #000;
+  padding: 4px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: transparent;
+  resize: vertical;
+}
+
+.cell-textarea.small {
+  min-height: 60px;
+}
+
+.cell-textarea.tall {
+  min-height: 140px;
+}
+
+.cell-textarea:focus {
+  outline: none;
+  border-color: #b33;
 }
 
 /* === ATTRIBUTES TABLE === */
@@ -122,9 +183,15 @@ textarea, .desc-block {
 /* === SKILLS GRID === */
 .tableSkills {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; /* five columns of skills */
-    grid-template-rows: 1fr 1fr; /* 2 rows used by first three cols only */
-    height: 300px;
+    grid-template-columns: repeat(5, minmax(0, 1fr)); /* five columns of skills */
+    grid-template-rows: auto auto; /* rows expand to fit their content */
+    grid-auto-rows: auto;
+    width: 100%;
+}
+
+.tableSkills .cell {
+  display: flex;
+  flex-direction: column;
 }
 
 .tableSkills .skill-row {
@@ -140,6 +207,7 @@ textarea, .desc-block {
   flex: 1 1 auto;
   font-weight: 400;
   letter-spacing: 0.02em;
+  font-size: 0.7rem; /* reduce skill name size */
 }
 
 .tableSkills .skill-row .skill-roll {
@@ -254,7 +322,7 @@ textarea, .desc-block {
   display: grid;
   grid-template-columns: 0.8fr 2.2fr 3fr; /* three vertical sections */
   grid-template-rows: 1fr 1fr;            /* two rows (bottom only used by last col) */
-  height: 300px;
+  height: 220px;
 }
 
 .cell {
@@ -272,6 +340,71 @@ textarea, .desc-block {
 .descriptionCell {
   grid-column: 2;
   grid-row: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.descriptionCell .description-text {
+  flex: 1 1 auto;
+  border: none;
+  padding: 4px 0 0;
+  resize: none;
+  min-height: 0;
+  width: 100%;
+}
+
+.descriptionCell .description-text:focus {
+  border: none;
+  outline: none;
+}
+
+.hp-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.hp-input {
+  width: 4rem;
+  border: none;
+  border-bottom: 1px solid #000;
+  background: transparent;
+  font-family: inherit;
+  font-size: 1rem;
+  text-align: right;
+  padding: 0 0.25rem;
+}
+
+.hp-input:focus {
+  outline: none;
+  border-bottom-color: #b33;
+}
+
+.afflictionsCell,
+.possessionsCell,
+.moneyCell,
+.notesCell {
+  display: flex;
+  flex-direction: column;
+}
+
+.afflictionsCell .textarea-plain,
+.possessionsCell .textarea-plain,
+.moneyCell .textarea-plain,
+.notesCell .textarea-plain {
+  flex: 1 1 auto;
+  border: none;
+  padding: 4px 0 0;
+  resize: none;
+  min-height: 0;
+}
+
+.afflictionsCell .textarea-plain:focus,
+.possessionsCell .textarea-plain:focus,
+.moneyCell .textarea-plain:focus,
+.notesCell .textarea-plain:focus {
+  border: none;
+  outline: none;
 }
 
 /* Right column top */
@@ -289,9 +422,11 @@ textarea, .desc-block {
 
 .tableMiddle {
   display: grid;
-  grid-template-columns: 3fr 3fr; /* two vertical sections */
-  grid-template-rows: 1fr 1fr;    /* two rows */
-  height: 300px;
+  grid-template-columns: 2fr 4fr;
+  grid-template-rows: auto auto;
+  column-gap: 0;
+  row-gap: 1rem;
+  height: auto;
 }
 
 .possessionsCell {
@@ -302,6 +437,162 @@ textarea, .desc-block {
 .weaponsCell {
     grid-column: 2;
     grid-row: 1;
+}
+
+.moneyCell {
+    grid-column: 1;
+    grid-row: 2;
+    min-height: 180px;
+}
+
+.notesCell {
+    grid-column: 2;
+    grid-row: 2;
+    min-height: 180px;
+}
+
+.weapons-table {
+  display: grid;
+  grid-template-columns: 32% 18% 32% 18%;
+  border: 1px solid #111;
+  margin-top: 0.5rem;
+  font-family: 'Special Elite', 'Courier New', monospace;
+}
+
+.weapon-row {
+  display: contents;
+}
+
+.weapon-cell {
+  padding: 6px 4px;
+  border-bottom: 1px dashed #000;
+  font-size: 0.95rem;
+}
+
+.weapon-header .weapon-cell {
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  background: #555;
+  color: #f7f1d3;
+  border-bottom: 2px solid #000;
+  text-align: center;
+}
+
+.weapon-name {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: bold;
+}
+
+.weapon-value {
+  text-align: center;
+}
+
+.weapon-row .weapon-value:nth-of-type(2),
+.weapon-row .weapon-value:nth-of-type(4) {
+  text-align: right;
+}
+
+.weapon-row .weapon-value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+.weapon-row .weapon-value.attack,
+.weapon-row .weapon-value.parry {
+  justify-content: flex-end;
+}
+
+.weapon-row .weapon-value input,
+.weapon-bonus-row input {
+  width: 4.5rem;
+  border: none;
+  border-bottom: 1px solid #000;
+  background: transparent;
+  text-align: right;
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0 0.25rem;
+}
+
+.weapon-roll {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1;
+  padding: 0 0.1rem;
+  width: 1.1rem;
+}
+
+.weapon-roll:hover {
+  color: #b33;
+}
+
+.weapon-damage-roll {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: underline dotted;
+}
+
+.weapon-damage-roll:hover {
+  color: #b33;
+}
+
+.weapon-row .weapon-value input:focus {
+  outline: none;
+  border-bottom-color: #b33;
+}
+
+.weapon-bonus-row .weapon-cell {
+  font-weight: bold;
+}
+
+.weapon-bonus-row .weapon-value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  white-space: nowrap;
+}
+
+.weapon-bonus-row .weapon-value.attack,
+.weapon-bonus-row .weapon-value.parry {
+  justify-content: flex-end;
+  position: relative;
+}
+
+.weapon-bonus-row .weapon-value.attack::before,
+.weapon-bonus-row .weapon-value.parry::before {
+  content: "";
+  display: inline-block;
+  width: 1.1rem;
+}
+
+.weapon-bonus-row .item-percent {
+  font-size: 0.9rem;
+}
+
+.weapon-bonus-row .divider {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.weapon-row:last-child .weapon-cell {
+  border-bottom: none;
+}
+
+.weapon-empty .weapon-cell {
+  grid-column: 1 / span 4;
+  text-align: center;
 }
 
 .moneyCell {
