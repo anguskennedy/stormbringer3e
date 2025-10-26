@@ -4,7 +4,8 @@ export class StormItemSheet extends foundry.appv1.sheets.ItemSheet {
       classes: ["storm", "sheet", "item"],
       template: "systems/stormbringer3e/templates/item-sheet.hbs",
       width: 520,
-      height: 400
+      height: 400,
+      submitOnChange: true
     });
   }
 
@@ -20,11 +21,14 @@ export class StormItemSheet extends foundry.appv1.sheets.ItemSheet {
       { id: "commun", label: "Communication" }
     ];
 
+    const skillTypeChoices = Object.fromEntries(skillTypes.map(t => [t.id, t.label]));
+
     return {
       ...data,
       config: {
         ...(data.config ?? {}),
-        skillTypes
+        skillTypes,
+        skillTypeChoices
       }
     };
   }

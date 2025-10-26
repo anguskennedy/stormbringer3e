@@ -9,5 +9,16 @@
     "bonus": 0,
     "skills": [],
     "description": ""
+  },
+  "weapon": {
+    "category": "",             
+    "strReq": 0,
+    "dexReq": 0,
+    "damage": "",
+    "length": { "ft": 0, "cm": 0 },
+    "range":  { "ft": 0, "m": 0 },
+    "priceLB": 0,
+    "attack": { "base": 0, "bonus": 0 },
+    "parry":  { "base": 0, "bonus": 0 }
   }
 }

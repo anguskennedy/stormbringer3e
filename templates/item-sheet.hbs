@@ -1,24 +1,8 @@
 <form class="storm sheet item storm-item-sheet" autocomplete="off">
   <header class="header">
-    <div class="item-details">
-      <div class="form-group">
-        <label>Name</label>
-        <input type="text" name="name" value="{{item.name}}" placeholder="Name"/>
-      </div>
-      {{#if (eq item.type "skill")}}
-        <div class="form-group">
-          <label>Category</label>
-          <select name="system.type">
-            {{#each config.skillTypes as |type|}}
-              <option value="{{type.id}}" {{#if (eq ../system.type type.id)}}selected{{/if}}>{{type.label}}</option>
-            {{/each}}
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Base Chance (%)</label>
-          <input type="number" name="system.base" value="{{system.base}}" />
-        </div>
-      {{/if}}
+    <div class="item-name">
+      <label>Name</label>
+      <input type="text" name="name" value="{{item.name}}" placeholder="Name"/>
     </div>
     <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
   </header>
@@ -26,7 +10,19 @@
     {{#if (eq item.type "skill")}}
       <div class="form-group">
         <label>Description</label>
-        <textarea name="system.description">{{system.description}}</textarea>
+        <textarea name="system.description">{{item.system.description}}</textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Category</label>
+          <select name="system.type">
+            {{selectOptions config.skillTypeChoices selected=item.system.type}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Base Chance (%)</label>
+          <input type="number" name="system.base" value="{{item.system.base}}" />
+        </div>
       </div>
     {{/if}}
 

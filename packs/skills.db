@@ -1,6 +1,0 @@
-{"_id":"ambush","name":"Ambush","type":"skill","system":{"type":"stealth","base":0,"description":"This is the skill of hiding one's intent to attack another."}}
-{"_id":"climb","name":"Climb","type":"skill","system":{"type":"agility","base":0,"description":"Climb walls, ropes, trees, or other surfaces."}}
-{"_id":"conceal","name":"Conceal","type":"skill","system":{"type":"stealth","base":0,"description":"Allows one to secretly pocket or conceal any small item without anyyone noticing."}}
-{"_id":"dodge","name":"Dodge","type":"skill","system":{"type":"agility","base":0,"description":"Avoid physical attacks or moving hazards."}}
-{"_id":"listen","name":"Listen","type":"skill","system":{"type":"perception","base":0,"description":"Detect sounds that indicate danger, conversation, or movement."}}
-{"_id":"see","name":"See","type":"skill","img":"icons/svg//eye.svg","system":{"type":"perception","base":0,"description":"Visually notice hidden, distant, or subtle details."}}
