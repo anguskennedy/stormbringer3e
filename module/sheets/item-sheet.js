@@ -13,7 +13,7 @@ export class StormItemSheet extends foundry.appv1.sheets.ItemSheet {
     const data = super.getData(options);
     const skillTypes = [
       { id: "agility", label: "Agility" },
-      { id: "perception", label: "Perception" },
+      { id: "percept", label: "Perception" },
       { id: "stealth", label: "Stealth" },
       { id: "know", label: "Knowledge" },
       { id: "summoning", label: "Summoning" },
@@ -23,12 +23,20 @@ export class StormItemSheet extends foundry.appv1.sheets.ItemSheet {
 
     const skillTypeChoices = Object.fromEntries(skillTypes.map(t => [t.id, t.label]));
 
+    const weaponTypes = [
+      { id: "hand", label: "Hand Weapon" },
+      { id: "projectile", label: "Projectile" }
+    ];
+    const weaponTypeChoices = Object.fromEntries(weaponTypes.map(t => [t.id, t.label]));
+
     return {
       ...data,
       config: {
         ...(data.config ?? {}),
         skillTypes,
-        skillTypeChoices
+        skillTypeChoices,
+        weaponTypes,
+        weaponTypeChoices
       }
     };
   }

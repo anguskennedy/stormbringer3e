@@ -189,6 +189,26 @@ textarea, .desc-block {
     width: 100%;
 }
 
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.skill-bonus {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.skill-bonus-value {
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
 .tableSkills .cell {
   display: flex;
   flex-direction: column;
@@ -517,6 +537,18 @@ textarea, .desc-block {
   font-family: inherit;
   font-size: 0.95rem;
   padding: 0 0.25rem;
+}
+
+.weapon-derived-value {
+  min-width: 4.5rem;
+  text-align: right;
+  display: inline-block;
+  font-size: 0.95rem;
+}
+
+.critical-success {
+  color: #b3261e;
+  font-weight: 700;
 }
 
 .weapon-roll {

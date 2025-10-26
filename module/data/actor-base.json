@@ -11,6 +11,6 @@
   "resources": {
     "hp": { "value": 10},
     "elan": { "value": 10},
-    "age": 0
+    "age": 25
   }
 }

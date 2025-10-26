@@ -6,7 +6,7 @@ export const STORM = {
 export const STORM_TYPES = {
   agility: {
     name: "Agility",
-    description: "The ability to perform acrobiatic feats and engate in physical activities which require strength and coordination.",
+    description: "The ability to perform acrobatic feats and engate in physical activities which require strength and coordination.",
     attributes: ["str", "pow", "dex", "siz"]
   },
   perception: {

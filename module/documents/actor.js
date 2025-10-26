@@ -19,6 +19,13 @@ export class StormActor extends Actor {
     system.narrative.possessions ??= "";
     system.narrative.money ??= "";
     system.narrative.notes ??= "";
+    system.skillBonuses ??= {};
+    system.skillBonuses.agility ??= 0;
+    system.skillBonuses.percept ??= 0;
+    system.skillBonuses.stealth ??= 0;
+    system.skillBonuses.know ??= 0;
+    system.skillBonuses.manip ??= 0;
+    system.skillBonuses.commun ??= 0;
     system.wounds ??= {};
     system.wounds.major ??= 0;
     system.combat ??= {};
@@ -57,6 +64,13 @@ export class StormActor extends Actor {
 
     const con = getAttr("con", 10);
     const siz = getAttr("siz", 10);
+    const str = getAttr("str", 10);
+    const pow = getAttr("pow", 10);
+    const cha = getAttr("cha", 10);
+    const dex = getAttr("dex", 10);
+    const int = getAttr("int", 10);
+    const age = Number(this.system.details?.age ?? 0);
+    const charClass = (this.system.details?.class ?? "").toLowerCase();
 
     let hpBase = con;
     if (siz > 12) hpBase += siz - 12;
@@ -80,6 +94,53 @@ export class StormActor extends Actor {
 
     this.system.wounds ??= {};
     this.system.wounds.major = Math.ceil(hpBase / 2);
+
+    const attrBonus = (stat) => this._attributeBonus(stat);
+
+    const agilityBonus = attrBonus(str) + attrBonus(pow) + attrBonus(dex) + this._sizeBonus(siz);
+    const perceptBonus = attrBonus(int) + attrBonus(pow);
+    const stealthBonus = attrBonus(int) + attrBonus(dex) + this._sizeBonus(siz);
+    const knowBonus = this._knowledgeBonus(int, age, charClass);
+    const manipBonus = attrBonus(str) + attrBonus(int) + attrBonus(pow) + attrBonus(dex);
+    const communBonus = attrBonus(cha) + attrBonus(int) + attrBonus(pow);
+
+    this.system.skillBonuses ??= {};
+    this.system.skillBonuses.agility = agilityBonus;
+    this.system.skillBonuses.percept = perceptBonus;
+    this.system.skillBonuses.stealth = stealthBonus;
+    this.system.skillBonuses.know = knowBonus;
+    this.system.skillBonuses.manip = manipBonus;
+    this.system.skillBonuses.commun = communBonus;
+
+    this.system.combat ??= {};
+    this.system.combat.attackBonus = manipBonus;
+    this.system.combat.parryBonus = agilityBonus;
+  }
+
+  _attributeBonus(value) {
+    let bonus = 0;
+    if (value > 12) bonus += value - 12;
+    if (value < 9) bonus -= 9 - value;
+    return bonus;
+  }
+
+  _sizeBonus(value) {
+    if (value < 9) return 9 - value;
+    if (value > 12) return -(value - 12);
+    return 0;
+  }
+
+  _knowledgeBonus(intValue, age, charClass) {
+    let bonus = 0;
+    if (intValue > 12) bonus += 2 * (intValue - 12);
+    if (intValue < 9) bonus -= 2 * (9 - intValue);
+
+    const ageOver = Math.max(0, age - 25);
+    const perYear =
+      charClass === "priest" ? 3 :
+      charClass === "noble" ? 2 : 1;
+    bonus += ageOver * perYear;
+    return bonus;
   }
 }
 

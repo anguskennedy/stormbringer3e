@@ -10,7 +10,13 @@
           "hp": {"value": 10, "max": 10},
           "elan": {"value": 10, "max": 10}
         },
-        "skills": {}
+        "skills": {},
+        "skillBonuses": {
+          "agility": 0,
+          "percept": 0,
+          "stealth": 0,
+          "know": 0
+        }
       },
       "character": {"$$inherit": ["base"]},
       "npc": {"$$inherit": ["base"]}

@@ -24,8 +24,7 @@ export class StormItem extends Item {
         // ensure nested structures exist even if _itemBase is missing
         system.length ??= { ft: 0, cm: 0 };
         system.range  ??= { ft: 0, m: 0 };
-        system.attack ??= { base: 0, bonus: 0, total: 0 };
-        system.parry  ??= { base: 0, bonus: 0, total: 0 };
+        system.damage ??= "";
         break;
     }
   }
@@ -42,19 +41,6 @@ export class StormItem extends Item {
       const typeBonus = typeData?.bonus ?? 0;
       system.effective = system.base + typeBonus;
     }
-    
-    if (this.type === "weapon") {
-      const { attack, parry } = system;
-      attack.total = Number(attack.base ?? 0) + Number(attack.bonus ?? 0);
-      parry.total  = Number(parry.base ?? 0) + Number(parry.bonus ?? 0);
-
-    if (this.actor) {
-      const bonuses = this.actor.system?.combat ?? {};
-      attack.total += Number(bonuses.attack ?? 0);
-      parry.total  += Number(bonuses.parry ?? 0);
-    }
-  }
-
     // If this is a type, you could eventually compute its bonus dynamically
     if (this.type === "type" && this.actor) {
       // Placeholder for derived calculations later (e.g., from STR, DEX, POW, SIZ)

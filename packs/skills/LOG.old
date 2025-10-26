@@ -1,22 +1,8 @@
-2025/10/26-14:21:23.579415 171bf3000 Recovering log #25
-2025/10/26-14:21:23.580250 171bf3000 Delete type=3 #23
-2025/10/26-14:21:23.580287 171bf3000 Delete type=0 #25
-2025/10/26-14:21:23.581562 17248b000 Level-0 table #29: started
-2025/10/26-14:21:23.581843 17248b000 Level-0 table #29: 1047 bytes OK
-2025/10/26-14:21:23.581932 17248b000 Delete type=0 #27
-2025/10/26-14:21:23.581992 17248b000 Manual compaction at level-0 from '!items!6pi0ckUkFbJmIQBe' @ 72057594037927935 : 1 .. '!items!see' @ 0 : 0; will stop at '!items!null' @ 36 : 1
-2025/10/26-14:21:23.581997 17248b000 Compacting 2@0 + 0@1 files
-2025/10/26-14:21:23.582162 17248b000 Generated table #30@0: 11 keys, 1047 bytes
-2025/10/26-14:21:23.582167 17248b000 Compacted 2@0 + 0@1 files => 1047 bytes
-2025/10/26-14:21:23.582201 17248b000 compacted to: files[ 0 1 1 0 0 0 0 ]
-2025/10/26-14:21:23.582225 17248b000 Delete type=2 #29
-2025/10/26-14:21:23.582265 17248b000 Delete type=2 #24
-2025/10/26-14:21:23.582316 17248b000 Manual compaction at level-0 from '!items!null' @ 36 : 1 .. '!items!see' @ 0 : 0; will stop at (end)
-2025/10/26-14:21:23.582329 17248b000 Manual compaction at level-1 from '!items!6pi0ckUkFbJmIQBe' @ 72057594037927935 : 1 .. '!items!see' @ 0 : 0; will stop at '!items!see' @ 49 : 1
-2025/10/26-14:21:23.582332 17248b000 Compacting 1@1 + 1@2 files
-2025/10/26-14:21:23.582470 17248b000 Generated table #31@1: 10 keys, 1032 bytes
-2025/10/26-14:21:23.582474 17248b000 Compacted 1@1 + 1@2 files => 1032 bytes
-2025/10/26-14:21:23.582537 17248b000 compacted to: files[ 0 0 1 0 0 0 0 ]
-2025/10/26-14:21:23.582646 17248b000 Delete type=2 #20
-2025/10/26-14:21:23.582718 17248b000 Delete type=2 #30
-2025/10/26-14:21:23.582773 17248b000 Manual compaction at level-1 from '!items!see' @ 49 : 1 .. '!items!see' @ 0 : 0; will stop at (end)
+2025/10/26-17:22:17.130862 3113c4000 Recovering log #15
+2025/10/26-17:22:17.131228 3113c4000 Delete type=0 #15
+2025/10/26-17:22:17.131257 3113c4000 Delete type=3 #12
+2025/10/26-17:27:55.814581 30a2a7000 Level-0 table #22: started
+2025/10/26-17:27:55.814602 30a2a7000 Level-0 table #22: 0 bytes OK
+2025/10/26-17:27:55.814815 30a2a7000 Delete type=0 #20
+2025/10/26-17:27:55.815430 30a2a7000 Manual compaction at level-0 from '!folders!5Z1VvxYvtS3FJPi7' @ 72057594037927935 : 1 .. '!items!wTZDAnifKCxgUUjv' @ 0 : 0; will stop at (end)
+2025/10/26-17:27:55.816116 30a2a7000 Manual compaction at level-1 from '!folders!5Z1VvxYvtS3FJPi7' @ 72057594037927935 : 1 .. '!items!wTZDAnifKCxgUUjv' @ 0 : 0; will stop at (end)

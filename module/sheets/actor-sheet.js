@@ -14,6 +14,10 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
 
     const skillTypeKeys = ["agility", "percept", "stealth", "know", "summoning", "manip", "commun"];
     const skillsByType = Object.fromEntries(skillTypeKeys.map(key => [key, []]));
+    const skillBonuses = foundry.utils.deepClone(actorData.skillBonuses ?? {});
+    for (const key of skillTypeKeys) {
+      if (skillBonuses[key] === undefined) skillBonuses[key] = 0;
+    }
 
     const locale = game.i18n?.lang ?? "en";
     const collator = new Intl.Collator(locale, { sensitivity: "base" });
@@ -25,7 +29,16 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
     for (const skill of skillItems) {
       const typeKey = skill.system?.type ?? "";
       if (!skillsByType[typeKey]) skillsByType[typeKey] = [];
-      skillsByType[typeKey].push(skill);
+      const base = Number(skill.system?.base ?? 0);
+      const bonus = Number(skillBonuses[typeKey] ?? 0);
+      skillsByType[typeKey].push({
+        id: skill.id,
+        name: skill.name,
+        type: typeKey,
+        base,
+        bonus,
+        total: base + bonus
+      });
     }
 
     const combat = actorData.combat ?? {};
@@ -95,6 +108,7 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
       items: this.actor.items.contents,
       config: CONFIG.STORM ?? {},
       skillsByType,
+      skillBonuses,
       weaponRows
     };
   }
@@ -121,12 +135,15 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
     const skill = this.actor.items.get(itemId);
     if (!skill) return;
 
-    const target = Number(skill.system?.base ?? 0);
+    const typeKey = skill.system?.type ?? "";
+    const bonus = Number(this.actor.system?.skillBonuses?.[typeKey] ?? 0);
+    const target = Number(skill.system?.base ?? 0) + bonus;
     const roll = await new Roll("1d100").evaluate({async: true});
-    const success = roll.total <= target;
+    const { success, isCritical } = this._evaluateRoll(target, roll.total);
+    const resultLabel = this._formatRollResult({ success, isCritical });
     await roll.toMessage({
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      flavor: `${skill.name} Check (vs ${target}%) → ${success ? "Success" : "Failure"}`
+      flavor: `${skill.name} Check (vs ${target}%) → ${resultLabel}`
     });
   });
 
@@ -135,7 +152,8 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
     const input = ev.currentTarget;
     const itemId = input.dataset.itemId;
     const field = input.dataset.field;
-    const value = Number(input.value);
+    const bonus = Number(input.dataset.bonus ?? 0);
+    const value = Number(input.value) - bonus;
     const item = this.actor.items.get(itemId);
     if (item) item.update({ [field]: value });
   });
@@ -177,11 +195,12 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
     const target = base + bonus;
 
     const roll = await new Roll("1d100").evaluate({async: true});
-    const success = roll.total <= target;
+    const { success, isCritical } = this._evaluateRoll(target, roll.total);
+    const resultLabel = this._formatRollResult({ success, isCritical });
     const label = `${weaponName} ${rollType === "parry" ? "Parry" : "Attack"} (${target}%)`;
     await roll.toMessage({
       speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      flavor: `${label} → ${success ? "Success" : "Failure"}`
+      flavor: `${label} → ${resultLabel}`
     });
   }
 
@@ -215,5 +234,17 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
       yes: () => weapon.delete(),
       options: { jQuery: false }
     });
+  }
+
+  _evaluateRoll(target, rollTotal) {
+    const success = rollTotal <= target;
+    const critThreshold = Math.max(1, Math.floor(target / 10));
+    const isCritical = success && rollTotal <= critThreshold;
+    return { success, isCritical };
+  }
+
+  _formatRollResult({ success, isCritical }) {
+    if (isCritical) return `<strong class="critical-success">Critical Success!</strong>`;
+    return success ? "Success" : "Failure";
   }
 }

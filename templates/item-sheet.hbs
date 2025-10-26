@@ -27,9 +27,59 @@
     {{/if}}
 
     {{#if (eq item.type "weapon")}}
+      <div class="form-row">
+        <div class="form-group">
+          <label>Type</label>
+          <select name="system.category">
+            {{selectOptions config.weaponTypeChoices selected=item.system.category}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Price (LB)</label>
+          <input type="number" name="system.priceLB" value="{{item.system.priceLB}}" step="0.1" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>STR Required</label>
+          <input type="number" name="system.strReq" value="{{item.system.strReq}}" />
+        </div>
+        <div class="form-group">
+          <label>DEX Required</label>
+          <input type="number" name="system.dexReq" value="{{item.system.dexReq}}" />
+        </div>
+      </div>
+
+      {{#if (eq item.system.category "hand")}}
+        <div class="form-row">
+          <div class="form-group">
+            <label>Length (ft)</label>
+            <input type="number" name="system.length.ft" value="{{item.system.length.ft}}" step="0.1" />
+          </div>
+          <div class="form-group">
+            <label>Length (cm)</label>
+            <input type="number" name="system.length.cm" value="{{item.system.length.cm}}" step="0.1" />
+          </div>
+        </div>
+      {{/if}}
+
+      {{#if (eq item.system.category "projectile")}}
+        <div class="form-row">
+          <div class="form-group">
+            <label>Range (ft)</label>
+            <input type="number" name="system.range.ft" value="{{item.system.range.ft}}" step="0.1" />
+          </div>
+          <div class="form-group">
+            <label>Range (m)</label>
+            <input type="number" name="system.range.m" value="{{item.system.range.m}}" step="0.1" />
+          </div>
+        </div>
+      {{/if}}
+
       <div class="form-group">
         <label>Damage</label>
-        <input type="text" name="system.damage" value="{{system.damage}}"/>
+        <input type="text" name="system.damage" value="{{item.system.damage}}"/>
       </div>
     {{/if}}
   </section>
