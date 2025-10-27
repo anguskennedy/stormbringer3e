@@ -55,8 +55,13 @@
       </div>
       <div class="cell armourCell">
         <div class="armor-block">
-          <div class="bold">Armor</div>
-          <div>Plate (1D10+1D8)</div>
+          <div class="armor-inline">
+            <span class="bold armor-title">Armor</span>
+            <input type="text" class="armor-input armor-name-input" name="system.armour.name" value="{{system.armour.name}}" placeholder="Plate" />
+            <span class="armor-divider">/</span>
+            <input type="text" class="armor-input armor-protection-input" name="system.armour.protection" value="{{system.armour.protection}}" placeholder="1d10+2" />
+            <button type="button" class="armor-protection-roll" title="Roll Armor Protection">🎲</button>
+          </div>
           <div class="hp-row">
             <span>Major Wound Level:</span>
             <span class="hp-max">{{system.wounds.major}}</span>
@@ -126,9 +131,13 @@
                   {{/if}}
                 </div>
                 <div class="weapon-cell weapon-value parry">
-                  <button type="button" class="weapon-roll" data-action="roll-weapon" data-roll-type="parry" data-weapon-id="{{weapon.id}}" title="Roll Parry">🎲</button>
-                  <input type="number" class="weapon-stat-input" data-weapon-id="{{weapon.id}}" data-stat="parry" value="{{weapon.parryDisplay}}" />
-                  <span class="item-percent">%</span>
+                  {{#if weapon.isProjectile}}
+                    —
+                  {{else}}
+                    <button type="button" class="weapon-roll" data-action="roll-weapon" data-roll-type="parry" data-weapon-id="{{weapon.id}}" title="Roll Parry">🎲</button>
+                    <input type="number" class="weapon-stat-input" data-weapon-id="{{weapon.id}}" data-stat="parry" value="{{weapon.parryDisplay}}" />
+                    <span class="item-percent">%</span>
+                  {{/if}}
                 </div>
               </div>
             {{/each}}
@@ -167,7 +176,7 @@
           <div class="skill-row flexrow">
             <label class="skill-roll" data-action="roll-skill" data-item-id="{{item.id}}">{{item.name}}</label>
             <span class="item-field-wrapper">
-              <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" class="item-field" />
+              <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" data-base-bonus="{{item.baseBonus}}" class="item-field" />
               <span class="item-percent">%</span>
             </span>
           </div>
@@ -185,7 +194,7 @@
           <div class="skill-row flexrow">
             <label class="skill-roll" data-action="roll-skill" data-item-id="{{item.id}}">{{item.name}}</label>
             <span class="item-field-wrapper">
-              <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" class="item-field" />
+              <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" data-base-bonus="{{item.baseBonus}}" class="item-field" />
               <span class="item-percent">%</span>
             </span>
           </div>
@@ -203,7 +212,7 @@
           <div class="skill-row flexrow">
             <label class="skill-roll" data-action="roll-skill" data-item-id="{{item.id}}">{{item.name}}</label>
             <span class="item-field-wrapper">
-              <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" class="item-field" />
+              <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" data-base-bonus="{{item.baseBonus}}" class="item-field" />
               <span class="item-percent">%</span>
             </span>
           </div>
@@ -221,7 +230,7 @@
           <div class="skill-row flexrow">
             <label class="skill-roll" data-action="roll-skill" data-item-id="{{item.id}}">{{item.name}}</label>
             <span class="item-field-wrapper">
-              <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" class="item-field" />
+              <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" data-base-bonus="{{item.baseBonus}}" class="item-field" />
               <span class="item-percent">%</span>
             </span>
           </div>
@@ -233,7 +242,7 @@
           <div class="skill-row flexrow">
             <label class="skill-roll" data-action="roll-skill" data-item-id="{{item.id}}">{{item.name}}</label>
             <span class="item-field-wrapper">
-              <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" class="item-field" />
+              <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" data-base-bonus="{{item.baseBonus}}" class="item-field" />
               <span class="item-percent">%</span>
             </span>
           </div>
@@ -251,7 +260,7 @@
           <div class="skill-row flexrow">
             <label class="skill-roll" data-action="roll-skill" data-item-id="{{item.id}}">{{item.name}}</label>
             <span class="item-field-wrapper">
-              <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" class="item-field" />
+              <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" data-base-bonus="{{item.baseBonus}}" class="item-field" />
               <span class="item-percent">%</span>
             </span>
           </div>
@@ -269,7 +278,7 @@
           <div class="skill-row flexrow">
             <label class="skill-roll" data-action="roll-skill" data-item-id="{{item.id}}">{{item.name}}</label>
             <span class="item-field-wrapper">
-              <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" class="item-field" />
+              <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" data-base-bonus="{{item.baseBonus}}" class="item-field" />
               <span class="item-percent">%</span>
             </span>
           </div>

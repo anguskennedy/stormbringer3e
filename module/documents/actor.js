@@ -6,26 +6,46 @@ export class StormActor extends Actor {
     system.attributes ??= {};
     system.resources ??= {};
     system.details ??= {};
-    system.details.sex ??= "";
-    system.details.age ??= 0;
-    system.details.player ??= "";
-    system.details.nationality ??= "";
-    system.details.class ??= "";
-    system.details.cult ??= "";
-    system.details.elan ??= 0;
-    system.narrative ??= {};
-    system.narrative.description ??= "";
-    system.narrative.afflictions ??= "";
-    system.narrative.possessions ??= "";
-    system.narrative.money ??= "";
-    system.narrative.notes ??= "";
+    const baseKey = this.type === "creature" ? "_creatureBase" : "_actorBase";
+    const baseData = game.stormbringer?.[baseKey];
+    if (baseData) {
+      foundry.utils.mergeObject(system, baseData, { overwrite: false });
+    }
+
+    if (this.type !== "creature") {
+      system.details.sex ??= "";
+      system.details.age ??= 0;
+      system.details.player ??= "";
+      system.details.nationality ??= "";
+      system.details.class ??= "";
+      system.details.cult ??= "";
+      system.details.elan ??= 0;
+      system.narrative ??= {};
+      system.narrative.description ??= "";
+      system.narrative.afflictions ??= "";
+      system.narrative.possessions ??= "";
+      system.narrative.money ??= "";
+      system.narrative.notes ??= "";
+    } else {
+      system.details = system.details || {};
+      system.narrative = {};
+      delete system.attributes.cha;
+      delete system.attributes.CHA;
+    }
+    system.armour ??= {};
+    system.armour.name ??= "";
+    system.armour.protection ??= "";
     system.skillBonuses ??= {};
-    system.skillBonuses.agility ??= 0;
-    system.skillBonuses.percept ??= 0;
-    system.skillBonuses.stealth ??= 0;
-    system.skillBonuses.know ??= 0;
-    system.skillBonuses.manip ??= 0;
-    system.skillBonuses.commun ??= 0;
+    if (this.type !== "creature") {
+      system.skillBonuses.agility ??= 0;
+      system.skillBonuses.percept ??= 0;
+      system.skillBonuses.stealth ??= 0;
+      system.skillBonuses.know ??= 0;
+      system.skillBonuses.manip ??= 0;
+      system.skillBonuses.commun ??= 0;
+    } else {
+      system.skillBonuses = {};
+    }
     system.wounds ??= {};
     system.wounds.major ??= 0;
     system.combat ??= {};
@@ -105,16 +125,25 @@ export class StormActor extends Actor {
     const communBonus = attrBonus(cha) + attrBonus(int) + attrBonus(pow);
 
     this.system.skillBonuses ??= {};
-    this.system.skillBonuses.agility = agilityBonus;
-    this.system.skillBonuses.percept = perceptBonus;
-    this.system.skillBonuses.stealth = stealthBonus;
-    this.system.skillBonuses.know = knowBonus;
-    this.system.skillBonuses.manip = manipBonus;
-    this.system.skillBonuses.commun = communBonus;
+    if (this.type === "creature") {
+      this.system.skillBonuses = {};
+    } else {
+      this.system.skillBonuses.agility = agilityBonus;
+      this.system.skillBonuses.percept = perceptBonus;
+      this.system.skillBonuses.stealth = stealthBonus;
+      this.system.skillBonuses.know = knowBonus;
+      this.system.skillBonuses.manip = manipBonus;
+      this.system.skillBonuses.commun = communBonus;
+    }
 
     this.system.combat ??= {};
-    this.system.combat.attackBonus = manipBonus;
-    this.system.combat.parryBonus = agilityBonus;
+    if (this.type === "creature") {
+      this.system.combat.attackBonus = 0;
+      this.system.combat.parryBonus = 0;
+    } else {
+      this.system.combat.attackBonus = manipBonus;
+      this.system.combat.parryBonus = agilityBonus;
+    }
   }
 
   _attributeBonus(value) {

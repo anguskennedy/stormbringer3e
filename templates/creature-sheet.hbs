@@ -1,0 +1,114 @@
+<link rel="stylesheet" href="systems/stormbringer3e/css/stormbringer.css">
+
+<form class="stormbringer-sheet creature-sheet" autocomplete="off">
+  <header class="stormbringer-header creature">
+    <div class="title">Creature Record</div>
+    <div class="name-field">
+      <label>Name:</label>
+      <input type="text" name="name" value="{{actor.name}}" />
+    </div>
+  </header>
+
+  <section class="stormbringer-section">
+    <div class="tabletop creature-top">
+      <div class="cell attributeCell">
+        {{#each system.attributes as |v k|}}
+          <div class="attribute-row flexrow">
+            <label class="attr-label" data-action="roll-attr" data-attr="{{k}}">{{k}}</label>
+            <input type="number" class="attr-value" name="system.attributes.{{k}}" value="{{v}}" />
+          </div>
+        {{/each}}
+      </div>
+      <div class="cell armourCell">
+        <div class="armor-block">
+          <div class="armor-inline">
+            <span class="bold armor-title">Armor</span>
+            <input type="text" class="armor-input armor-name-input" name="system.armour.name" value="{{system.armour.name}}" placeholder="Hide" />
+            <span class="armor-divider">/</span>
+            <input type="text" class="armor-input armor-protection-input" name="system.armour.protection" value="{{system.armour.protection}}" placeholder="1d6" />
+            <button type="button" class="armor-protection-roll weapon-damage-roll" title="Roll Armor Protection" {{#unless system.armour.protection}}disabled{{/unless}}>🎲</button>
+          </div>
+          <div class="hp-row">
+            <span>Hit Points:</span>
+            <input type="number" class="hp-input" name="system.resources.hp.value" value="{{system.resources.hp.value}}" />
+            <span class="hp-max">/ {{system.resources.hp.max}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stormbringer-section">
+    <div class="tableMiddle creature-weapons">
+      <div class="cell weaponsCell" data-drop-target="true">
+        <p>WEAPONS</p>
+        <div class="weapons-table">
+          <div class="weapon-row weapon-header">
+            <div class="weapon-cell">Weapon</div>
+            <div class="weapon-cell">Attack</div>
+            <div class="weapon-cell">Damage</div>
+            <div class="weapon-cell">Parry</div>
+          </div>
+
+          {{#if weaponRows.length}}
+            {{#each weaponRows as |weapon|}}
+              <div class="weapon-row" data-item-id="{{weapon.id}}">
+                <div class="weapon-cell weapon-name">{{weapon.name}}</div>
+                <div class="weapon-cell weapon-value attack">
+                  <button type="button" class="weapon-roll" data-action="roll-weapon" data-roll-type="attack" data-weapon-id="{{weapon.id}}" title="Roll Attack">🎲</button>
+                  <input type="number" class="weapon-stat-input" data-weapon-id="{{weapon.id}}" data-stat="attack" value="{{weapon.attackDisplay}}" />
+                  <span class="item-percent">%</span>
+                </div>
+                <div class="weapon-cell weapon-value damage">
+                  {{#if weapon.damageFormula}}
+                    <button type="button" class="weapon-damage-roll" data-weapon-id="{{weapon.id}}" data-damage-formula="{{weapon.damageFormula}}" title="Roll Damage">
+                      {{weapon.damageDisplay}}
+                    </button>
+                  {{else}}
+                    —
+                  {{/if}}
+                </div>
+                <div class="weapon-cell weapon-value parry">
+                  {{#if weapon.isProjectile}}
+                    —
+                  {{else}}
+                    <button type="button" class="weapon-roll" data-action="roll-weapon" data-roll-type="parry" data-weapon-id="{{weapon.id}}" title="Roll Parry">🎲</button>
+                    <input type="number" class="weapon-stat-input" data-weapon-id="{{weapon.id}}" data-stat="parry" value="{{weapon.parryDisplay}}" />
+                    <span class="item-percent">%</span>
+                  {{/if}}
+                </div>
+              </div>
+            {{/each}}
+          {{else}}
+            <div class="weapon-row weapon-empty">
+              <div class="weapon-cell weapon-value">
+                <div class="center small">Drag weapon items here to equip them.</div>
+              </div>
+            </div>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stormbringer-section">
+    <div class="tableSkills creature-skills">
+      <div class="cell creatureSkillCell">
+        <p>SKILLS</p>
+        {{#if creatureSkills.length}}
+          {{#each creatureSkills as |skill|}}
+            <div class="skill-row flexrow">
+              <label class="skill-roll" data-action="roll-skill" data-item-id="{{skill.id}}">{{skill.name}}</label>
+              <span class="item-field-wrapper">
+                <input type="number" value="{{skill.total}}" data-item-id="{{skill.id}}" data-field="system.base" data-bonus="0" data-base-bonus="0" class="item-field" />
+                <span class="item-percent">%</span>
+              </span>
+            </div>
+          {{/each}}
+        {{else}}
+          <div class="skill-row empty">No skills assigned.</div>
+        {{/if}}
+      </div>
+    </div>
+  </section>
+</form>

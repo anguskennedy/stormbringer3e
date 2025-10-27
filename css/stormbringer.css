@@ -400,6 +400,92 @@ textarea, .desc-block {
   border-bottom-color: #b33;
 }
 
+.armor-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.armor-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: nowrap;
+}
+
+.armor-title {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+}
+
+.armor-input {
+  flex: 1 1 auto;
+  border: none;
+  border-bottom: 1px solid #000;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0 0.25rem;
+  max-width: 16ch;
+}
+
+.armor-input:focus {
+  outline: none;
+  border-bottom-color: #b33;
+}
+
+.armor-name-input {
+  max-width: 20ch;
+}
+
+.armor-protection-input {
+  max-width: 16ch;
+}
+
+.armor-divider {
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.armor-protection-roll {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1;
+  padding: 0;
+  margin-left: 0.2rem;
+  width: auto;
+}
+
+.armor-protection-roll:hover {
+  color: #b33;
+}
+
+.creature-sheet .tabletop {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  height: auto;
+}
+
+.creature-sheet .armourCell {
+  border-top: none;
+}
+
+.creature-sheet .tableMiddle {
+  grid-template-columns: 1fr;
+}
+
+.creature-skills {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.creatureSkillCell {
+  grid-column: 1;
+}
+
 .afflictionsCell,
 .possessionsCell,
 .moneyCell,

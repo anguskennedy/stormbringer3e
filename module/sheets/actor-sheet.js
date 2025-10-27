@@ -30,14 +30,16 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
       const typeKey = skill.system?.type ?? "";
       if (!skillsByType[typeKey]) skillsByType[typeKey] = [];
       const base = Number(skill.system?.base ?? 0);
-      const bonus = Number(skillBonuses[typeKey] ?? 0);
+      const baseBonus = this._skillBaseOffset(skill.name);
+      const bonus = this._skillStartsAtZero(skill.name) ? 0 : Number(skillBonuses[typeKey] ?? 0);
       skillsByType[typeKey].push({
         id: skill.id,
         name: skill.name,
         type: typeKey,
         base,
         bonus,
-        total: base + bonus
+        baseBonus,
+        total: base + bonus + baseBonus
       });
     }
 
@@ -97,7 +99,8 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
           parryDisplay,
           damageDisplay,
           damageFormula,
-          weaponCategory: category
+          weaponCategory: category,
+          isProjectile: category === "projectile"
         };
       });
 
@@ -136,8 +139,11 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
     if (!skill) return;
 
     const typeKey = skill.system?.type ?? "";
-    const bonus = Number(this.actor.system?.skillBonuses?.[typeKey] ?? 0);
-    const target = Number(skill.system?.base ?? 0) + bonus;
+    const bonus = this._skillStartsAtZero(skill.name)
+      ? 0
+      : Number(this.actor.system?.skillBonuses?.[typeKey] ?? 0);
+    const baseBonus = this._skillBaseOffset(skill.name);
+    const target = Number(skill.system?.base ?? 0) + bonus + baseBonus;
     const roll = await new Roll("1d100").evaluate({async: true});
     const { success, isCritical } = this._evaluateRoll(target, roll.total);
     const resultLabel = this._formatRollResult({ success, isCritical });
@@ -153,7 +159,8 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
     const itemId = input.dataset.itemId;
     const field = input.dataset.field;
     const bonus = Number(input.dataset.bonus ?? 0);
-    const value = Number(input.value) - bonus;
+    const baseBonus = Number(input.dataset.baseBonus ?? 0);
+    const value = Number(input.value) - bonus - baseBonus;
     const item = this.actor.items.get(itemId);
     if (item) item.update({ [field]: value });
   });
@@ -176,6 +183,8 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
   html.find(".weapon-roll").on("click", ev => this._rollWeapon(ev));
   html.find(".weapon-damage-roll").on("click", ev => this._rollWeaponDamage(ev));
   html.find(".weapon-row[data-item-id]").on("contextmenu", ev => this._onWeaponContextMenu(ev));
+  html.find(".armor-protection-roll").on("click", ev => this._rollArmorProtection(ev));
+  html.find(".armor-protection-input").on("input", ev => this._updateArmorRollButton(ev));
   }
 
   async _rollWeapon(event) {
@@ -234,6 +243,54 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
       yes: () => weapon.delete(),
       options: { jQuery: false }
     });
+  }
+
+  async _rollArmorProtection(event) {
+    const button = event.currentTarget;
+    event.preventDefault();
+    if (button.disabled) return;
+    const container = button.closest(".armor-inline");
+    const nameInput = container?.querySelector(".armor-name-input");
+    const formulaInput = container?.querySelector(".armor-protection-input");
+    const formula = (formulaInput?.value ?? this.actor.system?.armour?.protection ?? "").trim();
+    if (!formula) return;
+
+    const armorName = (nameInput?.value ?? this.actor.system?.armour?.name ?? "Armor").trim() || "Armor";
+    const roll = await new Roll(formula).evaluate({ async: true });
+    await roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      flavor: `${armorName} Protection (${formula})`
+    });
+  }
+
+  _updateArmorRollButton(event) {
+    const input = event.currentTarget;
+    const container = input.closest(".armor-inline");
+    if (!container) return;
+    const button = container.querySelector(".armor-protection-roll");
+    if (!button) return;
+    const formula = (input.value ?? "").trim();
+    button.disabled = formula.length === 0;
+  }
+
+  _skillStartsAtZero(name) {
+    const value = (name ?? "").toLowerCase();
+    if (!value) return false;
+    if (value.includes("poison lore")) return true;
+    if (value.includes("plant lore")) return true;
+    if (value.includes("music lore")) return true;
+    if (value.startsWith("r/w") || value.includes("read/write")) return true;
+    return false;
+  }
+
+  _skillBaseOffset(name) {
+    const value = (name ?? "").toLowerCase();
+    if (!value) return 0;
+    const startsWithAny = (...parts) => parts.some(part => value === part || value.startsWith(part));
+    if (startsWithAny("move quietly", "hide", "climb", "jump", "see", "listen", "balance", "persuade")) {
+      return 10;
+    }
+    return 0;
   }
 
   _evaluateRoll(target, rollTotal) {

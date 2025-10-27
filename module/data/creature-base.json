@@ -1,0 +1,17 @@
+{
+  "attributes": {
+    "STR": 10,
+    "CON": 10,
+    "SIZ": 10,
+    "INT": 6,
+    "POW": 10,
+    "DEX": 10
+  },
+  "resources": {
+    "hp": { "value": 10, "max": 10 }
+  },
+  "armour": {
+    "name": "",
+    "protection": ""
+  }
+}
