@@ -463,27 +463,181 @@ textarea, .desc-block {
   color: #b33;
 }
 
-.creature-sheet .tabletop {
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
-  height: auto;
+.creature-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
 }
 
-.creature-sheet .armourCell {
-  border-top: none;
+.creature-header input {
+  flex: 1 1 auto;
+  border: none;
+  border-bottom: 1px solid #000;
+  background: transparent;
+  font-family: inherit;
+  font-size: 1.1rem;
+  padding: 0.1rem 0.25rem;
 }
 
-.creature-sheet .tableMiddle {
-  grid-template-columns: 1fr;
+.creature-header input:focus {
+  outline: none;
+  border-bottom-color: #b33;
 }
 
-.creature-skills {
+.creature-section {
+  margin-bottom: 1.25rem;
+}
+
+.creature-columns {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 2fr 2fr;
+  gap: 1.25rem;
 }
 
-.creatureSkillCell {
-  grid-column: 1;
+.creature-column h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+.creature-attribute-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.creature-attribute-row .attr-label {
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.creature-attribute-row .attr-value {
+  width: 4rem;
+  border: none;
+  border-bottom: 1px solid #000;
+  background: transparent;
+  text-align: right;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.creature-attribute-row .attr-value:focus {
+  outline: none;
+  border-bottom-color: #b33;
+}
+
+.creature-skills-column .skill-row {
+  border-bottom: 1px dashed #aaa;
+}
+
+.creature-skills-column .skill-row.empty {
+  border-bottom: none;
+  font-style: italic;
+  color: #666;
+  padding: 0.5rem 0;
+}
+
+.creature-arsenal {
+
+  grid-template-columns: minmax(0, 3fr) minmax(220px, 1.5fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.creature-arsenal h3,
+.creature-defense h4 {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.creature-weapons .weapons-table {
+  margin-top: 0.35rem;
+}
+
+.creature-defense {
+  display: grid;
+  gap: 1rem;
+  padding: 0.75rem;
+  border: 1px solid #222;
+  background: transparent;
+}
+
+.creature-armor-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.creature-armor-points {
+  width: 4.5ch;
+  border: none;
+  border-bottom: 1px solid #000;
+  text-align: right;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.creature-armor-points:focus {
+  outline: none;
+  border-bottom-color: #b33;
+}
+
+.creature-armor-points-label {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+}
+
+.creature-armor-name {
+  flex: 1 1 auto;
+  border: none;
+  border-bottom: 1px solid #000;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0 0.25rem;
+}
+
+.creature-armor-name:focus {
+  outline: none;
+  border-bottom-color: #b33;
+}
+
+.creature-hp-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.creature-textarea {
+  width: 100%;
+  min-height: 110px;
+  border: 1px solid #222;
+  padding: 0.5rem;
+  font-family: inherit;
+  resize: vertical;
+  background: transparent;
+}
+
+.creature-textarea:focus {
+  outline: none;
+  border-color: #b33;
+}
+
+@media (max-width: 860px) {
+  .creature-arsenal {
+    grid-template-columns: 1fr;
+  }
 }
 
 .afflictionsCell,

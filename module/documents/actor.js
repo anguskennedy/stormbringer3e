@@ -28,6 +28,8 @@ export class StormActor extends Actor {
       system.narrative.notes ??= "";
     } else {
       system.details = system.details || {};
+      system.details.description ??= "";
+      system.details.habitat ??= "";
       system.narrative = {};
       delete system.attributes.cha;
       delete system.attributes.CHA;
