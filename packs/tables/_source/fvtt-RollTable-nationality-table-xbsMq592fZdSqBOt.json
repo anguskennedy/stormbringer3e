@@ -1,0 +1,492 @@
+{
+  "name": "Nationality Table",
+  "img": "icons/svg/d20-black.svg",
+  "formula": "1d100",
+  "replacement": true,
+  "displayRoll": true,
+  "results": [
+    {
+      "type": "text",
+      "range": [
+        1,
+        2
+      ],
+      "weight": 1,
+      "_id": "wJoF4vAjkUAGuvFB",
+      "description": "Melnibone",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        3,
+        5
+      ],
+      "weight": 1,
+      "_id": "JCPsJCl0njKzoRqF",
+      "description": "Pan Tang",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        6,
+        8
+      ],
+      "weight": 1,
+      "_id": "sGVeWnORUaQTbIlf",
+      "description": "Myrrhyn",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        9,
+        12
+      ],
+      "weight": 1,
+      "_id": "bei0wPEvkl9HWfDg",
+      "description": "Dharijor",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        13,
+        16
+      ],
+      "weight": 1,
+      "_id": "3YKMbV0ACHOaWjqd",
+      "description": "Jharkor",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        17,
+        24
+      ],
+      "weight": 1,
+      "_id": "QuohIy0uTboDSTwk",
+      "description": "Shazaar",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        25,
+        29
+      ],
+      "weight": 1,
+      "_id": "ZtjiAjhaTilNVzVy",
+      "description": "Tarkesh",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        30,
+        37
+      ],
+      "weight": 1,
+      "_id": "fMrFjEEd0dpvTZqU",
+      "description": "Vilmir",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        38,
+        44
+      ],
+      "weight": 1,
+      "_id": "juaohXwTEDR0Yd8f",
+      "description": "Ilmiora",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        45,
+        49
+      ],
+      "weight": 1,
+      "_id": "3yWQ9meQLfYJVNlt",
+      "description": "Nadsokor",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        50,
+        56
+      ],
+      "weight": 1,
+      "_id": "ulwM2h8DVZuezG5b",
+      "description": "Weeping Waste",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        57,
+        60
+      ],
+      "weight": 1,
+      "_id": "IxqDhEHhIsfq6Ooa",
+      "description": "Elwher",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        61,
+        67
+      ],
+      "weight": 1,
+      "_id": "dd5dzVHvdRW7PHxy",
+      "description": "Island of Purple Towns",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        68,
+        74
+      ],
+      "weight": 1,
+      "_id": "JJeEmXwTqSOqEfQc",
+      "description": "Argimiliar",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        75,
+        81
+      ],
+      "weight": 1,
+      "_id": "gSO3IPyyKsiGPcJo",
+      "description": "Pikarayd",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        82,
+        88
+      ],
+      "weight": 1,
+      "_id": "lEXW9NcdWrX7lh52",
+      "description": "Lormyr",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        89,
+        95
+      ],
+      "weight": 1,
+      "_id": "baZHAJ1TxWSjPIiz",
+      "description": "Filkhar",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        96,
+        97
+      ],
+      "weight": 1,
+      "_id": "wSLAQOnxCaTWWafv",
+      "description": "Oin",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        98,
+        99
+      ],
+      "weight": 1,
+      "_id": "8scPIQaSUyHvXZRi",
+      "description": "Yu",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "type": "text",
+      "range": [
+        100,
+        100
+      ],
+      "weight": 1,
+      "_id": "Re7Cm8AGZaISiCTL",
+      "description": "Org",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "folder": "zeUgCbx0smzwAppr",
+  "flags": {},
+  "description": "",
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": {
+      "worldId": "y2k",
+      "uuid": "RollTable.xbsMq592fZdSqBOt",
+      "coreVersion": "13.350",
+      "systemId": "stormbringer3e",
+      "systemVersion": "1.0.0"
+    },
+    "coreVersion": "13.350",
+    "systemId": "stormbringer3e",
+    "systemVersion": "1.0.0",
+    "createdTime": 1761692489394,
+    "modifiedTime": 1761692489394,
+    "lastModifiedBy": "EqNI53y0YNjtqnyG"
+  },
+  "ownership": {
+    "default": 0
+  }
+}

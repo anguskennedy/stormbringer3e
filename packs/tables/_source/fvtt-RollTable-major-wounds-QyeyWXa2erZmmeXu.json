@@ -1,0 +1,560 @@
+{
+  "name": "Major Wounds",
+  "img": "icons/svg/d20-grey.svg",
+  "description": "",
+  "results": [
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        1,
+        50
+      ],
+      "_id": "A7s0MwG5LA3zn2Js",
+      "name": "You will have a really impressive scar, but no ill effects.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        51,
+        51
+      ],
+      "_id": "mqOzM0WcJCQwXank",
+      "name": "Lose left eye. Lose 2 points CHA and 2 points DEX.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        52,
+        52
+      ],
+      "_id": "xLIDm3fsS8Kyeb0U",
+      "name": "Lose right eye. Lose 2 points CHA and 2 points DEX.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        53,
+        53
+      ],
+      "_id": "4UFPbVNOtLQ28hnL",
+      "name": "Lose nose. Lose 4 points CHA and 3% from Perception bonus.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        54,
+        54
+      ],
+      "_id": "KWJgCWQBhCSm52MU",
+      "name": "Lose left ear, impair hearing. lose 1 point CHA and 5% from Perception bonus.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        55,
+        55
+      ],
+      "_id": "oVxJ3EboS1mckFiy",
+      "name": "Lose right ear, impair hearing. Lose 1 point CHA and 5% from Perception bonus.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        56,
+        57
+      ],
+      "_id": "2UumSl6H2mYKzDtb",
+      "name": "Broken jaw, loss of several teeth. Lose 2 points CHA and 1 point CON.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        58,
+        58
+      ],
+      "_id": "YyI8DAxQPBuRy7Db",
+      "name": "Severe injury to vertebra in back. Ability to move rapidly and handle heavy weights severely impaired. Reduce STR and DEX ratings by half.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        59,
+        59
+      ],
+      "_id": "jYSN20yrS9tVtB0K",
+      "name": "Severe concussion and head injury. Lose 3 points INT and 3 points CHA. Reduction of all bonuses depending partially on INT rating.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        60,
+        62
+      ],
+      "_id": "d0uD02ZWvQePOhI9",
+      "name": "Mild concussion and head injury. lose 1 point INT and 1 point CHA. Reduction of all bonuses depending parti- ally on INT rating.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        63,
+        64
+      ],
+      "_id": "TCtGXicAnuaz8bi8",
+      "name": "Damage to internal organs. Lose 1D6+2 points CON. Possible delayed fatality. Loss of Hit Points equal to loss of CON points. Reduction of bonuses depending on CON rating.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        65,
+        68
+      ],
+      "_id": "sFE1SVF5YnreKG1w",
+      "name": "Broken ribs. Lose 1D4 points CON. Loss of Hit Points equal to loss of CON points.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        69,
+        72
+      ],
+      "_id": "T37UeFnOCxf4jyxt",
+      "name": "Broken left arm never heals properly. Lose 2 points DEX.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        73,
+        76
+      ],
+      "_id": "CNBmVCNJnYAeMRXP",
+      "name": "Broken right arm never heals properly. Lose 2 points DEX.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        77,
+        79
+      ],
+      "_id": "2V2CvpPEBjzBqkFe",
+      "name": "Amputate left hand and part of arm. lose 4 points DEX.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        80,
+        82
+      ],
+      "_id": "Tzb1ZpOPnPdXeDDN",
+      "name": "Amputate right hand and part of arm. lose 4 points DEX.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        83,
+        86
+      ],
+      "_id": "MD7YC0nLKwXLaRZZ",
+      "name": "Broken left leg never heals properly. Lose 2 points DEX.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        87,
+        90
+      ],
+      "_id": "UpPv6HzkYhE22G8P",
+      "name": "Broken right leg never heals properly. Lose 2 points DEX.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        91,
+        92
+      ],
+      "_id": "5vbArLS4dqEQn7ED",
+      "name": "Hamstring left leg, becomes totally useless. lose 4 points DEX.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        93,
+        94
+      ],
+      "_id": "7snKAN2OKRQBhKZi",
+      "name": "Hamstring right leg, becomes totally useless. lose 4 points DEX.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        95,
+        97
+      ],
+      "_id": "DIXHhtL3cPu0hqF5",
+      "name": "Amputate part of left leg. lose 3 points DEX.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    },
+    {
+      "type": "text",
+      "weight": 1,
+      "range": [
+        98,
+        100
+      ],
+      "_id": "ay8pJa8NnwXk48zP",
+      "name": "Amputate part of right leg. lose 3 points DEX.",
+      "img": "icons/svg/d20-black.svg",
+      "description": "",
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      },
+      "documentUuid": null
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "folder": "zeUgCbx0smzwAppr",
+  "flags": {},
+  "_stats": {
+    "compendiumSource": "Compendium.stormbringer3e.tables.RollTable.tpIJPl8pG3wvDs6u",
+    "duplicateSource": null,
+    "exportSource": {
+      "worldId": "y2k",
+      "uuid": "RollTable.QyeyWXa2erZmmeXu",
+      "coreVersion": "13.350",
+      "systemId": "stormbringer3e",
+      "systemVersion": "1.0.0"
+    },
+    "coreVersion": "13.350",
+    "systemId": "stormbringer3e",
+    "systemVersion": "1.0.0",
+    "createdTime": 1761692489394,
+    "modifiedTime": 1761692489394,
+    "lastModifiedBy": "EqNI53y0YNjtqnyG"
+  },
+  "formula": "1d100",
+  "ownership": {
+    "default": 0
+  }
+}

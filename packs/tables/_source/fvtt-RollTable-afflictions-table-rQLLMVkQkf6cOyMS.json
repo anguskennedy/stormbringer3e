@@ -1,0 +1,492 @@
+{
+  "name": "Afflictions Table",
+  "img": "icons/svg/d20-black.svg",
+  "formula": "1d20",
+  "replacement": true,
+  "displayRoll": true,
+  "results": [
+    {
+      "_id": "H9mb635LVDsc6zZd",
+      "range": [
+        1,
+        1
+      ],
+      "weight": 1,
+      "description": "Cataract, half blind",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "MSGd3ZDgtPfVjTIw",
+      "range": [
+        2,
+        2
+      ],
+      "weight": 1,
+      "description": "Missing one ear, half normal Listen ability",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "5efCwxPB6UAqt3MA",
+      "range": [
+        3,
+        3
+      ],
+      "weight": 1,
+      "description": "Dumb - or tongue missing",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "pvIbTiwVrkk9tXGr",
+      "range": [
+        4,
+        4
+      ],
+      "weight": 1,
+      "description": "Missing one eye",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "icNzHZVLD7zes9r9",
+      "range": [
+        5,
+        5
+      ],
+      "weight": 1,
+      "description": "Missing nose",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "cCbsAMXLG4h4fFgm",
+      "range": [
+        6,
+        6
+      ],
+      "weight": 1,
+      "description": "Tooth decay - bad breath (foul, disgusting, putrid, etc.)",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "WrVQfNjelBRxej1r",
+      "range": [
+        7,
+        7
+      ],
+      "weight": 1,
+      "description": "Open sores",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "sOt6L2aLiMyekaFw",
+      "range": [
+        8,
+        8
+      ],
+      "weight": 1,
+      "description": "Leprosy",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "GTtyk9eb2H6MfLiQ",
+      "range": [
+        9,
+        9
+      ],
+      "weight": 1,
+      "description": "Hemophilia",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "M7PXGMSjja0aJdqe",
+      "range": [
+        10,
+        10
+      ],
+      "weight": 1,
+      "description": "Scurvy",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "THe6KBwlWqT3FEmS",
+      "range": [
+        11,
+        11
+      ],
+      "weight": 1,
+      "description": "Missing 2D4 fingers",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "uLpAjePslrmJWGMx",
+      "range": [
+        12,
+        12
+      ],
+      "weight": 1,
+      "description": "Missing a hand",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "QUxmCNGBzvl8bNRk",
+      "range": [
+        13,
+        13
+      ],
+      "weight": 1,
+      "description": "Missing a foot",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "95te2dGi9H3b58sm",
+      "range": [
+        14,
+        14
+      ],
+      "weight": 1,
+      "description": "Missing an arm",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "GmBcWwuYLqk8HftE",
+      "range": [
+        15,
+        15
+      ],
+      "weight": 1,
+      "description": "Missing a leg",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "fPoCsZptQ7mZ9vs8",
+      "range": [
+        16,
+        16
+      ],
+      "weight": 1,
+      "description": "Missing an arm and a leg",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "aqzSNneukL90ea45",
+      "range": [
+        17,
+        17
+      ],
+      "weight": 1,
+      "description": "Bald and scabby",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "w7aliENxlj1j7tzk",
+      "range": [
+        18,
+        18
+      ],
+      "weight": 1,
+      "description": "Grossly fat",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "3rbW7oOWwEhMm86m",
+      "range": [
+        19,
+        19
+      ],
+      "weight": 1,
+      "description": "Living skeleton - grossly thin",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    },
+    {
+      "_id": "BHf9mci01m9V4Kg7",
+      "range": [
+        20,
+        20
+      ],
+      "weight": 1,
+      "description": "Mentally retarded (subtract 1D6 from INT)",
+      "type": "text",
+      "name": "",
+      "img": null,
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "stormbringer3e",
+        "systemVersion": "1.0.0",
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "folder": "zeUgCbx0smzwAppr",
+  "flags": {},
+  "description": "",
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": {
+      "worldId": "y2k",
+      "uuid": "RollTable.rQLLMVkQkf6cOyMS",
+      "coreVersion": "13.350",
+      "systemId": "stormbringer3e",
+      "systemVersion": "1.0.0"
+    },
+    "coreVersion": "13.350",
+    "systemId": "stormbringer3e",
+    "systemVersion": "1.0.0",
+    "createdTime": 1761692489394,
+    "modifiedTime": 1761692489394,
+    "lastModifiedBy": "EqNI53y0YNjtqnyG"
+  },
+  "ownership": {
+    "default": 0
+  }
+}

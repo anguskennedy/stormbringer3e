@@ -1,6 +1,6 @@
 {
   "id": "stormbringer3e",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "title": "Stormbringer 3e",
   "url": "https://github.com/anguskennedy/stormbringer3e/",
   "description": "Simple Stormbringer",
@@ -22,9 +22,24 @@
     },
     {
       "name": "tables",
-      "label": "Stormbringer Rollable Tables",
+      "label": "Rollable Tables",
       "path": "packs/tables.db",
-      "type": "RollTable"
+      "type": "RollTable",
+      "system": "stormbringer3e"
+    },
+    {
+      "name": "weapons",
+      "label": "Weapons",
+      "path": "packs/weapons.db",
+      "type": "Item",
+      "system": "stormbringer3e"
+    },
+        {
+      "name": "macros",
+      "label": "Macros",
+      "path": "packs/macros.db",
+      "type": "Macro",
+      "system": "stormbringer3e"
     }
   ],
   "languages": [
