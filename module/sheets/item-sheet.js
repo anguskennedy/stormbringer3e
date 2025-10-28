@@ -1,3 +1,5 @@
+import { SUMMONING_SUBTYPES } from "../config.js";
+
 export class StormItemSheet extends foundry.appv1.sheets.ItemSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -22,6 +24,7 @@ export class StormItemSheet extends foundry.appv1.sheets.ItemSheet {
     ];
 
     const skillTypeChoices = Object.fromEntries(skillTypes.map(t => [t.id, t.label]));
+    const summoningSubtypeChoices = Object.fromEntries(Object.entries(SUMMONING_SUBTYPES));
 
     const weaponTypes = [
       { id: "hand", label: "Hand Weapon" },
@@ -35,6 +38,7 @@ export class StormItemSheet extends foundry.appv1.sheets.ItemSheet {
         ...(data.config ?? {}),
         skillTypes,
         skillTypeChoices,
+        summoningSubtypeChoices,
         weaponTypes,
         weaponTypeChoices
       }

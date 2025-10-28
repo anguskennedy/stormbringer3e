@@ -26,6 +26,7 @@ export class StormActor extends Actor {
       system.narrative.possessions ??= "";
       system.narrative.money ??= "";
       system.narrative.notes ??= "";
+      system.narrative.skillNotes ??= "";
     } else {
       system.details = system.details || {};
       system.details.description ??= "";
@@ -36,7 +37,36 @@ export class StormActor extends Actor {
     }
     system.armour ??= {};
     system.armour.name ??= "";
-    system.armour.protection ??= "";
+    if (this.type === "creature") {
+      system.armour.protection ??= 0;
+      let creatureWeapons = system.creatureWeapons;
+      if (Array.isArray(creatureWeapons)) {
+        creatureWeapons = [...creatureWeapons];
+      } else if (creatureWeapons && typeof creatureWeapons === "object") {
+        const sortedKeys = Object.keys(creatureWeapons)
+          .filter(k => !Number.isNaN(Number(k)))
+          .sort((a, b) => Number(a) - Number(b));
+        creatureWeapons = sortedKeys.map(k => creatureWeapons[k]);
+      } else {
+        creatureWeapons = [];
+      }
+      system.creatureWeapons = creatureWeapons
+        .map(w => ({
+          name: String(w?.name ?? "").trim(),
+          attack: Number(w?.attack ?? 0) || 0,
+          damage: String(w?.damage ?? "").trim(),
+          parry: Number(w?.parry ?? 0) || 0
+        }))
+        .filter(w => w.name || w.damage || w.attack || w.parry);
+    } else {
+      system.armour.protection ??= "";
+    }
+    if (this.type === "creature") {
+      system.resources ??= {};
+      system.resources.hp ??= {};
+      system.resources.hp.mode ??= "auto";
+      system.resources.hp.override ??= "";
+    }
     system.skillBonuses ??= {};
     if (this.type !== "creature") {
       system.skillBonuses.agility ??= 0;
@@ -64,7 +94,7 @@ export class StormActor extends Actor {
     system.skills ??= {};
 
     // Merge defaults from preloaded cache
-    if (game.stormbringer?._actorBase) {
+    if (this.type !== "creature" && game.stormbringer?._actorBase) {
       foundry.utils.mergeObject(system, game.stormbringer._actorBase, { overwrite: false });
     }
   }
@@ -94,12 +124,22 @@ export class StormActor extends Actor {
     const age = Number(this.system.details?.age ?? 0);
     const charClass = (this.system.details?.class ?? "").toLowerCase();
 
-    let hpBase = con;
-    if (siz > 12) hpBase += siz - 12;
-    else if (siz < 9) hpBase -= 9 - siz;
+    let hpBase;
+    if (this.type === "creature") {
+      const hpMode = this.system.resources?.hp?.mode ?? "auto";
+      const override = this.system.resources?.hp?.override ?? "";
+      hpBase = this._computeCreatureHp(con, siz, hpMode, override);
+      resources.hp ??= {};
+      resources.hp.mode = hpMode;
+      resources.hp.override ??= override;
+    } else {
+      hpBase = con;
+      if (siz > 12) hpBase += siz - 12;
+      else if (siz < 9) hpBase -= 9 - siz;
 
-    const minHp = Math.ceil(con / 2);
-    hpBase = Math.max(hpBase, minHp);
+      const minHp = Math.ceil(con / 2);
+      hpBase = Math.max(hpBase, minHp);
+    }
 
     resources.hp ??= {};
     const previousMax = Number(resources.hp.max ?? 0);
@@ -139,6 +179,11 @@ export class StormActor extends Actor {
     }
 
     this.system.combat ??= {};
+    const damageTotal = Number(str) + Number(siz);
+    this.system.combat.damageMods ??= {};
+    this.system.combat.damageMods.hand = this._damageMod(damageTotal, 6);
+    this.system.combat.damageMods.projectile = this._damageMod(damageTotal, 4);
+
     if (this.type === "creature") {
       this.system.combat.attackBonus = 0;
       this.system.combat.parryBonus = 0;
@@ -172,6 +217,42 @@ export class StormActor extends Actor {
       charClass === "noble" ? 2 : 1;
     bonus += ageOver * perYear;
     return bonus;
+  }
+
+  _computeCreatureHp(con, siz, mode, override) {
+    const safe = (val) => Math.max(1, Math.floor(Number(val) || 0));
+    const auto = safe(con + siz - 12);
+
+    switch ((mode ?? "auto").toLowerCase()) {
+      case "con":
+        return safe(con);
+      case "conplussix":
+        return safe(con + 6);
+      case "conplussiz":
+        return safe(con + siz);
+      case "custom": {
+        const custom = Number(override);
+        if (!Number.isNaN(custom) && custom > 0) return safe(custom);
+        return auto;
+      }
+      default:
+        return auto;
+    }
+  }
+
+  _damageMod(total, dieSize) {
+    const score = Number(total) || 0;
+    let steps;
+    if (score <= 16) steps = -1;
+    else if (score <= 24) steps = 0;
+    else if (score <= 40) steps = 1;
+    else if (score <= 50) steps = 2;
+    else steps = 3;
+
+    if (steps === 0) return "";
+    const sign = steps > 0 ? "+" : "-";
+    const magnitude = Math.abs(steps);
+    return `${sign}${magnitude}d${dieSize}`;
   }
 }
 

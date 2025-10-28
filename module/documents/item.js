@@ -7,6 +7,7 @@ export class StormItem extends Item {
     switch (this.type) {
       case "skill":
         system.type ??= "";  
+        system.subtype ??= "";
         system.base ??= 0;
         system.effective ??= 0;
         system.description ??= "";

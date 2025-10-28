@@ -234,19 +234,63 @@
               <span class="item-percent">%</span>
             </span>
           </div>
-        {{/each}} 
+        {{/each}}
+
+        {{#if knowLanguages.length}}
+          <div class="language-skill-block">
+            <div class="language-skill-header">
+              <span></span>
+              <span>Speak</span>
+              <span>R/W</span>
+            </div>
+            <div class="language-skill-grid">
+              {{#each knowLanguages as |lang|}}
+                <div class="language-skill-name">
+                  <button type="button" class="language-roll" data-language-key="{{lang.key}}">{{lang.name}}</button>
+                </div>
+                <div class="language-skill-value">
+                  {{#if lang.speak}}
+                    <span class="item-field-wrapper">
+                      <input type="number" value="{{lang.speak.total}}" data-item-id="{{lang.speak.id}}" data-field="system.base" data-bonus="{{lang.speak.bonus}}" data-base-bonus="{{lang.speak.baseBonus}}" class="item-field" />
+                      <span class="item-percent">%</span>
+                    </span>
+                  {{else}}
+                    <span class="language-empty">—</span>
+                  {{/if}}
+                </div>
+                <div class="language-skill-value">
+                  {{#if lang.read}}
+                    <span class="item-field-wrapper">
+                      <input type="number" value="{{lang.read.total}}" data-item-id="{{lang.read.id}}" data-field="system.base" data-bonus="{{lang.read.bonus}}" data-base-bonus="{{lang.read.baseBonus}}" class="item-field" />
+                      <span class="item-percent">%</span>
+                    </span>
+                  {{else}}
+                    <span class="language-empty">—</span>
+                  {{/if}}
+                </div>
+              {{/each}}
+            </div>
+          </div>
+        {{/if}}
       </div>
       <div class="cell summoningCell">
         <p>SUMMONINGS</p>
-        {{#each skillsByType.summoning as |item|}}
-          <div class="skill-row flexrow">
-            <label class="skill-roll" data-action="roll-skill" data-item-id="{{item.id}}">{{item.name}}</label>
-            <span class="item-field-wrapper">
-              <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" data-base-bonus="{{item.baseBonus}}" class="item-field" />
-              <span class="item-percent">%</span>
-            </span>
-          </div>
-        {{/each}} 
+        <div class="summoning-groups">
+          {{#each summoningGroups as |group|}}
+            <div class="summoning-group">
+              <p class="summoning-group-title">{{group.label}}</p>
+              {{#each group.skills as |item|}}
+                <div class="skill-row flexrow">
+                  <label class="skill-roll" data-action="roll-skill" data-item-id="{{item.id}}">{{item.name}}</label>
+                  <span class="item-field-wrapper">
+                    <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" data-base-bonus="{{item.baseBonus}}" class="item-field" />
+                    <span class="item-percent">%</span>
+                  </span>
+                </div>
+              {{/each}}
+            </div>
+          {{/each}}
+        </div>
       </div>
       <div class="cell manipCell">
         <div class="skill-header">
@@ -286,7 +330,7 @@
       </div>
       <div class="cell skillNotesCell">
         <p>NOTES</p>
-
+        <textarea class="cell-textarea textarea-plain" name="system.narrative.skillNotes">{{system.narrative.skillNotes}}</textarea>
       </div>
     </div>
   </section>

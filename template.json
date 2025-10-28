@@ -29,6 +29,7 @@
       "base": {},
       "skill": {
         "type": "",
+        "subtype": "",
         "base": 0,
         "effective": 0,
         "description": ""

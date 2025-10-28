@@ -274,6 +274,96 @@ textarea, .desc-block {
   -moz-appearance: textfield;
 }
 
+.language-skill-block {
+  margin-top: 0.75rem;
+  font-size: 0.72rem;
+}
+
+.language-skill-header {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  padding: 0.2rem 0.3rem;
+  gap: 0.5rem;
+}
+
+.language-skill-header span:nth-child(1) {
+  justify-self: flex-start;
+}
+
+.language-skill-header span:nth-child(2),
+.language-skill-header span:nth-child(3) {
+  justify-self: flex-end;
+  width: 100%;
+  text-align: right;
+}
+
+.language-skill-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 0.1rem 0.5rem;
+  padding: 0.3rem 0.3rem 0;
+}
+
+.language-skill-name {
+  align-self: center;
+  font-weight: 400;
+}
+
+.language-roll {
+  border: none;
+  background: transparent;
+  font: inherit;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.language-roll:hover,
+.language-roll:focus {
+  color: #b33;
+  outline: none;
+}
+
+.language-skill-value {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.language-skill-value .item-field-wrapper {
+  min-width: 4.5ch;
+}
+
+.language-skill-value .item-field {
+  width: 3.25ch;
+  text-align: right;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px dashed #000;
+  box-shadow: none;
+  padding: 0;
+  appearance: textfield;
+}
+
+.language-skill-value .item-field:focus {
+  outline: none;
+  border-bottom-color: #b33;
+}
+
+.language-skill-value .item-percent {
+  font-size: 0.85rem;
+}
+
+.language-empty {
+  display: inline-block;
+  min-width: 3ch;
+  text-align: center;
+  font-style: italic;
+}
+
 /*
 .skill-item {
   display: flex;
@@ -493,8 +583,8 @@ textarea, .desc-block {
 
 .creature-columns {
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr;
-  gap: 1.25rem;
+  grid-template-columns: 0.1fr 1fr 1fr;
+  gap: 1rem;
 }
 
 .creature-column h3 {
@@ -507,8 +597,7 @@ textarea, .desc-block {
 .creature-attribute-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
+  gap: 0.4rem;
   margin-bottom: 0.35rem;
 }
 
@@ -516,10 +605,11 @@ textarea, .desc-block {
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.05em;
+  width: 2.8rem;
 }
 
 .creature-attribute-row .attr-value {
-  width: 4rem;
+  width: 3.25rem;
   border: none;
   border-bottom: 1px solid #000;
   background: transparent;
@@ -533,22 +623,185 @@ textarea, .desc-block {
   border-bottom-color: #b33;
 }
 
-.creature-skills-column .skill-row {
-  border-bottom: 1px dashed #aaa;
-}
-
 .creature-skills-column .skill-row.empty {
-  border-bottom: none;
   font-style: italic;
   color: #666;
   padding: 0.5rem 0;
 }
 
-.creature-arsenal {
+.creature-skills-column .skill-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 22px;
+}
 
-  grid-template-columns: minmax(0, 3fr) minmax(220px, 1.5fr);
-  gap: 1.25rem;
-  align-items: start;
+.creature-skills-column .skill-row label {
+  flex: 1 1 auto;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.creature-skills-column .skill-row .item-field-wrapper {
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 4px;
+  min-width: 5ch;
+}
+
+.creature-skills-column .skill-row .item-field {
+  width: 3.25ch;
+  text-align: right;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px dashed #000;
+  box-shadow: none;
+  padding: 0;
+  appearance: textfield;
+}
+
+.creature-skills-column .skill-row .item-field:focus {
+  outline: none;
+  border-bottom-color: #b33;
+}
+
+.creature-skills-column .skill-row .item-percent {
+  font-size: 0.9rem;
+}
+
+.creature-skills-column .skill-row .item-field::-webkit-outer-spin-button,
+.creature-skills-column .skill-row .item-field::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.creature-skills-column .skill-row .item-field[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.creature-arsenal {
+  display: block;
+}
+
+.creature-weapon-table {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr)) auto;
+  border: 1px solid #111;
+  margin-top: 0.35rem;
+  font-family: 'Special Elite', 'Courier New', monospace;
+}
+
+.creature-weapon-row {
+  display: contents;
+}
+
+.creature-weapon-row span,
+.creature-weapon-row input,
+.creature-weapon-row button {
+  padding: 6px 4px;
+  font-size: 0.95rem;
+}
+
+.creature-weapon-row button {
+  text-align: center;
+}
+
+.creature-weapon-header span {
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  background: #555;
+  color: #f7f1d3;
+  border-bottom: 2px solid #000;
+  text-align: left;
+}
+
+.creature-weapon-header span:nth-child(2),
+.creature-weapon-header span:nth-child(3),
+.creature-weapon-header span:nth-child(4) {
+  text-align: center;
+}
+
+.creature-weapon-row input {
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0 0.25rem;
+}
+
+.creature-weapon-row input:focus {
+  outline: none;
+  border-bottom-color: #b33;
+}
+
+
+.creature-weapon-value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  width: 100%;
+}
+
+.creature-weapon-value input[type="number"],
+.creature-weapon-value input[type="text"] {
+  text-align: center;
+}
+
+.creature-weapon-value input[type="number"] {
+  width: 4.5ch;
+  text-align: right;
+}
+
+.creature-weapon-value .weapon-roll,
+.weapon-roll-placeholder {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1;
+  padding: 0;
+}
+
+.creature-weapon-damage {
+  width: 16ch;
+}
+
+.creature-weapon-value .item-percent {
+  font-size: 0.85rem;
+}
+
+.weapon-roll-placeholder {
+  cursor: default;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.creature-weapon-value .weapon-roll:hover {
+  color: #b33;
+}
+
+.creature-weapon-remove {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  line-height: 1;
+  font-size: 0.9rem;
+}
+
+.creature-weapon-remove:hover {
+  color: #b33;
+}
+
+.creature-weapon-row:last-child span,
+.creature-weapon-row:last-child input,
+.creature-weapon-row:last-child button {
+  border-bottom: none;
 }
 
 .creature-arsenal h3,
@@ -566,13 +819,50 @@ textarea, .desc-block {
 .creature-defense {
   display: grid;
   gap: 1rem;
-  padding: 0.75rem;
-  border: 1px solid #222;
   background: transparent;
 }
 
-.creature-armor-row {
+.creature-hp-mode,
+.creature-hp-custom {
   display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.creature-hp-mode-select,
+.creature-hp-custom input {
+  border: none;
+  border-bottom: 1px solid #000;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.1rem 0.25rem;
+}
+
+.creature-hp-mode-select {
+  width: 100%;
+  max-width: 10rem;
+}
+
+.creature-hp-override-label {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+}
+
+.creature-hp-override {
+  width: 6ch;
+}
+
+.creature-hp-mode-select:focus,
+.creature-hp-custom input:focus {
+  outline: none;
+  border-bottom-color: #b33;
+}
+
+.creature-armor-row {
   align-items: center;
   gap: 0.4rem;
 }
@@ -606,6 +896,7 @@ textarea, .desc-block {
   font-family: inherit;
   font-size: 0.95rem;
   padding: 0 0.25rem;
+  max-width: 10rem;
 }
 
 .creature-armor-name:focus {
@@ -622,10 +913,11 @@ textarea, .desc-block {
 .creature-textarea {
   width: 100%;
   min-height: 110px;
-  border: 1px solid #222;
-  padding: 0.5rem;
+  border: none;
+  padding: 4px 0 0;
   font-family: inherit;
-  resize: vertical;
+  flex: 1 1 auto;
+  resize: none;
   background: transparent;
 }
 
@@ -643,7 +935,8 @@ textarea, .desc-block {
 .afflictionsCell,
 .possessionsCell,
 .moneyCell,
-.notesCell {
+.notesCell,
+.skillNotesCell {
   display: flex;
   flex-direction: column;
 }
@@ -651,7 +944,8 @@ textarea, .desc-block {
 .afflictionsCell .textarea-plain,
 .possessionsCell .textarea-plain,
 .moneyCell .textarea-plain,
-.notesCell .textarea-plain {
+.notesCell .textarea-plain,
+.skillNotesCell .textarea-plain {
   flex: 1 1 auto;
   border: none;
   padding: 4px 0 0;
@@ -662,7 +956,8 @@ textarea, .desc-block {
 .afflictionsCell .textarea-plain:focus,
 .possessionsCell .textarea-plain:focus,
 .moneyCell .textarea-plain:focus,
-.notesCell .textarea-plain:focus {
+.notesCell .textarea-plain:focus,
+.skillNotesCell .textarea-plain:focus {
   border: none;
   outline: none;
 }
@@ -736,7 +1031,7 @@ textarea, .desc-block {
   background: #555;
   color: #f7f1d3;
   border-bottom: 2px solid #000;
-  text-align: center;
+  text-align: left;
 }
 
 .weapon-name {
@@ -773,7 +1068,6 @@ textarea, .desc-block {
   border: none;
   border-bottom: 1px solid #000;
   background: transparent;
-  text-align: right;
   font-family: inherit;
   font-size: 0.95rem;
   padding: 0 0.25rem;
@@ -811,7 +1105,6 @@ textarea, .desc-block {
   padding: 0;
   font: inherit;
   cursor: pointer;
-  text-align: left;
   text-decoration: underline dotted;
 }
 
@@ -900,6 +1193,31 @@ textarea, .desc-block {
 .summoningCell {
     grid-column: 5;
     grid-row: 1 / span 2;    
+}
+
+.summoningCell .summoning-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+}
+
+.summoningCell .summoning-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.summoningCell .summoning-group-title {
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0.4rem 0 0.1rem;
+}
+
+.summoningCell .summoning-group:first-child .summoning-group-title {
+  margin-top: 0.2rem;
 }
 
 .manipCell {

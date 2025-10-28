@@ -3,6 +3,12 @@ export const STORM = {
   itemTypes: ["skill", "weapon", "armor"],
 };
 
+export const SUMMONING_SUBTYPES = {
+  elemental: "Elementals",
+  demon: "Demons",
+  other: "Others"
+};
+
 export const STORM_TYPES = {
   agility: {
     name: "Agility",

@@ -1,3 +1,10 @@
+import { SUMMONING_SUBTYPES } from "../config.js";
+
+const SUMMONING_NAME_FALLBACKS = {
+  elemental: ["air", "earth", "fire", "water"],
+  demon: ["combat", "desire", "knowledge", "possession", "protection", "travel"]
+};
+
 export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -36,12 +43,86 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
         id: skill.id,
         name: skill.name,
         type: typeKey,
+        subtype: String(skill.system?.subtype ?? "").toLowerCase(),
         base,
         bonus,
         baseBonus,
         total: base + bonus + baseBonus
       });
     }
+
+    const fallbackSubtypeByName = new Map();
+    for (const [groupKey, names] of Object.entries(SUMMONING_NAME_FALLBACKS)) {
+      for (const name of names) {
+        fallbackSubtypeByName.set(name.toLowerCase(), groupKey);
+      }
+    }
+
+    const summoningGroups = Object.entries(SUMMONING_SUBTYPES).map(([key, label]) => ({
+      key,
+      label,
+      skills: []
+    }));
+    const summoningGroupMap = Object.fromEntries(summoningGroups.map(group => [group.key, group]));
+    const summoningSkills = skillsByType.summoning ?? [];
+    for (const skill of summoningSkills) {
+      const rawSubtype = skill.subtype ?? "";
+      let subtypeKey = Object.prototype.hasOwnProperty.call(SUMMONING_SUBTYPES, rawSubtype)
+        ? rawSubtype
+        : "";
+      if (!subtypeKey) {
+        const nameKey = (skill.name ?? "").trim().toLowerCase();
+        subtypeKey = fallbackSubtypeByName.get(nameKey) ?? "other";
+      }
+      const targetGroup = summoningGroupMap[subtypeKey] ?? summoningGroupMap.other;
+      targetGroup.skills.push(skill);
+    }
+
+    const knowSkills = skillsByType.know ?? [];
+    const knowGeneral = [];
+    const languageMap = new Map();
+    for (const item of knowSkills) {
+      const languageInfo = this._parseLanguageSkillName(item.name ?? "");
+      if (!languageInfo) {
+        knowGeneral.push(item);
+        continue;
+      }
+
+      const key = languageInfo.key;
+      if (!languageMap.has(key)) {
+        languageMap.set(key, {
+          key,
+          name: languageInfo.label,
+          speak: null,
+          read: null
+        });
+      }
+
+      const entry = languageMap.get(key);
+      if (languageInfo.variant === "speak") entry.speak = item;
+      else entry.read = item;
+    }
+    const knowLanguages = Array.from(languageMap.values())
+      .sort((a, b) => collator.compare(a.name ?? "", b.name ?? ""));
+    skillsByType.know = knowGeneral;
+
+    knowLanguages.forEach(lang => {
+      lang.speak ??= null;
+      lang.read ??= null;
+      lang.key = lang.key ?? (lang.name ?? "").toLowerCase();
+    });
+    this._languageCache = knowLanguages.map(lang => ({
+      key: lang.key,
+      name: lang.name,
+      speak: lang.speak,
+      read: lang.read
+    }));
+    this._languageCache = knowLanguages.map(lang => ({
+      key: lang.key,
+      name: lang.name,
+      speak: lang.speak,
+      read: lang.read
+    }));
 
     const combat = actorData.combat ?? {};
     combat.damageMods ??= {};
@@ -104,7 +185,7 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
         };
       });
 
-    return {
+  return {
       ...data,
       actor: this.actor,
       system: actorData,
@@ -112,7 +193,9 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
       config: CONFIG.STORM ?? {},
       skillsByType,
       skillBonuses,
-      weaponRows
+      weaponRows,
+      knowLanguages,
+      summoningGroups
     };
   }
 
@@ -185,6 +268,8 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
   html.find(".weapon-row[data-item-id]").on("contextmenu", ev => this._onWeaponContextMenu(ev));
   html.find(".armor-protection-roll").on("click", ev => this._rollArmorProtection(ev));
   html.find(".armor-protection-input").on("input", ev => this._updateArmorRollButton(ev));
+  html.find(".language-roll").on("click", ev => this._onLanguageRoll(ev));
+  html.find(".creature-weapon-remove").on("click", ev => this._removeCreatureWeapon(ev));
   }
 
   async _rollWeapon(event) {
@@ -303,5 +388,99 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
   _formatRollResult({ success, isCritical }) {
     if (isCritical) return `<strong class="critical-success">Critical Success!</strong>`;
     return success ? "Success" : "Failure";
+  }
+
+  _parseLanguageSkillName(rawName) {
+    if (!rawName) return null;
+    const name = rawName.trim();
+    const regex = /^(Speak|Read\/?Write|R\/W)\s*[\-:]?\s*(.+)$/i;
+    const match = name.match(regex);
+    if (!match) return null;
+    const prefix = match[1].toLowerCase();
+    const labelRaw = match[2].trim().replace(/^[()]/, "").replace(/[()]$/, "");
+    const key = labelRaw.toLowerCase();
+    const variant = prefix.startsWith("speak") ? "speak" : "read";
+    return { key, label: labelRaw || name, variant };
+  }
+
+  async _onLanguageRoll(event) {
+    event.preventDefault();
+    const button = event.currentTarget;
+    const key = button.dataset.languageKey;
+    if (!key) return;
+
+    const languages = this._languageCache ?? this._buildLanguageCache();
+    const language = languages.find(entry => entry.key === key);
+    if (!language) return;
+
+    const options = [];
+    if (language.speak) options.push({ id: "speak", label: `Speak (${language.speak.total}%)`, data: language.speak });
+    if (language.read) options.push({ id: "read", label: `R/W (${language.read.total}%)`, data: language.read });
+
+    if (!options.length) return;
+
+    const choice = options.length === 1 ? options[0] : await this._promptLanguageChoice(language.name, options);
+    if (!choice) return;
+
+    await this._rollLanguageSkill(choice.data, language.name, choice.id === "read" ? "R/W" : "Speak");
+  }
+
+  _buildLanguageCache() {
+    if (this._languageCache) return this._languageCache;
+    return [];
+  }
+
+  async _promptLanguageChoice(name, options) {
+    return new Promise(resolve => {
+      const buttons = options.map(opt => `<button type="button" data-choice="${opt.id}">${opt.label}</button>`).join(" ");
+      const dlg = new Dialog({
+        title: `${name} Check`,
+        content: `<div class="language-choice">${buttons}</div>`,
+        buttons: {},
+        render: html => {
+          html.find("button[data-choice]").on("click", ev => {
+            const id = ev.currentTarget.dataset.choice;
+            resolve(options.find(opt => opt.id === id));
+            dlg.close();
+          });
+        },
+        close: () => resolve(null)
+      }, { jQuery: true });
+      dlg.render(true);
+    });
+  }
+
+  async _rollLanguageSkill(data, languageName, columnLabel) {
+    const item = data?.item ?? this.actor.items.get(data?.id);
+    if (!item) return;
+
+    const typeKey = item.system?.type ?? "";
+    const bonus = this._skillStartsAtZero(item.name)
+      ? 0
+      : Number(this.actor.system?.skillBonuses?.[typeKey] ?? 0);
+    const baseBonus = this._skillBaseOffset(item.name);
+    const target = Number(item.system?.base ?? 0) + bonus + baseBonus;
+
+    const roll = await new Roll("1d100").evaluate({ async: true });
+    const { success, isCritical } = this._evaluateRoll(target, roll.total);
+    const resultLabel = this._formatRollResult({ success, isCritical });
+
+    await roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      flavor: `${languageName} (${columnLabel}) (${target}%) → ${resultLabel}`
+    });
+  }
+
+  async _removeCreatureWeapon(event) {
+    event.preventDefault();
+    const button = event.currentTarget;
+    const index = Number(button.dataset.index);
+    if (Number.isNaN(index)) return;
+
+    const weapons = Array.isArray(this.actor.system?.creatureWeapons)
+      ? [...this.actor.system.creatureWeapons]
+      : [];
+    weapons.splice(index, 1);
+    await this.actor.update({ "system.creatureWeapons": weapons });
   }
 }

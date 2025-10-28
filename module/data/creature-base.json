@@ -8,10 +8,11 @@
     "DEX": 10
   },
   "resources": {
-    "hp": { "value": 10, "max": 10 }
+    "hp": { "value": 10, "max": 10, "mode": "auto", "override": "" }
   },
   "armour": {
     "name": "",
-    "protection": ""
-  }
+    "protection": 0
+  },
+  "creatureWeapons": []
 }

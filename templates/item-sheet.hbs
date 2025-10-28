@@ -23,6 +23,14 @@
           <label>Base Chance (%)</label>
           <input type="number" name="system.base" value="{{item.system.base}}" />
         </div>
+        {{#if (eq item.system.type "summoning")}}
+          <div class="form-group">
+            <label>Summoning Subtype</label>
+            <select name="system.subtype">
+              {{selectOptions config.summoningSubtypeChoices selected=item.system.subtype blank="Unassigned"}}
+            </select>
+          </div>
+        {{/if}}
       </div>
     {{/if}}
 

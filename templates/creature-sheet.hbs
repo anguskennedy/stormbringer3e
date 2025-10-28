@@ -34,9 +34,8 @@
       {{/if}}
     </div>
 
-    <div class="creature-column creature-skills-column">
+    <div class="creature-column creature-defense">
       <h3>Defense</h3>
-          <div class="creature-defense">
       <div class="creature-armor">
         <h4>Armor</h4>
         <div class="creature-armor-row">
@@ -47,66 +46,79 @@
       </div>
       <div class="creature-hp">
         <h4>Hit Points</h4>
+        <div class="creature-hp-mode">
+          <label for="creature-hp-mode-select">Mode</label>
+          <select id="creature-hp-mode-select" name="system.resources.hp.mode" class="creature-hp-mode-select">
+            {{#each creatureHpModes as |mode|}}
+              <option value="{{mode.value}}" {{#if mode.selected}}selected{{/if}}>{{mode.label}}</option>
+            {{/each}}
+          </select>
+          {{#if creatureHpIsCustom}}
+            <label for="creature-hp-override" class="creature-hp-override-label">Max</label>
+            <input type="number" id="creature-hp-override" class="creature-hp-override" name="system.resources.hp.override" value="{{system.resources.hp.override}}" min="1" />
+          {{/if}}
+        </div>
         <div class="creature-hp-row">
           <input type="number" class="hp-input" name="system.resources.hp.value" value="{{system.resources.hp.value}}" />
           <span class="hp-max">/ {{system.resources.hp.max}}</span>
         </div>
       </div>
     </div>
-    </div>
   </section>
 
   <section class="creature-section creature-arsenal">
-    <div class="creature-weapons weaponsCell" data-drop-target="true">
+    <div class="creature-weapons">
       <h3>Weapons</h3>
-      <div class="weapons-table">
-        <div class="weapon-row weapon-header">
-          <div class="weapon-cell">Weapon</div>
-          <div class="weapon-cell">Attack</div>
-          <div class="weapon-cell">Damage</div>
-          <div class="weapon-cell">Parry</div>
+      <div class="creature-weapon-table">
+        <div class="creature-weapon-row creature-weapon-header">
+          <span>Weapon</span>
+          <span>Attack</span>
+          <span>Damage</span>
+          <span>Parry</span>
+          <span></span>
         </div>
-
-        {{#if weaponRows.length}}
-          {{#each weaponRows as |weapon|}}
-            <div class="weapon-row" data-item-id="{{weapon.id}}">
-              <div class="weapon-cell weapon-name">{{weapon.name}}</div>
-              <div class="weapon-cell weapon-value attack">
-                <button type="button" class="weapon-roll" data-action="roll-weapon" data-roll-type="attack" data-weapon-id="{{weapon.id}}" title="Roll Attack">🎲</button>
-                <input type="number" class="weapon-stat-input" data-weapon-id="{{weapon.id}}" data-stat="attack" value="{{weapon.attackDisplay}}" />
-                <span class="item-percent">%</span>
-              </div>
-              <div class="weapon-cell weapon-value damage">
-                {{#if weapon.damageFormula}}
-                  <button type="button" class="weapon-damage-roll" data-weapon-id="{{weapon.id}}" data-damage-formula="{{weapon.damageFormula}}" title="Roll Damage">
-                    {{weapon.damageDisplay}}
-                  </button>
-                {{else}}
-                  —
-                {{/if}}
-              </div>
-              <div class="weapon-cell weapon-value parry">
-                {{#if weapon.isProjectile}}
-                  —
-                {{else}}
-                  <button type="button" class="weapon-roll" data-action="roll-weapon" data-roll-type="parry" data-weapon-id="{{weapon.id}}" title="Roll Parry">🎲</button>
-                  <input type="number" class="weapon-stat-input" data-weapon-id="{{weapon.id}}" data-stat="parry" value="{{weapon.parryDisplay}}" />
-                  <span class="item-percent">%</span>
-                {{/if}}
-              </div>
-            </div>
-          {{/each}}
-        {{else}}
-          <div class="weapon-row weapon-empty">
-            <div class="weapon-cell weapon-value">
-              <div class="center small">Drag weapon items here to equip them.</div>
-            </div>
+        {{#each creatureWeapons as |weapon index|}}
+          <div class="creature-weapon-row">
+            <span class="creature-weapon-value">
+              <input type="text" name="system.creatureWeapons.{{index}}.name" value="{{weapon.name}}" />
+            </span>
+            <span class="creature-weapon-value">
+              <button type="button" class="weapon-roll" data-action="roll-creature-weapon" data-index="{{index}}" data-roll-type="attack" title="Roll Attack">🎲</button>
+              <input type="number" name="system.creatureWeapons.{{index}}.attack" value="{{weapon.attack}}" />
+              <span class="item-percent">%</span>
+            </span>
+            <span class="creature-weapon-value">
+              <button type="button" class="weapon-roll" data-action="roll-creature-weapon" data-index="{{index}}" data-roll-type="damage" title="Roll Damage">🎲</button>
+              <input type="text" name="system.creatureWeapons.{{index}}.damage" value="{{weapon.damage}}" class="creature-weapon-damage" />
+            </span>
+            <span class="creature-weapon-value">
+              <button type="button" class="weapon-roll" data-action="roll-creature-weapon" data-index="{{index}}" data-roll-type="parry" title="Roll Parry">🎲</button>
+              <input type="number" name="system.creatureWeapons.{{index}}.parry" value="{{weapon.parry}}" />
+              <span class="item-percent">%</span>
+            </span>
+            <button type="button" class="creature-weapon-remove" data-index="{{index}}" title="Remove">✕</button>
           </div>
-        {{/if}}
+        {{/each}}
+        <div class="creature-weapon-row creature-weapon-row--new">
+          <input type="text" name="system.creatureWeapons.{{creatureWeapons.length}}.name" placeholder="Weapon name" />
+          <span class="creature-weapon-value">
+            <span class="weapon-roll-placeholder">🎲</span>
+            <input type="number" name="system.creatureWeapons.{{creatureWeapons.length}}.attack" placeholder="0" />
+            <span class="item-percent">%</span>
+          </span>
+          <span class="creature-weapon-value">
+            <span class="weapon-roll-placeholder">🎲</span>
+            <input type="text" name="system.creatureWeapons.{{creatureWeapons.length}}.damage" placeholder="1d6" class="creature-weapon-damage" />
+          </span>
+          <span class="creature-weapon-value">
+            <span class="weapon-roll-placeholder">🎲</span>
+            <input type="number" name="system.creatureWeapons.{{creatureWeapons.length}}.parry" placeholder="0" />
+            <span class="item-percent">%</span>
+          </span>
+          <span></span>
+        </div>
       </div>
     </div>
-
-
   </section>
 
   <section class="creature-section creature-description">
