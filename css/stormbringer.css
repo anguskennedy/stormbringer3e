@@ -21,9 +21,29 @@
 
 .stormbringer-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
+  gap: 0.75rem;
   padding: 6px;
+}
+
+.stormbringer-header .header-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.sheet-portrait {
+  width: 74px;
+  height: 74px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  object-fit: cover;
+  background: #f5f5f5;
+  flex: 0 0 auto;
+  cursor: pointer;
 }
 
 .stormbringer-header .title {
@@ -615,6 +635,18 @@ textarea, .desc-block {
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 0.75rem;
+}
+
+.creature-header .creature-header-fields {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1 1 auto;
+}
+
+.creature-portrait {
+  width: 64px;
+  height: 64px;
 }
 
 .creature-header input {

@@ -6,6 +6,27 @@ export class StormActor extends Actor {
     system.attributes ??= {};
     system.resources ??= {};
     system.details ??= {};
+    const normalizeAttributes = (keys) => {
+      if (!system.attributes) return;
+      for (const key of keys) {
+        const lower = key.toLowerCase();
+        const upper = key.toUpperCase();
+        let value;
+        if (Object.prototype.hasOwnProperty.call(system.attributes, upper)) {
+          value = system.attributes[upper];
+        } else if (Object.prototype.hasOwnProperty.call(system.attributes, lower)) {
+          value = system.attributes[lower];
+        } else {
+          continue;
+        }
+        const numeric = Number(value);
+        const finalValue = Number.isFinite(numeric) ? numeric : 0;
+        system.attributes[upper] = finalValue;
+        if (lower !== upper && Object.prototype.hasOwnProperty.call(system.attributes, lower)) {
+          delete system.attributes[lower];
+        }
+      }
+    };
     const baseKey = this.type === "creature" ? "_creatureBase" : "_actorBase";
     const baseData = game.stormbringer?.[baseKey];
     if (baseData) {
@@ -28,6 +49,8 @@ export class StormActor extends Actor {
       system.narrative.notes ??= "";
       system.narrative.skillNotes ??= "";
 
+      normalizeAttributes(["STR", "CON", "SIZ", "INT", "POW", "DEX", "CHA", "LCK"]);
+
       const craftSlots = Array.isArray(system.craftSlots) ? system.craftSlots : [];
       const normalizedSlots = craftSlots
         .slice(0, 2)
@@ -46,6 +69,7 @@ export class StormActor extends Actor {
       delete system.attributes.LCK;
       delete system.craftSlots;
       delete system.crafts;
+      normalizeAttributes(["STR", "CON", "SIZ", "INT", "POW", "DEX"]);
     }
     system.armour ??= {};
     system.armour.name ??= "";

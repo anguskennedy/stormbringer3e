@@ -14,7 +14,7 @@ Hooks.once("init", async() => {
 
   // Use raw DEX for initiative, highest goes first
   CONFIG.Combat.initiative = {
-    formula: "@attributes.dex",   // path into actor.system
+    formula: "@attributes.DEX",   // path into actor.system
     decimals: 0                   // no fractional tie‑breaker
   };
 

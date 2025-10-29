@@ -1,7 +1,7 @@
 {
   "id": "stormbringer3e",
   "type": "system",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "title": "Stormbringer 3e",
   "url": "https://github.com/anguskennedy/stormbringer3e/",
   "description": "Simple Stormbringer",
@@ -70,5 +70,5 @@
     "units": "ft"
   },
   "manifest": "https://raw.githubusercontent.com/anguskennedy/stormbringer3e/main/system.json",
-  "download": "https://github.com/anguskennedy/stormbringer3e/archive/refs/tags/v1.0.5.zip"
+  "download": "https://github.com/anguskennedy/stormbringer3e/archive/refs/tags/v1.0.6.zip"
 }

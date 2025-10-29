@@ -2,8 +2,11 @@
 
 <form class="stormbringer-sheet creature-sheet" autocomplete="off">
   <header class="creature-header">
-    <label>Name:</label>
-    <input type="text" name="name" value="{{actor.name}}" />
+    <img class="sheet-portrait creature-portrait" src="{{actor.img}}" data-edit="img" alt="{{actor.name}} portrait" />
+    <div class="creature-header-fields">
+      <label>Name:</label>
+      <input type="text" name="name" value="{{actor.name}}" />
+    </div>
   </header>
 
   <section class="creature-section creature-columns">
