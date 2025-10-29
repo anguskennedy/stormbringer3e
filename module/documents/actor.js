@@ -27,6 +27,14 @@ export class StormActor extends Actor {
       system.narrative.money ??= "";
       system.narrative.notes ??= "";
       system.narrative.skillNotes ??= "";
+
+      const craftSlots = Array.isArray(system.craftSlots) ? system.craftSlots : [];
+      const normalizedSlots = craftSlots
+        .slice(0, 2)
+        .map(value => (typeof value === "string" && value.trim().length ? value : null));
+      while (normalizedSlots.length < 2) normalizedSlots.push(null);
+      system.craftSlots = normalizedSlots;
+      delete system.crafts;
     } else {
       system.details = system.details || {};
       system.details.description ??= "";
@@ -34,6 +42,10 @@ export class StormActor extends Actor {
       system.narrative = {};
       delete system.attributes.cha;
       delete system.attributes.CHA;
+      delete system.attributes.lck;
+      delete system.attributes.LCK;
+      delete system.craftSlots;
+      delete system.crafts;
     }
     system.armour ??= {};
     system.armour.name ??= "";
@@ -96,6 +108,20 @@ export class StormActor extends Actor {
     // Merge defaults from preloaded cache
     if (this.type !== "creature" && game.stormbringer?._actorBase) {
       foundry.utils.mergeObject(system, game.stormbringer._actorBase, { overwrite: false });
+    }
+
+    if (this.type === "character") {
+      const currentLuck = system.attributes?.LCK ?? system.attributes?.lck;
+      const parsedLuck = Number(currentLuck);
+      const luckValue = Number.isFinite(parsedLuck) ? parsedLuck : 10;
+      system.attributes ??= {};
+      system.attributes.LCK = luckValue;
+      if (Object.prototype.hasOwnProperty.call(system.attributes, "lck")) {
+        delete system.attributes.lck;
+      }
+    } else if (system.attributes) {
+      delete system.attributes.LCK;
+      delete system.attributes.lck;
     }
   }
 

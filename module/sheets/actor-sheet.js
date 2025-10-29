@@ -78,10 +78,23 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
       targetGroup.skills.push(skill);
     }
 
+    const rawCraftSlotIds = Array.isArray(actorData.craftSlots) ? actorData.craftSlots : [];
+    const craftSlotIds = Array.from({ length: 2 }, (_, index) => {
+      const value = rawCraftSlotIds[index];
+      return typeof value === "string" && value.trim().length ? value : null;
+    });
+    const craftSlotIdSet = new Set(craftSlotIds.filter(Boolean));
+    const craftSlotMap = new Map();
+
     const knowSkills = skillsByType.know ?? [];
     const knowGeneral = [];
     const languageMap = new Map();
     for (const item of knowSkills) {
+      if (craftSlotIdSet.has(item.id)) {
+        craftSlotMap.set(item.id, item);
+        continue;
+      }
+
       const languageInfo = this._parseLanguageSkillName(item.name ?? "");
       if (!languageInfo) {
         knowGeneral.push(item);
@@ -123,6 +136,36 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
       speak: lang.speak,
       read: lang.read
     }));
+
+    const craftSlots = craftSlotIds.map((id, index) => {
+      if (!id) return { index, id: null, item: null };
+
+      if (!craftSlotMap.has(id)) {
+        const doc = this.actor.items.get(id);
+        if (doc?.type === "skill" && (doc.system?.type ?? "") === "know") {
+          const base = Number(doc.system?.base ?? 0);
+          const typeKey = doc.system?.type ?? "";
+          const bonus = this._skillStartsAtZero(doc.name)
+            ? 0
+            : Number(skillBonuses[typeKey] ?? 0);
+          const baseBonus = this._skillBaseOffset(doc.name);
+          craftSlotMap.set(id, {
+            id: doc.id,
+            name: doc.name,
+            type: typeKey,
+            subtype: String(doc.system?.subtype ?? "").toLowerCase(),
+            base,
+            bonus,
+            baseBonus,
+            total: base + bonus + baseBonus
+          });
+        }
+      }
+
+      const item = craftSlotMap.get(id) ?? null;
+      if (!item) return { index, id: null, item: null };
+      return { index, id, item };
+    });
 
     const combat = actorData.combat ?? {};
     combat.damageMods ??= {};
@@ -193,6 +236,7 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
       config: CONFIG.STORM ?? {},
       skillsByType,
       skillBonuses,
+      craftSlots,
       weaponRows,
       knowLanguages,
       summoningGroups
@@ -248,6 +292,13 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
     if (item) item.update({ [field]: value });
   });
 
+  html.find(".craft-remove").on("click", async ev => {
+    const button = ev.currentTarget;
+    const index = Number(button.dataset.craftSlot ?? -1);
+    if (!Number.isInteger(index) || index < 0) return;
+    await this._assignCraftSlot(index, null);
+  });
+
   html.find(".weapon-stat-input").change(ev => {
     const input = ev.currentTarget;
     const weaponId = input.dataset.weaponId;
@@ -270,6 +321,7 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
   html.find(".armor-protection-input").on("input", ev => this._updateArmorRollButton(ev));
   html.find(".language-roll").on("click", ev => this._onLanguageRoll(ev));
   html.find(".creature-weapon-remove").on("click", ev => this._removeCreatureWeapon(ev));
+  html.find(".skill-row[draggable='true']").on("dragstart", ev => this._onSkillDragStart(ev));
   }
 
   async _rollWeapon(event) {
@@ -469,6 +521,88 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       flavor: `${languageName} (${columnLabel}) (${target}%) → ${resultLabel}`
     });
+  }
+
+  _onSkillDragStart(event) {
+    const dragEvent = event.originalEvent ?? event;
+    const row = event.currentTarget;
+    const itemId = row?.dataset?.itemId;
+    if (!itemId || !dragEvent?.dataTransfer) return;
+    const item = this.actor.items.get(itemId);
+    if (!item?.toDragData) return;
+    const dragData = item.toDragData();
+    dragEvent.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+    dragEvent.dataTransfer.effectAllowed = "copyMove";
+  }
+
+  async _onDrop(event) {
+    const slotElement = event.target?.closest?.("[data-craft-slot]");
+    if (slotElement) {
+      event.preventDefault();
+      const index = Number(slotElement.dataset.craftSlot ?? -1);
+      if (!Number.isInteger(index) || index < 0) return;
+      const data = await TextEditor.getDragEventData(event);
+      await this._handleCraftDrop(data, index);
+      return;
+    }
+    return super._onDrop(event);
+  }
+
+  async _handleCraftDrop(data, index) {
+    if (!data || data.type !== "Item") return;
+
+    let document;
+    try {
+      document = await CONFIG.Item.documentClass.fromDropData(data);
+    } catch (error) {
+      console.error("StormActorSheet | Failed to resolve dropped item", error);
+      return;
+    }
+
+    if (!document) return;
+    if (document.type !== "skill") {
+      ui.notifications?.warn?.("Only skills can be assigned to Craft slots.");
+      return;
+    }
+
+    const typeKey = document.system?.type ?? "";
+    if (typeKey !== "know") {
+      ui.notifications?.warn?.("Craft slots require Knowledge skills.");
+      return;
+    }
+
+    let ownedItem = document.parent?.id === this.actor.id ? document : null;
+    if (!ownedItem) {
+      const source = document.toObject();
+      delete source._id;
+      const created = await this.actor.createEmbeddedDocuments("Item", [source]);
+      ownedItem = Array.isArray(created) ? created[0] : null;
+    }
+
+    if (!ownedItem) return;
+    await this._assignCraftSlot(index, ownedItem.id);
+  }
+
+  async _assignCraftSlot(index, itemId) {
+    const current = Array.isArray(this.actor.system?.craftSlots) ? [...this.actor.system.craftSlots] : [];
+    const normalized = Array.from({ length: 2 }, (_, i) => {
+      const value = current[i];
+      return typeof value === "string" && value.trim().length ? value : null;
+    });
+
+    const updates = {};
+    if (itemId) {
+      const duplicateIndex = normalized.findIndex(value => value === itemId);
+      if (duplicateIndex !== -1 && duplicateIndex !== index) {
+        updates[`system.craftSlots.${duplicateIndex}`] = null;
+      }
+      updates[`system.craftSlots.${index}`] = itemId;
+    } else {
+      updates[`system.craftSlots.${index}`] = null;
+    }
+
+    if (!Object.keys(updates).length) return;
+    await this.actor.update(updates);
   }
 
   async _removeCreatureWeapon(event) {

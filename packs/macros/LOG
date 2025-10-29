@@ -1,8 +1,15 @@
-2025/10/29-07:00:31.196716 31261f000 Recovering log #62
-2025/10/29-07:00:31.197175 31261f000 Delete type=0 #62
-2025/10/29-07:00:31.197235 31261f000 Delete type=3 #60
-2025/10/29-07:02:02.660712 30cbfb000 Level-0 table #67: started
-2025/10/29-07:02:02.660740 30cbfb000 Level-0 table #67: 0 bytes OK
-2025/10/29-07:02:02.660970 30cbfb000 Delete type=0 #65
-2025/10/29-07:02:02.661299 30cbfb000 Manual compaction at level-0 from '!macros!iYlBlzXYMDVUN61L' @ 72057594037927935 : 1 .. '!macros!iYlBlzXYMDVUN61L' @ 0 : 0; will stop at (end)
-2025/10/29-07:02:02.661327 30cbfb000 Manual compaction at level-1 from '!macros!iYlBlzXYMDVUN61L' @ 72057594037927935 : 1 .. '!macros!iYlBlzXYMDVUN61L' @ 0 : 0; will stop at (end)
+2025/10/29-13:29:12.110390 312e22000 Recovering log #74
+2025/10/29-13:29:12.110788 312e22000 Delete type=0 #74
+2025/10/29-13:29:12.110813 312e22000 Delete type=3 #72
+2025/10/29-15:38:09.035934 30cbfb000 Level-0 table #79: started
+2025/10/29-15:38:09.036156 30cbfb000 Level-0 table #79: 1243 bytes OK
+2025/10/29-15:38:09.036262 30cbfb000 Delete type=0 #77
+2025/10/29-15:38:09.037927 30cbfb000 Manual compaction at level-0 from '!macros!iYlBlzXYMDVUN61L' @ 72057594037927935 : 1 .. '!macros!iYlBlzXYMDVUN61L' @ 0 : 0; will stop at (end)
+2025/10/29-15:38:09.037963 30cbfb000 Manual compaction at level-1 from '!macros!iYlBlzXYMDVUN61L' @ 72057594037927935 : 1 .. '!macros!iYlBlzXYMDVUN61L' @ 0 : 0; will stop at '!macros!iYlBlzXYMDVUN61L' @ 4 : 1
+2025/10/29-15:38:09.037969 30cbfb000 Compacting 1@1 + 1@2 files
+2025/10/29-15:38:09.038168 30cbfb000 Generated table #80@1: 1 keys, 1160 bytes
+2025/10/29-15:38:09.038180 30cbfb000 Compacted 1@1 + 1@2 files => 1160 bytes
+2025/10/29-15:38:09.038239 30cbfb000 compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/10/29-15:38:09.038282 30cbfb000 Delete type=2 #5
+2025/10/29-15:38:09.038509 30cbfb000 Delete type=2 #79
+2025/10/29-15:38:09.039901 30cbfb000 Manual compaction at level-1 from '!macros!iYlBlzXYMDVUN61L' @ 4 : 1 .. '!macros!iYlBlzXYMDVUN61L' @ 0 : 0; will stop at (end)

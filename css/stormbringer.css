@@ -274,6 +274,61 @@ textarea, .desc-block {
   -moz-appearance: textfield;
 }
 
+.craft-skill-block {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.craft-header {
+  font-family: "Courier New", monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0 0.25rem;
+}
+
+.craft-slot {
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.craft-slot .craft-remove {
+  border: none;
+  background: transparent;
+  font-size: 0.8rem;
+  color: #933;
+  cursor: pointer;
+  padding: 0 0.2rem;
+  line-height: 1;
+}
+
+.craft-slot .craft-remove:hover,
+.craft-slot .craft-remove:focus {
+  color: #c33;
+  outline: none;
+}
+
+.craft-slot-empty {
+  justify-content: center;
+  gap: 0;
+  border: 1px dashed rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  padding: 0.3rem;
+  cursor: pointer;
+}
+
+.craft-slot-empty .craft-placeholder {
+  flex: 1 1 auto;
+  text-align: center;
+  font-style: italic;
+  font-size: 0.75rem;
+  color: #555;
+  letter-spacing: 0.04em;
+}
+
 .language-skill-block {
   margin-top: 0.75rem;
   font-size: 0.72rem;
@@ -431,8 +486,8 @@ textarea, .desc-block {
 .tabletop {
   display: grid;
   grid-template-columns: 0.8fr 2.2fr 3fr; /* three vertical sections */
-  grid-template-rows: 1fr 1fr;            /* two rows (bottom only used by last col) */
-  height: 220px;
+  grid-template-rows: auto auto;          /* allow rows to size to content */
+  min-height: 220px;
 }
 
 .cell {

@@ -1,7 +1,7 @@
 {
   "id": "stormbringer3e",
   "type": "system",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "title": "Stormbringer 3e",
   "url": "https://github.com/anguskennedy/stormbringer3e/",
   "description": "Simple Stormbringer",
@@ -35,11 +35,18 @@
       "type": "Item",
       "system": "stormbringer3e"
     },
-        {
+    {
       "name": "macros",
       "label": "Macros",
       "path": "packs/macros.db",
       "type": "Macro",
+      "system": "stormbringer3e"
+    },
+    {
+      "name": "creatures",
+      "label": "Creatures",
+      "path": "packs/creatures.db",
+      "type": "Actor",
       "system": "stormbringer3e"
     }
   ],
@@ -63,5 +70,5 @@
     "units": "ft"
   },
   "manifest": "https://raw.githubusercontent.com/anguskennedy/stormbringer3e/main/system.json",
-  "download": "https://github.com/anguskennedy/stormbringer3e/archive/refs/tags/v1.0.4.zip"
+  "download": "https://github.com/anguskennedy/stormbringer3e/archive/refs/tags/v1.0.5.zip"
 }

@@ -173,7 +173,7 @@
           </div>
         </div>
         {{#each skillsByType.agility as |item|}}
-          <div class="skill-row flexrow">
+          <div class="skill-row flexrow" data-item-id="{{item.id}}" draggable="true">
             <label class="skill-roll" data-action="roll-skill" data-item-id="{{item.id}}">{{item.name}}</label>
             <span class="item-field-wrapper">
               <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" data-base-bonus="{{item.baseBonus}}" class="item-field" />
@@ -191,7 +191,7 @@
           </div>
         </div>
         {{#each skillsByType.percept as |item|}}
-          <div class="skill-row flexrow">
+          <div class="skill-row flexrow" data-item-id="{{item.id}}" draggable="true">
             <label class="skill-roll" data-action="roll-skill" data-item-id="{{item.id}}">{{item.name}}</label>
             <span class="item-field-wrapper">
               <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" data-base-bonus="{{item.baseBonus}}" class="item-field" />
@@ -209,7 +209,7 @@
           </div>
         </div>
         {{#each skillsByType.stealth as |item|}}
-          <div class="skill-row flexrow">
+          <div class="skill-row flexrow" data-item-id="{{item.id}}" draggable="true">
             <label class="skill-roll" data-action="roll-skill" data-item-id="{{item.id}}">{{item.name}}</label>
             <span class="item-field-wrapper">
               <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" data-base-bonus="{{item.baseBonus}}" class="item-field" />
@@ -227,7 +227,7 @@
           </div>
         </div>
         {{#each skillsByType.know as |item|}}
-          <div class="skill-row flexrow">
+          <div class="skill-row flexrow" data-item-id="{{item.id}}" draggable="true">
             <label class="skill-roll" data-action="roll-skill" data-item-id="{{item.id}}">{{item.name}}</label>
             <span class="item-field-wrapper">
               <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" data-base-bonus="{{item.baseBonus}}" class="item-field" />
@@ -235,6 +235,25 @@
             </span>
           </div>
         {{/each}}
+<!--
+        <div class="craft-skill-block">
+          <div class="craft-header">Craft</div>
+          {{#each craftSlots as |slot|}}
+            <div class="skill-row flexrow craft-slot{{#unless slot.item}} craft-slot-empty{{/unless}}" data-drop-target="true" data-craft-slot="{{slot.index}}" {{#if slot.item}}data-item-id="{{slot.item.id}}" draggable="true"{{/if}}>
+              {{#if slot.item}}
+                <label class="skill-roll" data-action="roll-skill" data-item-id="{{slot.item.id}}">{{slot.item.name}}</label>
+                <span class="item-field-wrapper">
+                  <input type="number" value="{{slot.item.total}}" data-item-id="{{slot.item.id}}" data-field="system.base" data-bonus="{{slot.item.bonus}}" data-base-bonus="{{slot.item.baseBonus}}" class="item-field" />
+                  <span class="item-percent">%</span>
+                </span>
+                <button type="button" class="craft-remove" data-craft-slot="{{slot.index}}" title="Remove Craft Skill">✕</button>
+              {{else}}
+                <span class="craft-placeholder">Drop Craft Skill</span>
+              {{/if}}
+            </div>
+          {{/each}}
+        </div>
+        -->
 
         {{#if knowLanguages.length}}
           <div class="language-skill-block">
@@ -280,7 +299,7 @@
             <div class="summoning-group">
               <p class="summoning-group-title">{{group.label}}</p>
               {{#each group.skills as |item|}}
-                <div class="skill-row flexrow">
+                <div class="skill-row flexrow" data-item-id="{{item.id}}" draggable="true">
                   <label class="skill-roll" data-action="roll-skill" data-item-id="{{item.id}}">{{item.name}}</label>
                   <span class="item-field-wrapper">
                     <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" data-base-bonus="{{item.baseBonus}}" class="item-field" />
@@ -301,7 +320,7 @@
           </div>
         </div>
         {{#each skillsByType.manip as |item|}}
-          <div class="skill-row flexrow">
+          <div class="skill-row flexrow" data-item-id="{{item.id}}" draggable="true">
             <label class="skill-roll" data-action="roll-skill" data-item-id="{{item.id}}">{{item.name}}</label>
             <span class="item-field-wrapper">
               <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" data-base-bonus="{{item.baseBonus}}" class="item-field" />
@@ -319,7 +338,7 @@
           </div>
         </div>
         {{#each skillsByType.commun as |item|}}
-          <div class="skill-row flexrow">
+          <div class="skill-row flexrow" data-item-id="{{item.id}}" draggable="true">
             <label class="skill-roll" data-action="roll-skill" data-item-id="{{item.id}}">{{item.name}}</label>
             <span class="item-field-wrapper">
               <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" data-base-bonus="{{item.baseBonus}}" class="item-field" />

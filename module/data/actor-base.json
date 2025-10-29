@@ -6,7 +6,8 @@
     "INT": 10,
     "POW": 10,
     "DEX": 10,
-    "CHA": 10
+    "CHA": 10,
+    "LCK": 10
   },
   "resources": {
     "hp": { "value": 10},
