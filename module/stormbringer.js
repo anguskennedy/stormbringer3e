@@ -12,6 +12,12 @@ Hooks.once("init", async() => {
   game.system = game.system || {};
   game.system.config = { STORM, STORM_TYPES, SUMMONING_SUBTYPES };
 
+  // Use raw DEX for initiative, highest goes first
+  CONFIG.Combat.initiative = {
+    formula: "@attributes.dex",   // path into actor.system
+    decimals: 0                   // no fractional tie‑breaker
+  };
+
   // Preload base actor data before anything initializes
   const [actorBaseRes, creatureBaseRes] = await Promise.all([
     fetch("systems/stormbringer3e/module/data/actor-base.json"),
