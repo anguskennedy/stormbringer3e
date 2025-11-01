@@ -1,0 +1,34 @@
+<div class="storm-roll-card">
+  <div class="storm-roll-header">
+    <span class="storm-roll-formula">{{formula}}</span>
+  </div>
+
+  <div class="storm-roll-dice">
+    <div class="storm-roll-die">
+      <div class="storm-roll-die-label">1 tens die</div>
+      <div class="storm-roll-die-value">{{tensDisplay}}</div>
+    </div>
+    <div class="storm-roll-die">
+      <div class="storm-roll-die-label">1 unit die</div>
+      <div class="storm-roll-die-value">{{unitsDisplay}}</div>
+    </div>
+  </div>
+
+  {{#if isPush}}
+    <div class="storm-roll-push-note">Pushed Roll</div>
+  {{/if}}
+
+  <div class="storm-roll-result-text">
+    {{{resultLabel}}}
+  </div>
+
+  {{#if allowPush}}
+    <div class="storm-roll-actions">
+      <button type="button" class="storm-roll-push" data-action="push-roll">Push</button>
+    </div>
+  {{/if}}
+
+  <div class="storm-roll-total">
+    {{totalDisplay}}
+  </div>
+</div>

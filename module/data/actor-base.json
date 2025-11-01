@@ -10,7 +10,7 @@
     "LCK": 10
   },
   "resources": {
-    "hp": { "value": 10},
+    "hp": { "value": "" },
     "elan": { "value": 10},
     "age": 25
   }

@@ -251,10 +251,16 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
     const attr = ev.currentTarget.dataset.attr;
     const val = Number(this.actor.system.attributes[attr] ?? 10);
     const roll = await new Roll("1d100").evaluate({async: true});
-    const success = roll.total <= val;
-    await roll.toMessage({
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      flavor: `${attr.toUpperCase()} Check (vs ${val}) → ${success ? "Success" : "Failure"}`
+    const { success, isCritical } = this._evaluateRoll(val, roll.total);
+    const resultLabel = this._formatRollResult({ success, isCritical });
+    const label = `${attr.toUpperCase()} Check (vs ${val})`;
+    await this._sendD100RollMessage({
+      roll,
+      flavor: `${label} → ${resultLabel}`,
+      label,
+      target: val,
+      resultLabel,
+      allowPush: this.actor.type !== "creature" && !success
     });
   });
 
@@ -274,9 +280,14 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
     const roll = await new Roll("1d100").evaluate({async: true});
     const { success, isCritical } = this._evaluateRoll(target, roll.total);
     const resultLabel = this._formatRollResult({ success, isCritical });
-    await roll.toMessage({
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      flavor: `${skill.name} Check (vs ${target}%) → ${resultLabel}`
+    const label = `${skill.name} Check (vs ${target}%)`;
+    await this._sendD100RollMessage({
+      roll,
+      flavor: `${label} → ${resultLabel}`,
+      label,
+      target,
+      resultLabel,
+      allowPush: this.actor.type !== "creature" && !success
     });
   });
 
@@ -344,9 +355,13 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
     const { success, isCritical } = this._evaluateRoll(target, roll.total);
     const resultLabel = this._formatRollResult({ success, isCritical });
     const label = `${weaponName} ${rollType === "parry" ? "Parry" : "Attack"} (${target}%)`;
-    await roll.toMessage({
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      flavor: `${label} → ${resultLabel}`
+    await this._sendD100RollMessage({
+      roll,
+      flavor: `${label} → ${resultLabel}`,
+      label,
+      target,
+      resultLabel,
+      allowPush: false
     });
   }
 
@@ -431,15 +446,96 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
   }
 
   _evaluateRoll(target, rollTotal) {
+    return StormActorSheet.evaluateD100Roll(target, rollTotal);
+  }
+
+  _formatRollResult({ success, isCritical }) {
+    return StormActorSheet.formatRollResult({ success, isCritical });
+  }
+
+  async _sendD100RollMessage(options) {
+    return StormActorSheet.sendD100RollMessage({
+      actor: this.actor,
+      ...options
+    });
+  }
+
+  static evaluateD100Roll(target, rollTotal) {
     const success = rollTotal <= target;
     const critThreshold = Math.max(1, Math.floor(target / 10));
     const isCritical = success && rollTotal <= critThreshold;
     return { success, isCritical };
   }
 
-  _formatRollResult({ success, isCritical }) {
+  static formatRollResult({ success, isCritical }) {
     if (isCritical) return `<strong class="critical-success">Critical Success!</strong>`;
-    return success ? "Success" : "Failure";
+    return success ? `<span class="success-result">Success</span>` : "Failure";
+  }
+
+  static async sendD100RollMessage({
+    actor,
+    roll,
+    flavor,
+    label,
+    target,
+    resultLabel,
+    allowPush = false,
+    isPush = false,
+    speaker
+  }) {
+    const speakerData = speaker ?? ChatMessage.getSpeaker({ actor });
+    const parsedTarget = Number(target);
+    const targetValue = Number.isFinite(parsedTarget) ? parsedTarget : 0;
+    const totalRaw = Number.isFinite(roll.total) ? Number(roll.total) : 0;
+    const total = Math.max(0, Math.min(100, Math.floor(totalRaw)));
+    const normalized = ((total % 100) + 100) % 100;
+    const isHundred = total === 100;
+    const tensValue = isHundred ? 0 : Math.floor(normalized / 10) * 10;
+    const unitsValue = isHundred ? 0 : normalized % 10;
+
+    const templateData = {
+      actorName: actor?.name ?? "",
+      label,
+      formula: roll.formula,
+      totalDisplay: isHundred ? "100" : String(total).padStart(2, "0"),
+      tensDisplay: isHundred ? "00" : String(tensValue).padStart(2, "0"),
+      unitsDisplay: String(unitsValue),
+      resultLabel,
+      target: targetValue,
+      allowPush: allowPush && !isPush,
+      isPush
+    };
+
+    const content = await renderTemplate(
+      "systems/stormbringer3e/templates/chat/d100-roll-card.hbs",
+      templateData
+    );
+
+    const flags = {
+      stormbringer3e: {
+        canPush: allowPush && !isPush,
+        isPush,
+        pushData: allowPush && !isPush
+          ? {
+              actorId: actor?.id ?? null,
+              target: targetValue,
+              label,
+              speaker: speakerData,
+              used: false
+            }
+          : null
+      }
+    };
+
+    return ChatMessage.create({
+      speaker: speakerData,
+      flavor,
+      content,
+      sound: CONFIG.sounds?.dice ?? null,
+      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      rolls: [roll],
+      flags
+    });
   }
 
   _parseLanguageSkillName(rawName) {
@@ -516,10 +612,14 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
     const roll = await new Roll("1d100").evaluate({ async: true });
     const { success, isCritical } = this._evaluateRoll(target, roll.total);
     const resultLabel = this._formatRollResult({ success, isCritical });
-
-    await roll.toMessage({
-      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      flavor: `${languageName} (${columnLabel}) (${target}%) → ${resultLabel}`
+    const label = `${languageName} (${columnLabel}) (${target}%)`;
+    await this._sendD100RollMessage({
+      roll,
+      flavor: `${label} → ${resultLabel}`,
+      label,
+      target,
+      resultLabel,
+      allowPush: this.actor.type !== "creature" && !success
     });
   }
 

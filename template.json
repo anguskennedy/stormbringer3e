@@ -7,7 +7,7 @@
           "str": 10, "con": 10, "siz": 10, "int": 10, "pow": 10, "dex": 10, "cha": 10, "lck": 10
         },
         "resources": {
-          "hp": {"value": 10, "max": 10},
+          "hp": {"value": "", "max": 10},
           "elan": {"value": 10, "max": 10}
         },
         "skills": {},

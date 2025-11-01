@@ -50,3 +50,66 @@ Hooks.once("init", async() => {
 
   game.storm = {};
 });
+
+Hooks.on("renderChatMessage", (message, html) => {
+  const pushData = message.getFlag("stormbringer3e", "pushData");
+  if (!pushData) return;
+
+  const button = html.find("[data-action='push-roll']");
+  if (!button.length) return;
+
+  if (pushData.used) {
+    button.remove();
+    return;
+  }
+
+  button.on("click", async event => {
+    event.preventDefault();
+    const target = Number(pushData.target ?? 0) || 0;
+    const actorId = pushData.actorId;
+    let actor = actorId ? game.actors?.get(actorId) : null;
+
+    if (!actor && pushData.speaker?.token) {
+      const token = canvas?.tokens?.placeables?.find(t => t.id === pushData.speaker.token);
+      actor = token?.actor ?? actor;
+    }
+
+    if (!actor) {
+      ui.notifications?.warn?.("Unable to resolve actor for pushed roll.");
+      button.remove();
+      try {
+        await message.setFlag("stormbringer3e", "pushData.used", true);
+      } catch (error) {
+        console.warn("Stormbringer3e | Failed to update push flag", error);
+      }
+      return;
+    }
+
+    button.prop("disabled", true);
+
+    const roll = await new Roll("1d100").evaluate({ async: true });
+    const outcome = StormActorSheet.evaluateD100Roll(target, roll.total);
+    const resultLabel = StormActorSheet.formatRollResult(outcome);
+    const label = pushData.label ?? (typeof message.flavor === "string" ? message.flavor : "Check");
+    const flavor = `${label} (Pushed) → ${resultLabel}`;
+
+    await StormActorSheet.sendD100RollMessage({
+      actor,
+      roll,
+      flavor,
+      label,
+      target,
+      resultLabel,
+      allowPush: false,
+      isPush: true,
+      speaker: pushData.speaker
+    });
+
+    try {
+      await message.setFlag("stormbringer3e", "pushData.used", true);
+    } catch (error) {
+      console.warn("Stormbringer3e | Failed to update push flag", error);
+    }
+    button.remove();
+  });
+});

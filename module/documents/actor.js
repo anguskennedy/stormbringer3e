@@ -192,16 +192,26 @@ export class StormActor extends Actor {
     }
 
     resources.hp ??= {};
-    const previousMax = Number(resources.hp.max ?? 0);
+    const previousValueRaw = resources.hp.value;
+    const autoFillHp = this.type === "creature";
     resources.hp.max = hpBase;
 
-    const currentValue = Number(resources.hp.value);
-    const hasManualValue = !Number.isNaN(currentValue) && currentValue !== previousMax;
+    const hasUserValue =
+      previousValueRaw !== undefined &&
+      previousValueRaw !== null &&
+      !(typeof previousValueRaw === "string" && previousValueRaw.trim() === "");
 
-    if (!hasManualValue) {
-      resources.hp.value = hpBase;
+    if (!hasUserValue) {
+      resources.hp.value = autoFillHp ? hpBase : "";
     } else {
-      resources.hp.value = Math.min(currentValue, hpBase);
+      const currentValue = Number(previousValueRaw);
+      if (Number.isNaN(currentValue)) {
+        resources.hp.value = autoFillHp ? hpBase : "";
+      } else if (currentValue > hpBase) {
+        resources.hp.value = hpBase;
+      } else {
+        resources.hp.value = currentValue;
+      }
     }
 
     this.system.wounds ??= {};

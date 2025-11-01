@@ -89,10 +89,16 @@ export class StormCreatureSheet extends StormActorSheet {
       const parryValue = Number(parryInput?.value ?? 0) || 0;
       const value = rollType === "parry" ? parryValue : attackValue;
       const roll = await new Roll("1d100").evaluate({ async: true });
-      const success = roll.total <= value;
-      await roll.toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: `${name} ${rollType === "parry" ? "Parry" : "Attack"} (${value}%) → ${success ? "Success" : "Failure"}`
+      const { success, isCritical } = this._evaluateRoll(value, roll.total);
+      const resultLabel = this._formatRollResult({ success, isCritical });
+      const label = `${name} ${rollType === "parry" ? "Parry" : "Attack"} (${value}%)`;
+      await this._sendD100RollMessage({
+        roll,
+        flavor: `${label} → ${resultLabel}`,
+        label,
+        target: value,
+        resultLabel,
+        allowPush: false
       });
     }
   }
