@@ -1,0 +1,26 @@
+<div class="storm-roll-card">
+  <div class="storm-roll-header">
+    <span class="storm-roll-formula">{{formula}}</span>
+  </div>
+
+  {{#if diceEntries.length}}
+    <div class="storm-roll-dice">
+      {{#each diceEntries as |entry|}}
+        <div class="storm-roll-die">
+          <div class="storm-roll-die-label">{{entry.label}}</div>
+          <div class="storm-roll-die-value">{{entry.value}}</div>
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+
+  {{#if resultLabel}}
+    <div class="storm-roll-result-text">
+      {{resultLabel}}
+    </div>
+  {{/if}}
+
+  <div class="storm-roll-total">
+    {{totalDisplay}}
+  </div>
+</div>

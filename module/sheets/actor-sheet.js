@@ -375,9 +375,11 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
     const weaponName = weapon?.name ?? game.i18n.localize("storm.weapon");
 
     const roll = await new Roll(formula).evaluate({async: true});
-    await roll.toMessage({
-      speaker: ChatMessage.getSpeaker({actor: this.actor}),
-      flavor: `${weaponName} Damage (${formula})`
+    const flavor = `${weaponName} Damage (${formula})`;
+    await this._sendDamageRollMessage({
+      roll,
+      flavor,
+      label: flavor
     });
   }
 
@@ -460,6 +462,13 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
     });
   }
 
+  async _sendDamageRollMessage(options) {
+    return StormActorSheet.sendDamageRollMessage({
+      actor: this.actor,
+      ...options
+    });
+  }
+
   static evaluateD100Roll(target, rollTotal) {
     const success = rollTotal <= target;
     const critThreshold = Math.max(1, Math.floor(target / 10));
@@ -536,6 +545,98 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
       rolls: [roll],
       flags
     });
+  }
+
+  static async sendDamageRollMessage({
+    actor,
+    roll,
+    flavor,
+    label,
+    resultLabel,
+    speaker
+  }) {
+    const speakerData = speaker ?? ChatMessage.getSpeaker({ actor });
+    const templateData = StormActorSheet._buildDamageRollTemplateData(roll);
+    templateData.formula = roll.formula;
+    templateData.resultLabel = resultLabel ?? templateData.resultLabel ?? "";
+    templateData.label = label ?? "";
+
+    const content = await renderTemplate(
+      "systems/stormbringer3e/templates/chat/damage-roll-card.hbs",
+      templateData
+    );
+
+    return ChatMessage.create({
+      speaker: speakerData,
+      flavor,
+      content,
+      sound: CONFIG.sounds?.dice ?? null,
+      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      rolls: [roll]
+    });
+  }
+
+  static _buildDamageRollTemplateData(roll) {
+    const entries = [];
+    let diceSum = 0;
+
+    const diceTerms = Array.isArray(roll?.dice) ? roll.dice : [];
+    for (const die of diceTerms) {
+      const faces = Number(die?.faces ?? 0);
+      if (!Number.isFinite(faces) || faces <= 0) continue;
+      const results = Array.isArray(die?.results)
+        ? die.results.filter(result => result && result.discarded !== true && result.active !== false)
+        : [];
+      if (!results.length) continue;
+
+      let index = 0;
+      for (const result of results) {
+        index += 1;
+        const value = Number(result?.result ?? result);
+        if (!Number.isFinite(value)) continue;
+        diceSum += value;
+        const dieLabel = die.number > 1 ? `d${faces} #${index}` : `d${faces}`;
+        entries.push({
+          label: dieLabel,
+          value: StormActorSheet._formatDamageNumber(value)
+        });
+      }
+    }
+
+    const total = Number.isFinite(roll?.total) ? Number(roll.total) : 0;
+    const remainder = total - diceSum;
+    if (Math.abs(remainder) > 1e-6) {
+      const formatted = StormActorSheet._formatDamageNumber(remainder);
+      const signed = remainder > 0 ? `+${formatted}` : formatted;
+      entries.push({
+        label: "Modifier",
+        value: signed
+      });
+    }
+
+    if (!entries.length) {
+      entries.push({
+        label: "Value",
+        value: StormActorSheet._formatDamageNumber(total)
+      });
+    }
+
+    const totalDisplay = StormActorSheet._formatDamageNumber(total);
+    const breakdown = typeof roll?.result === "string" ? roll.result : "";
+
+    return {
+      diceEntries: entries,
+      totalDisplay,
+      resultLabel: breakdown
+    };
+  }
+
+  static _formatDamageNumber(value) {
+    if (!Number.isFinite(value)) return "0";
+    if (Math.abs(value - Math.round(value)) <= 1e-6) {
+      return String(Math.round(value));
+    }
+    return Number(value).toFixed(2).replace(/\.?0+$/, "");
   }
 
   _parseLanguageSkillName(rawName) {

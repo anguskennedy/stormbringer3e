@@ -27,13 +27,15 @@ export class StormActor extends Actor {
         }
       }
     };
-    const baseKey = this.type === "creature" ? "_creatureBase" : "_actorBase";
+    let baseKey = "_actorBase";
+    if (this.type === "creature") baseKey = "_creatureBase";
+    else if (this.type === "npc") baseKey = "_npcBase";
     const baseData = game.stormbringer?.[baseKey];
     if (baseData) {
       foundry.utils.mergeObject(system, baseData, { overwrite: false });
     }
 
-    if (this.type !== "creature") {
+    if (this.type === "character") {
       system.details.sex ??= "";
       system.details.age ??= 0;
       system.details.player ??= "";
@@ -58,6 +60,35 @@ export class StormActor extends Actor {
       while (normalizedSlots.length < 2) normalizedSlots.push(null);
       system.craftSlots = normalizedSlots;
       delete system.crafts;
+    } else if (this.type === "npc") {
+      system.details ??= {};
+      system.details.age ??= 0;
+      system.details.class ??= "";
+      system.narrative ??= {};
+      system.narrative.description ??= "";
+      system.narrative.notes ??= "";
+      system.narrative.possessions ??= "";
+      if (!system.narrative.notes?.trim?.() && system.narrative.possessions?.trim?.()) {
+        system.narrative.notes = system.narrative.possessions;
+      }
+      if (!system.narrative.possessions?.trim?.() && system.narrative.notes?.trim?.()) {
+        system.narrative.possessions = system.narrative.notes;
+      }
+      normalizeAttributes(["STR", "CON", "SIZ", "INT", "POW", "DEX", "CHA"]);
+      if (system.attributes) {
+        delete system.attributes.LCK;
+        delete system.attributes.lck;
+      }
+      delete system.craftSlots;
+      delete system.crafts;
+      delete system.details.sex;
+      delete system.details.player;
+      delete system.details.nationality;
+      delete system.details.cult;
+      delete system.details.elan;
+      delete system.narrative.afflictions;
+      delete system.narrative.money;
+      delete system.narrative.skillNotes;
     } else {
       system.details = system.details || {};
       system.details.description ??= "";
@@ -104,15 +135,15 @@ export class StormActor extends Actor {
       system.resources.hp.override ??= "";
     }
     system.skillBonuses ??= {};
-    if (this.type !== "creature") {
+    if (this.type === "creature") {
+      system.skillBonuses = {};
+    } else {
       system.skillBonuses.agility ??= 0;
       system.skillBonuses.percept ??= 0;
       system.skillBonuses.stealth ??= 0;
       system.skillBonuses.know ??= 0;
       system.skillBonuses.manip ??= 0;
       system.skillBonuses.commun ??= 0;
-    } else {
-      system.skillBonuses = {};
     }
     system.wounds ??= {};
     system.wounds.major ??= 0;
@@ -130,8 +161,10 @@ export class StormActor extends Actor {
     system.skills ??= {};
 
     // Merge defaults from preloaded cache
-    if (this.type !== "creature" && game.stormbringer?._actorBase) {
+    if (this.type === "character" && game.stormbringer?._actorBase) {
       foundry.utils.mergeObject(system, game.stormbringer._actorBase, { overwrite: false });
+    } else if (this.type === "npc" && game.stormbringer?._npcBase) {
+      foundry.utils.mergeObject(system, game.stormbringer._npcBase, { overwrite: false });
     }
 
     if (this.type === "character") {
@@ -227,15 +260,22 @@ export class StormActor extends Actor {
     const communBonus = attrBonus(cha) + attrBonus(int) + attrBonus(pow);
 
     this.system.skillBonuses ??= {};
-    if (this.type === "creature") {
-      this.system.skillBonuses = {};
-    } else {
+    if (this.type === "character") {
       this.system.skillBonuses.agility = agilityBonus;
       this.system.skillBonuses.percept = perceptBonus;
       this.system.skillBonuses.stealth = stealthBonus;
       this.system.skillBonuses.know = knowBonus;
       this.system.skillBonuses.manip = manipBonus;
       this.system.skillBonuses.commun = communBonus;
+    } else if (this.type === "npc") {
+      this.system.skillBonuses.agility = 0;
+      this.system.skillBonuses.percept = 0;
+      this.system.skillBonuses.stealth = 0;
+      this.system.skillBonuses.know = 0;
+      this.system.skillBonuses.manip = 0;
+      this.system.skillBonuses.commun = 0;
+    } else {
+      this.system.skillBonuses = {};
     }
 
     this.system.combat ??= {};

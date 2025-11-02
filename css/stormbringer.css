@@ -229,40 +229,153 @@ textarea, .desc-block {
   font-size: 0.95rem;
 }
 
-.tableSkills .cell {
+.stormbringer-npc .npc-top {
   display: flex;
-  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-bottom: 1px solid #000;
 }
 
-.tableSkills .skill-row {
+.stormbringer-npc .npc-portrait {
+  width: 96px;
+  height: 96px;
+  flex: 0 0 auto;
+}
+
+.stormbringer-npc .npc-top-fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.stormbringer-npc .npc-top-label {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  font-size: 0.75rem;
+  display: block;
+}
+
+.stormbringer-npc .npc-name-input {
+  border: none;
+  border-bottom: 1px solid #000;
+  background: transparent;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.15rem 0.25rem;
+}
+
+.stormbringer-npc .npc-name-input:focus {
+  outline: none;
+  border-bottom-color: #b33;
+}
+
+.stormbringer-npc .npc-description-input {
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.7);
+  min-height: 4.5rem;
+  padding: 0.4rem;
+  resize: vertical;
+}
+
+.stormbringer-npc .npc-description-input:focus {
+  outline: none;
+  border-color: #b33;
+}
+
+.stormbringer-npc .npc-main-grid {
+  display: grid;
+  grid-template-columns: 180px 1fr 1fr;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-bottom: 1px solid #000;
+}
+
+.stormbringer-npc .npc-attributes,
+.stormbringer-npc .npc-notes,
+.stormbringer-npc .npc-skills {
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  border-radius: 4px;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.7);
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-height: 160px;
+}
+
+.stormbringer-npc .npc-attributes h3,
+.stormbringer-npc .npc-notes h3,
+.stormbringer-npc .npc-skills h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.stormbringer-npc .npc-attribute-row {
+  display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.stormbringer-npc .npc-notes-textarea {
+  border: none;
+  padding: 0.25rem 0;
+  background: transparent;
+  font-family: inherit;
+  min-height: 4rem;
+  resize: vertical;
+}
+
+.stormbringer-npc .npc-notes-textarea:focus {
+  outline: none;
+}
+
+.stormbringer-npc .npc-skills-header {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.stormbringer-npc .npc-skill-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: end;
   gap: 0.5rem;
-  padding: 2px 4px;
+  padding: 2px 0;
   min-height: 22px;
 }
 
-.tableSkills .skill-row label {
-  flex: 1 1 auto;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  font-size: 0.7rem; /* reduce skill name size */
+.stormbringer-npc .skill-empty {
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+  padding: 0.5rem;
+  min-height: 3rem;
+  grid-column: 1 / span 3;
 }
 
-.tableSkills .skill-row .skill-roll {
+.stormbringer-npc .npc-skill-row label {
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  font-size: 0.7rem;
   cursor: pointer;
 }
 
-.tableSkills .skill-row .item-field-wrapper {
+.stormbringer-npc .npc-skill-row .item-field-wrapper {
   display: inline-flex;
   align-items: flex-end;
-  justify-content: flex-end;
   gap: 4px;
   min-width: 5ch;
 }
 
-.tableSkills .skill-row .item-field {
+.stormbringer-npc .npc-skill-row .item-field {
   width: 3.25ch;
   text-align: right;
   font-family: inherit;
@@ -275,23 +388,113 @@ textarea, .desc-block {
   appearance: textfield;
 }
 
-.tableSkills .skill-row .item-field:focus {
+.stormbringer-npc .npc-skill-row .item-field:focus {
   outline: none;
   border-bottom-color: #b33;
 }
 
-.tableSkills .skill-row .item-percent {
+.stormbringer-npc .npc-skill-row .item-percent {
   font-size: 0.9rem;
 }
 
-.tableSkills .skill-row .item-field::-webkit-outer-spin-button,
-.tableSkills .skill-row .item-field::-webkit-inner-spin-button {
+.stormbringer-npc .npc-skill-row .item-field::-webkit-outer-spin-button,
+.stormbringer-npc .npc-skill-row .item-field::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.tableSkills .skill-row .item-field[type="number"] {
+.stormbringer-npc .npc-skill-row .item-field[type="number"] {
   -moz-appearance: textfield;
+}
+
+.stormbringer-npc .npc-skill-remove {
+  border: none;
+  background: transparent;
+  color: #933;
+  font-weight: 700;
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 0.1rem 0.25rem;
+  align-self: center;
+}
+
+.stormbringer-npc .npc-skill-remove:hover {
+  color: #600;
+}
+
+.stormbringer-npc .npc-defense {
+  display: flex;
+  gap: 1rem;
+  padding: 0.75rem;
+  border-bottom: 1px solid #000;
+}
+
+.stormbringer-npc .npc-armor,
+.stormbringer-npc .npc-health {
+  flex: 1 1 0;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  border-radius: 4px;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stormbringer-npc .npc-armor h3,
+.stormbringer-npc .npc-health h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.stormbringer-npc .npc-armor-row,
+.stormbringer-npc .npc-health-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.stormbringer-npc .npc-armor-row .armor-protection-roll {
+  flex: 0 0 auto;
+}
+
+.stormbringer-npc .npc-armor-row input,
+.stormbringer-npc .npc-health-row input {
+  flex: 1 1 auto;
+  border: none;
+  border-bottom: 1px solid #000;
+  background: transparent;
+  font-family: inherit;
+  padding: 0.1rem 0.25rem;
+}
+
+.stormbringer-npc .npc-armor-row input:focus,
+.stormbringer-npc .npc-health-row input:focus {
+  outline: none;
+  border-bottom-color: #b33;
+}
+
+.stormbringer-npc .npc-health-value {
+  font-weight: 700;
+}
+
+.stormbringer-npc .npc-health-input {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.stormbringer-npc .npc-weapons {
+  padding: 0.75rem;
+}
+
+.stormbringer-npc .npc-weapons h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
 }
 
 .craft-skill-block {

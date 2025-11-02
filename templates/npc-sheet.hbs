@@ -1,0 +1,151 @@
+<link rel="stylesheet" href="systems/stormbringer3e/css/stormbringer.css">
+
+<form class="stormbringer-sheet stormbringer-npc" autocomplete="off">
+
+  <header class="npc-top">
+    <img class="sheet-portrait npc-portrait" src="{{actor.img}}" data-edit="img" alt="{{actor.name}} portrait" />
+    <div class="npc-top-fields">
+      <label class="npc-top-label" for="npc-name-input">Name</label>
+      <input id="npc-name-input" type="text" name="name" value="{{actor.name}}" class="npc-name-input" />
+      <label class="npc-top-label" for="npc-description-input">Description</label>
+      <textarea id="npc-description-input" name="system.narrative.description" class="npc-description-input">{{system.narrative.description}}</textarea>
+    </div>
+  </header>
+
+  <section class="npc-main-grid">
+    <div class="npc-attributes">
+      <h3>Attributes</h3>
+      {{#each system.attributes as |v k|}}
+        <div class="npc-attribute-row">
+          <label class="attr-label" data-action="roll-attr" data-attr="{{k}}">{{k}}</label>
+          <input type="number" class="attr-value" name="system.attributes.{{k}}" value="{{v}}" />
+        </div>
+      {{/each}}
+    </div>
+
+    <div class="npc-notes">
+      <h3>Notes / Possessions</h3>
+      <textarea name="system.narrative.notes" class="npc-notes-textarea">{{#if system.narrative.notes}}{{system.narrative.notes}}{{else}}{{system.narrative.possessions}}{{/if}}</textarea>
+    </div>
+
+    <div class="npc-skills" data-drop-target="true">
+      <div class="npc-skills-header">
+        <span>Skill</span>
+        <span>Ability</span>
+        <span></span>
+      </div>
+      {{#if npcSkills.length}}
+        {{#each npcSkills as |item|}}
+          <div class="npc-skill-row" data-item-id="{{item.id}}" draggable="true">
+            <label class="skill-roll" data-action="roll-skill" data-item-id="{{item.id}}">{{item.name}}</label>
+            <span class="item-field-wrapper">
+              <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" data-base-bonus="{{item.baseBonus}}" class="item-field" />
+              <span class="item-percent">%</span>
+            </span>
+            <button type="button" class="npc-skill-remove" data-action="delete-item" data-item-id="{{item.id}}" title="Remove Skill">✕</button>
+          </div>
+        {{/each}}
+      {{else}}
+        <div class="npc-skill-row skill-empty">
+          <div class="center small">Drag skills here.</div>
+        </div>
+      {{/if}}
+    </div>
+  </section>
+
+  <section class="npc-defense">
+    <div class="npc-armor">
+      <h3>Armor</h3>
+      <div class="npc-armor-row">
+        <label>Name</label>
+        <input type="text" name="system.armour.name" value="{{system.armour.name}}" />
+      </div>
+      <div class="npc-armor-row">
+        <label>Protection</label>
+        <input type="text" name="system.armour.protection" value="{{system.armour.protection}}" />
+        <button type="button" class="armor-protection-roll" title="Roll Armor Protection">🎲</button>
+      </div>
+    </div>
+    <div class="npc-health">
+      <h3>Health</h3>
+      <div class="npc-health-row">
+        <span>Major Wound Level</span>
+        <span class="npc-health-value">{{system.wounds.major}}</span>
+      </div>
+      <div class="npc-health-row">
+        <span>Hit Points</span>
+        <span class="npc-health-input">
+          <input type="number" name="system.resources.hp.value" value="{{system.resources.hp.value}}" />
+          <span class="hp-max">/ {{system.resources.hp.max}}</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="npc-weapons" data-drop-target="true">
+    <h3>Weapons</h3>
+    <div class="weapons-table">
+      <div class="weapon-row weapon-header">
+        <div class="weapon-cell">Weapon</div>
+        <div class="weapon-cell">Attack</div>
+        <div class="weapon-cell">Damage</div>
+        <div class="weapon-cell">Parry</div>
+      </div>
+
+      <div class="weapon-row weapon-bonus-row">
+        <div class="weapon-cell weapon-name">Bonuses</div>
+        <div class="weapon-cell weapon-value attack">
+          <span class="weapon-derived-value">{{system.combat.attackBonus}}</span>
+          <span class="item-percent">%</span>
+        </div>
+        <div class="weapon-cell weapon-value damage">
+          <input type="text" name="system.combat.damageMods.hand" value="{{system.combat.damageMods.hand}}" placeholder="+d?" aria-label="Hand damage modifier" />
+          <span class="divider">/</span>
+          <input type="text" name="system.combat.damageMods.projectile" value="{{system.combat.damageMods.projectile}}" placeholder="+D?" aria-label="Projectile damage modifier" />
+        </div>
+        <div class="weapon-cell weapon-value parry">
+          <span class="weapon-derived-value">{{system.combat.parryBonus}}</span>
+          <span class="item-percent">%</span>
+        </div>
+      </div>
+
+      {{#if weaponRows.length}}
+        {{#each weaponRows as |weapon|}}
+          <div class="weapon-row" data-item-id="{{weapon.id}}">
+            <div class="weapon-cell weapon-name">{{weapon.name}}</div>
+            <div class="weapon-cell weapon-value attack">
+              <button type="button" class="weapon-roll" data-action="roll-weapon" data-roll-type="attack" data-weapon-id="{{weapon.id}}" title="Roll Attack">🎲</button>
+              <input type="number" class="weapon-stat-input" data-weapon-id="{{weapon.id}}" data-stat="attack" value="{{weapon.attackDisplay}}" />
+              <span class="item-percent">%</span>
+            </div>
+            <div class="weapon-cell weapon-value damage">
+              {{#if weapon.damageFormula}}
+                <button type="button" class="weapon-damage-roll" data-weapon-id="{{weapon.id}}" data-damage-formula="{{weapon.damageFormula}}" title="Roll Damage">
+                  {{weapon.damageDisplay}}
+                </button>
+              {{else}}
+                —
+              {{/if}}
+            </div>
+            <div class="weapon-cell weapon-value parry">
+              {{#if weapon.isProjectile}}
+                —
+              {{else}}
+                <button type="button" class="weapon-roll" data-action="roll-weapon" data-roll-type="parry" data-weapon-id="{{weapon.id}}" title="Roll Parry">🎲</button>
+                <input type="number" class="weapon-stat-input" data-weapon-id="{{weapon.id}}" data-stat="parry" value="{{weapon.parryDisplay}}" />
+                <span class="item-percent">%</span>
+              {{/if}}
+            </div>
+          </div>
+        {{/each}}
+      {{else}}
+        <div class="weapon-row weapon-empty">
+          <div class="weapon-cell weapon-value">
+            <div class="center small">Drag weapon items here to equip them.</div>
+          </div>
+        </div>
+      {{/if}}
+    </div>
+  </section>
+
+</form>
