@@ -229,6 +229,63 @@ textarea, .desc-block {
   font-size: 0.95rem;
 }
 
+.tableSkills .skill-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 2px 4px;
+  min-height: 22px;
+}
+
+.tableSkills .skill-row label {
+  flex: 1 1 auto;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.tableSkills .skill-row .item-field-wrapper {
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 4px;
+  min-width: 5ch;
+}
+
+.tableSkills .skill-row .item-field {
+  width: 3.25ch;
+  text-align: right;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px dashed #000;
+  box-shadow: none;
+  padding: 0;
+  appearance: textfield;
+}
+
+.tableSkills .skill-row .item-field:focus {
+  outline: none;
+  border-bottom-color: #b33;
+}
+
+.tableSkills .skill-row .item-percent {
+  font-size: 0.9rem;
+}
+
+.tableSkills .skill-row .item-field::-webkit-outer-spin-button,
+.tableSkills .skill-row .item-field::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.tableSkills .skill-row .item-field[type="number"] {
+  -moz-appearance: textfield;
+}
+
 .stormbringer-npc .npc-top {
   display: flex;
   align-items: stretch;
@@ -337,7 +394,7 @@ textarea, .desc-block {
 
 .stormbringer-npc .npc-skills-header {
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -345,7 +402,7 @@ textarea, .desc-block {
 
 .stormbringer-npc .npc-skill-row {
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto;
   align-items: end;
   gap: 0.5rem;
   padding: 2px 0;
@@ -358,7 +415,7 @@ textarea, .desc-block {
   border-radius: 4px;
   padding: 0.5rem;
   min-height: 3rem;
-  grid-column: 1 / span 3;
+  grid-column: 1 / span 2;
 }
 
 .stormbringer-npc .npc-skill-row label {
@@ -407,20 +464,6 @@ textarea, .desc-block {
   -moz-appearance: textfield;
 }
 
-.stormbringer-npc .npc-skill-remove {
-  border: none;
-  background: transparent;
-  color: #933;
-  font-weight: 700;
-  font-size: 0.75rem;
-  cursor: pointer;
-  padding: 0.1rem 0.25rem;
-  align-self: center;
-}
-
-.stormbringer-npc .npc-skill-remove:hover {
-  color: #600;
-}
 
 .stormbringer-npc .npc-defense {
   display: flex;

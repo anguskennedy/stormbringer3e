@@ -428,6 +428,7 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
   }
 
   _skillStartsAtZero(name) {
+    if (this.actor?.type === "creature") return false;
     const value = (name ?? "").toLowerCase();
     if (!value) return false;
     if (value.includes("poison lore")) return true;
@@ -438,6 +439,7 @@ export class StormActorSheet extends foundry.appv1.sheets.ActorSheet {
   }
 
   _skillBaseOffset(name) {
+    if (this.actor?.type === "creature") return 0;
     const value = (name ?? "").toLowerCase();
     if (!value) return 0;
     const startsWithAny = (...parts) => parts.some(part => value === part || value.startsWith(part));

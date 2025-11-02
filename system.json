@@ -62,7 +62,7 @@
     "verified": "13"
   },
   "documentTypes": {
-    "Actor": ["character", "npc"],
+    "Actor": ["character", "npc", "creature"],
     "Item": ["skill", "weapon", "armor"]
   },
   "grid": {

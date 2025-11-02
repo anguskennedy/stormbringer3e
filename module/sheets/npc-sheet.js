@@ -67,18 +67,66 @@ export class StormNPCSheet extends StormActorSheet {
 
   activateListeners(html) {
     super.activateListeners(html);
-    html.find(".npc-skill-remove").on("click", ev => this._onRemoveNpcSkill(ev));
+    const skillRows = html.find(".npc-skill-row[draggable='true']");
+    skillRows.on("dragend", ev => this._onNpcSkillDragEnd(ev));
+    skillRows.on("contextmenu", ev => this._onNpcSkillContextMenu(ev));
   }
 
-  async _onRemoveNpcSkill(event) {
-    event.preventDefault();
-    const button = event.currentTarget;
-    const itemId = button?.dataset?.itemId;
+  async _removeNpcSkill(itemId) {
     if (!itemId) return;
     try {
       await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
     } catch (error) {
       console.error("StormNPCSheet | Failed to remove skill", error);
     }
+  }
+
+  _onSkillDragStart(event) {
+    const row = event.currentTarget;
+    this._npcDraggedSkillId = row?.dataset?.itemId ?? null;
+    super._onSkillDragStart(event);
+  }
+
+  async _onNpcSkillDragEnd(event) {
+    const itemId = this._npcDraggedSkillId;
+    this._npcDraggedSkillId = null;
+    if (!itemId) return;
+
+    const native = event.originalEvent ?? event;
+    const dropEffect = native?.dataTransfer?.dropEffect;
+    if (dropEffect && dropEffect !== "none") return;
+
+    const clientX = native?.clientX;
+    const clientY = native?.clientY;
+    if (clientX === undefined || clientY === undefined) return;
+
+    const sheetElement = this.element?.[0];
+    if (!sheetElement) return;
+    const { left, right, top, bottom } = sheetElement.getBoundingClientRect();
+    const inside = clientX >= left && clientX <= right && clientY >= top && clientY <= bottom;
+    if (inside) return;
+
+    await this._removeNpcSkill(itemId);
+  }
+
+  async _onNpcSkillContextMenu(event) {
+    event.preventDefault();
+    const row = event.currentTarget;
+    const itemId = row?.dataset?.itemId;
+    if (!itemId) return;
+
+    const item = this.actor.items.get(itemId);
+    const name = item?.name ?? "Skill";
+
+    const confirmed = await Dialog.confirm({
+      title: "Remove Skill",
+      content: `<p>Remove <strong>${name}</strong> from this NPC?</p>`,
+      yes: () => true,
+      no: () => false,
+      options: { jQuery: false }
+    });
+
+    if (!confirmed) return;
+    await this._removeNpcSkill(itemId);
   }
 }

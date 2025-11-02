@@ -80,9 +80,11 @@ export class StormCreatureSheet extends StormActorSheet {
       const formula = damageInput?.value?.trim();
       if (!formula) return;
       const roll = await new Roll(formula).evaluate({ async: true });
-      await roll.toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: `${name} Damage (${formula})`
+      const flavor = `${name} Damage (${formula})`;
+      await this._sendDamageRollMessage({
+        roll,
+        flavor,
+        label: flavor
       });
     } else {
       const attackValue = Number(attackInput?.value ?? 0) || 0;

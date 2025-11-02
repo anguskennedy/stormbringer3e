@@ -32,21 +32,19 @@
       <div class="npc-skills-header">
         <span>Skill</span>
         <span>Ability</span>
-        <span></span>
       </div>
       {{#if npcSkills.length}}
         {{#each npcSkills as |item|}}
-          <div class="npc-skill-row" data-item-id="{{item.id}}" draggable="true">
+          <div class="npc-skill-row skill-row" data-item-id="{{item.id}}" draggable="true">
             <label class="skill-roll" data-action="roll-skill" data-item-id="{{item.id}}">{{item.name}}</label>
             <span class="item-field-wrapper">
               <input type="number" value="{{item.total}}" data-item-id="{{item.id}}" data-field="system.base" data-bonus="{{item.bonus}}" data-base-bonus="{{item.baseBonus}}" class="item-field" />
               <span class="item-percent">%</span>
             </span>
-            <button type="button" class="npc-skill-remove" data-action="delete-item" data-item-id="{{item.id}}" title="Remove Skill">✕</button>
           </div>
         {{/each}}
       {{else}}
-        <div class="npc-skill-row skill-empty">
+        <div class="npc-skill-row skill-row skill-empty">
           <div class="center small">Drag skills here.</div>
         </div>
       {{/if}}

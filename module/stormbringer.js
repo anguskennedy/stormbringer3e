@@ -3,6 +3,7 @@ import { StormActor } from "./documents/actor.js";
 import { StormCreature } from "./documents/creature.js";
 import { StormItem } from "./documents/item.js";
 import { StormActorSheet } from "./sheets/actor-sheet.js";
+import { StormNPCSheet } from "./sheets/npc-sheet.js";
 import { StormCreatureSheet } from "./sheets/creature-sheet.js";
 import { StormItemSheet } from "./sheets/item-sheet.js";
 
@@ -19,11 +20,13 @@ Hooks.once("init", async() => {
   };
 
   // Preload base actor data before anything initializes
-  const [actorBaseRes, creatureBaseRes] = await Promise.all([
+  const [actorBaseRes, npcBaseRes, creatureBaseRes] = await Promise.all([
     fetch("systems/stormbringer3e/module/data/actor-base.json"),
+    fetch("systems/stormbringer3e/module/data/npc-base.json"),
     fetch("systems/stormbringer3e/module/data/creature-base.json")
   ]);
   game.stormbringer._actorBase = await actorBaseRes.json();
+  game.stormbringer._npcBase = await npcBaseRes.json();
   game.stormbringer._creatureBase = await creatureBaseRes.json();
 
   // Define custom document classes
@@ -36,7 +39,11 @@ Hooks.once("init", async() => {
   foundry.documents.collections.Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
   foundry.documents.collections.Actors.registerSheet("storm", StormActorSheet, {
     makeDefault: true,
-    types: ["character", "npc"]
+    types: ["character"]
+  });
+  foundry.documents.collections.Actors.registerSheet("storm", StormNPCSheet, {
+    makeDefault: true,
+    types: ["npc"]
   });
   foundry.documents.collections.Actors.registerSheet("storm", StormCreatureSheet, {
     makeDefault: true,
@@ -52,6 +59,36 @@ Hooks.once("init", async() => {
 });
 
 Hooks.on("renderChatMessage", (message, html) => {
+  const damageCards = html.find(".storm-roll-card[data-damage-toggle='true']");
+  damageCards.each((_, element) => {
+    const card = $(element);
+    const toggle = card.find("[data-action='toggle-damage-details']");
+    if (!toggle.length) return;
+
+    const setExpanded = (value) => {
+      const flag = value ? "true" : "false";
+      card.attr("data-expanded", flag);
+      toggle.attr("aria-expanded", flag);
+    };
+
+    const handleToggle = (event) => {
+      if (event) event.preventDefault();
+      const current = card.attr("data-expanded") === "true";
+      setExpanded(!current);
+    };
+
+    const initial = card.attr("data-expanded") === "true";
+    setExpanded(initial);
+
+    toggle.off(".stormDamageToggle");
+    toggle.on("click.stormDamageToggle", handleToggle);
+    toggle.on("keydown.stormDamageToggle", event => {
+      if (event.key === " " || event.key === "Enter") {
+        handleToggle(event);
+      }
+    });
+  });
+
   const pushData = message.getFlag("stormbringer3e", "pushData");
   if (!pushData) return;
 
