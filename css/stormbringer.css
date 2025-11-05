@@ -351,6 +351,71 @@ textarea, .desc-block {
   border-bottom: 1px solid #000;
 }
 
+.stormbringer-demon .demon-top-fields {
+  gap: 0.6rem;
+}
+
+.stormbringer-demon .demon-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stormbringer-demon .demon-field-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.stormbringer-demon .demon-small-input {
+  width: 100%;
+}
+
+.stormbringer-demon .demon-text-sections {
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  border-radius: 4px;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 160px;
+}
+
+.stormbringer-demon .demon-text-block h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.stormbringer-demon .demon-textarea {
+  border: none;
+  padding: 0.25rem 0;
+  background: transparent;
+  font-family: inherit;
+  min-height: 4rem;
+  resize: vertical;
+}
+
+.stormbringer-demon .demon-textarea:focus {
+  outline: none;
+}
+
+.stormbringer-demon .demon-notes {
+  margin: 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.stormbringer-demon .demon-notes h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
 .stormbringer-npc .npc-attributes,
 .stormbringer-npc .npc-notes,
 .stormbringer-npc .npc-skills {
@@ -517,6 +582,22 @@ textarea, .desc-block {
 .stormbringer-npc .npc-health-row input:focus {
   outline: none;
   border-bottom-color: #b33;
+}
+
+.stormbringer-npc .npc-health-row.compact {
+  justify-content: flex-start;
+  gap: 0.35rem;
+}
+
+.stormbringer-npc .npc-health-row.compact .npc-health-label,
+.stormbringer-npc .npc-health-row.compact .npc-health-input {
+  flex: 0 0 auto;
+}
+
+.stormbringer-npc .npc-health-row.compact input {
+  flex: 0 0 4rem;
+  width: 4rem;
+  text-align: right;
 }
 
 .stormbringer-npc .npc-health-value {

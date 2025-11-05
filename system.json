@@ -1,7 +1,7 @@
 {
   "id": "stormbringer3e",
   "type": "system",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "title": "Stormbringer 3e",
   "url": "https://github.com/anguskennedy/stormbringer3e/",
   "description": "Simple Stormbringer",
@@ -62,7 +62,7 @@
     "verified": "13"
   },
   "documentTypes": {
-    "Actor": ["character", "npc", "creature"],
+    "Actor": ["character", "npc", "creature", "demon"],
     "Item": ["skill", "weapon", "armor"]
   },
   "grid": {
@@ -70,5 +70,5 @@
     "units": "ft"
   },
   "manifest": "https://raw.githubusercontent.com/anguskennedy/stormbringer3e/main/system.json",
-  "download": "https://github.com/anguskennedy/stormbringer3e/archive/refs/tags/v1.0.7.zip"
+  "download": "https://github.com/anguskennedy/stormbringer3e/archive/refs/tags/v1.0.8.zip"
 }

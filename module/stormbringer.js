@@ -4,6 +4,7 @@ import { StormCreature } from "./documents/creature.js";
 import { StormItem } from "./documents/item.js";
 import { StormActorSheet } from "./sheets/actor-sheet.js";
 import { StormNPCSheet } from "./sheets/npc-sheet.js";
+import { StormDemonSheet } from "./sheets/demon-sheet.js";
 import { StormCreatureSheet } from "./sheets/creature-sheet.js";
 import { StormItemSheet } from "./sheets/item-sheet.js";
 
@@ -20,13 +21,15 @@ Hooks.once("init", async() => {
   };
 
   // Preload base actor data before anything initializes
-  const [actorBaseRes, npcBaseRes, creatureBaseRes] = await Promise.all([
+  const [actorBaseRes, npcBaseRes, demonBaseRes, creatureBaseRes] = await Promise.all([
     fetch("systems/stormbringer3e/module/data/actor-base.json"),
     fetch("systems/stormbringer3e/module/data/npc-base.json"),
+    fetch("systems/stormbringer3e/module/data/demon-base.json"),
     fetch("systems/stormbringer3e/module/data/creature-base.json")
   ]);
   game.stormbringer._actorBase = await actorBaseRes.json();
   game.stormbringer._npcBase = await npcBaseRes.json();
+  game.stormbringer._demonBase = await demonBaseRes.json();
   game.stormbringer._creatureBase = await creatureBaseRes.json();
 
   // Define custom document classes
@@ -44,6 +47,10 @@ Hooks.once("init", async() => {
   foundry.documents.collections.Actors.registerSheet("storm", StormNPCSheet, {
     makeDefault: true,
     types: ["npc"]
+  });
+  foundry.documents.collections.Actors.registerSheet("storm", StormDemonSheet, {
+    makeDefault: true,
+    types: ["demon"]
   });
   foundry.documents.collections.Actors.registerSheet("storm", StormCreatureSheet, {
     makeDefault: true,

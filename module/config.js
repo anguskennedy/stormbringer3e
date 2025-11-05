@@ -1,5 +1,5 @@
 export const STORM = {
-  actorTypes: ["character", "npc", "creature"],
+  actorTypes: ["character", "npc", "demon", "creature"],
   itemTypes: ["skill", "weapon", "armor"],
 };
 

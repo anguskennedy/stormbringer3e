@@ -1,0 +1,50 @@
+{
+  "attributes": {
+    "STR": 10,
+    "CON": 10,
+    "SIZ": 10,
+    "INT": 10,
+    "POW": 10,
+    "DEX": 10,
+    "CHA": 10
+  },
+  "details": {
+    "summoner": "",
+    "demonType": ""
+  },
+  "narrative": {
+    "binding": "",
+    "specialPowers": "",
+    "notes": "",
+    "possessions": ""
+  },
+  "resources": {
+    "hp": {
+      "value": ""
+    }
+  },
+  "armour": {
+    "name": "",
+    "protection": ""
+  },
+  "combat": {
+    "attackBonus": 0,
+    "parryBonus": 0,
+    "damageMods": {
+      "hand": "",
+      "projectile": ""
+    }
+  },
+  "skills": {},
+  "skillBonuses": {
+    "agility": 0,
+    "percept": 0,
+    "stealth": 0,
+    "know": 0,
+    "manip": 0,
+    "commun": 0
+  },
+  "wounds": {
+    "major": 0
+  }
+}

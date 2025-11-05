@@ -30,6 +30,7 @@ export class StormActor extends Actor {
     let baseKey = "_actorBase";
     if (this.type === "creature") baseKey = "_creatureBase";
     else if (this.type === "npc") baseKey = "_npcBase";
+    else if (this.type === "demon") baseKey = "_demonBase";
     const baseData = game.stormbringer?.[baseKey];
     if (baseData) {
       foundry.utils.mergeObject(system, baseData, { overwrite: false });
@@ -60,14 +61,25 @@ export class StormActor extends Actor {
       while (normalizedSlots.length < 2) normalizedSlots.push(null);
       system.craftSlots = normalizedSlots;
       delete system.crafts;
-    } else if (this.type === "npc") {
+    } else if (this.type === "npc" || this.type === "demon") {
+      const isDemon = this.type === "demon";
       system.details ??= {};
       system.details.age ??= 0;
       system.details.class ??= "";
+      if (isDemon) {
+        system.details.summoner ??= "";
+        system.details.demonType ??= "";
+      }
       system.narrative ??= {};
-      system.narrative.description ??= "";
       system.narrative.notes ??= "";
       system.narrative.possessions ??= "";
+      if (isDemon) {
+        const description = typeof system.narrative.description === "string" ? system.narrative.description : "";
+        system.narrative.binding ??= description;
+        system.narrative.specialPowers ??= "";
+      } else {
+        system.narrative.description ??= "";
+      }
       if (!system.narrative.notes?.trim?.() && system.narrative.possessions?.trim?.()) {
         system.narrative.notes = system.narrative.possessions;
       }
@@ -89,6 +101,14 @@ export class StormActor extends Actor {
       delete system.narrative.afflictions;
       delete system.narrative.money;
       delete system.narrative.skillNotes;
+      if (!isDemon) {
+        delete system.details.summoner;
+        delete system.details.demonType;
+        delete system.narrative.binding;
+        delete system.narrative.specialPowers;
+      } else {
+        delete system.narrative.description;
+      }
     } else {
       system.details = system.details || {};
       system.details.description ??= "";
@@ -165,6 +185,8 @@ export class StormActor extends Actor {
       foundry.utils.mergeObject(system, game.stormbringer._actorBase, { overwrite: false });
     } else if (this.type === "npc" && game.stormbringer?._npcBase) {
       foundry.utils.mergeObject(system, game.stormbringer._npcBase, { overwrite: false });
+    } else if (this.type === "demon" && game.stormbringer?._demonBase) {
+      foundry.utils.mergeObject(system, game.stormbringer._demonBase, { overwrite: false });
     }
 
     if (this.type === "character") {
@@ -267,7 +289,7 @@ export class StormActor extends Actor {
       this.system.skillBonuses.know = knowBonus;
       this.system.skillBonuses.manip = manipBonus;
       this.system.skillBonuses.commun = communBonus;
-    } else if (this.type === "npc") {
+    } else if (this.type === "npc" || this.type === "demon") {
       this.system.skillBonuses.agility = 0;
       this.system.skillBonuses.percept = 0;
       this.system.skillBonuses.stealth = 0;

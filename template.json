@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character", "npc", "creature"],
+    "types": ["character", "npc", "creature", "demon"],
     "templates": {
       "base": {
         "attributes": {
@@ -20,7 +20,8 @@
       },
       "character": {"$$inherit": ["base"]},
       "npc": {"$$inherit": ["base"]},
-      "creature": {"$$inherit": ["base"]}
+      "creature": {"$$inherit": ["base"]},
+      "demon": {"$$inherit": ["base"]}
     }
   },
   "Item": {

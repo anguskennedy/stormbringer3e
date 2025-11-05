@@ -1,18 +1,28 @@
 <link rel="stylesheet" href="systems/stormbringer3e/css/stormbringer.css">
 
-<form class="stormbringer-sheet stormbringer-npc" autocomplete="off">
+<form class="stormbringer-sheet stormbringer-npc stormbringer-demon" autocomplete="off">
 
-  <header class="npc-top">
+  <header class="npc-top demon-top">
     <img class="sheet-portrait npc-portrait" src="{{actor.img}}" data-edit="img" alt="{{actor.name}} portrait" />
-    <div class="npc-top-fields">
-      <label class="npc-top-label" for="npc-name-input">Name</label>
-      <input id="npc-name-input" type="text" name="name" value="{{actor.name}}" class="npc-name-input" />
-      <label class="npc-top-label" for="npc-description-input">Description</label>
-      <textarea id="npc-description-input" name="system.narrative.description" class="npc-description-input">{{system.narrative.description}}</textarea>
+    <div class="npc-top-fields demon-top-fields">
+      <div class="demon-field-group">
+        <label class="npc-top-label" for="demon-name-input">Demon</label>
+        <input id="demon-name-input" type="text" name="name" value="{{actor.name}}" class="npc-name-input" />
+      </div>
+      <div class="demon-field-row">
+        <div class="demon-field-group">
+          <label class="npc-top-label" for="demon-summoner-input">Summoner</label>
+          <input id="demon-summoner-input" type="text" name="system.details.summoner" value="{{system.details.summoner}}" class="npc-name-input demon-small-input" />
+        </div>
+        <div class="demon-field-group">
+          <label class="npc-top-label" for="demon-type-input">Type</label>
+          <input id="demon-type-input" type="text" name="system.details.demonType" value="{{system.details.demonType}}" class="npc-name-input demon-small-input" />
+        </div>
+      </div>
     </div>
   </header>
 
-  <section class="npc-main-grid">
+  <section class="npc-main-grid demon-main-grid">
     <div class="npc-attributes">
       <h3>Attributes</h3>
       {{#each system.attributes as |v k|}}
@@ -23,9 +33,15 @@
       {{/each}}
     </div>
 
-    <div class="npc-notes">
-      <h3>Notes / Possessions</h3>
-      <textarea name="system.narrative.notes" class="npc-notes-textarea">{{#if system.narrative.notes}}{{system.narrative.notes}}{{else}}{{system.narrative.possessions}}{{/if}}</textarea>
+    <div class="demon-text-sections">
+      <div class="demon-text-block">
+        <h3>Binding Object / Description</h3>
+        <textarea name="system.narrative.binding" class="demon-textarea">{{system.narrative.binding}}</textarea>
+      </div>
+      <div class="demon-text-block">
+        <h3>Special Powers</h3>
+        <textarea name="system.narrative.specialPowers" class="demon-textarea">{{system.narrative.specialPowers}}</textarea>
+      </div>
     </div>
 
     <div class="npc-skills" data-drop-target="true">
@@ -49,6 +65,11 @@
         </div>
       {{/if}}
     </div>
+  </section>
+
+  <section class="demon-notes">
+    <h3>Notes / Possessions</h3>
+    <textarea name="system.narrative.notes" class="npc-notes-textarea">{{#if system.narrative.notes}}{{system.narrative.notes}}{{else}}{{system.narrative.possessions}}{{/if}}</textarea>
   </section>
 
   <section class="npc-defense">
